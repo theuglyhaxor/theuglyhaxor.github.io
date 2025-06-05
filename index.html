@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ugly Haxor's Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+            border: 3px solid #1a2a6c;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #1a2a6c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            background: #1a2a6c;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #b21f1f;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .btn {
+                min-width: 100%;
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+            }
+
+            .profile-img {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="image.png" alt="Profile Image" class="profile-img">
+        <h1>MD Rohan's Portfolio</h1>
+        <p>Explore my professional CV, register for updates, or generate a receipt.</p>
+        <div class="button-group">
+            <a href="cv.html" class="btn">View CV</a>
+            <a href="registration.html" class="btn">Registration Form</a>
+            <a href="form.html" class="btn">Receipt Form</a>
+        </div>
+    </div>
+</body>
+</html>
