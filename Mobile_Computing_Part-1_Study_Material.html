@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile Computing — Part 1 · Study Material</title>
+<style>
+:root{
+  --navy:#0e2647; --navy2:#12325c; --blue:#1f4e8c; --blue2:#2b6fd6;
+  --cyan:#12b3c7; --cyan-d:#0a8ea0; --ink:#1c2531; --grey:#5c6675;
+  --line:#d6deea; --soft:#eef2f8; --chip:#e7f1fb; --pagebg:#e9edf3;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--pagebg);color:var(--ink);
+  font-family:Georgia,'Times New Roman',serif;font-size:11pt;line-height:1.5;}
+h1,h2,h3,.ch-kicker,.toc-k,.handles,th,.chip,.cover-title,.cover-sub,.eyebrow,
+.au-name,.au-line,.by,.pagefoot{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;}
+
+/* ---------- screen page cards ---------- */
+.sheet{width:210mm;margin:10mm auto;background:#fff;position:relative;overflow:hidden;
+  box-shadow:0 6px 26px rgba(20,40,80,.18);}
+.doc{width:210mm;margin:10mm auto;background:#fff;padding:16mm 18mm 20mm;
+  box-shadow:0 6px 26px rgba(20,40,80,.18);}
+
+/* ---------- cover ---------- */
+.cover{min-height:297mm;color:#eaf2ff;display:flex;flex-direction:column;
+  padding:20mm 18mm 16mm;background-color:#102c52;
+  background-image:
+   radial-gradient(1100px 480px at 80% -10%, rgba(18,179,199,.34), transparent 60%),
+   linear-gradient(160deg,#0c2444 0%, #14355f 55%, #0d284b 100%);z-index:5;}
+.cover::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 34L0 84V50l28-16 28 16v34l-28 16z' fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='2'/%3E%3C/svg%3E");
+  background-size:56px 100px;opacity:.9;pointer-events:none;}
+.cover>*{position:relative;z-index:1;}
+.cover-mid{margin-top:6mm;margin-bottom:auto;text-align:center;}
+.eyebrow{letter-spacing:.44em;text-transform:uppercase;font-size:10.5pt;color:#8fd3df;margin:0 0 8px;}
+.cover-title{font-size:46pt;font-weight:800;letter-spacing:.02em;margin:0;line-height:1.02;
+  color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.35);}
+.cover-part{display:inline-block;margin-top:14px;padding:6px 22px;border-radius:30px;
+  background:linear-gradient(90deg,var(--cyan),#2b8fd6);color:#04263a;font-weight:800;
+  letter-spacing:.18em;font-size:12pt;}
+.cover-sub{margin-top:16px;color:#cfe0f5;font-size:13pt;font-style:italic;}
+.tower{display:block;width:196px;height:auto;margin:12px auto 2px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px 10px;justify-content:center;margin-top:8px;}
+.chip{background:rgba(255,255,255,.09);border:1px solid rgba(143,211,223,.4);color:#dcecff;
+  border-radius:20px;padding:5px 13px;font-size:9.5pt;}
+
+/* author card on cover */
+.author{margin-top:14mm;display:flex;justify-content:center;}
+.au-card{width:100%;max-width:150mm;background:rgba(255,255,255,.06);
+  border:1px solid rgba(143,211,223,.35);border-radius:14px;padding:16px 22px;
+  display:flex;justify-content:space-between;align-items:center;gap:18px;
+  backdrop-filter:blur(2px);}
+.au-left{text-align:left;}
+.au-tag{text-transform:uppercase;letter-spacing:.28em;font-size:8.5pt;color:#8fd3df;margin:0 0 4px;}
+.au-name{font-size:19pt;font-weight:800;color:#fff;line-height:1.1;}
+.au-name span{color:var(--cyan);font-weight:700;}
+.au-line{font-size:10pt;color:#cfe0f5;margin-top:5px;}
+.au-line b{color:#fff;font-weight:600;}
+.au-right{text-align:right;}
+.au-right .handles{flex-direction:column;align-items:flex-end;gap:7px;}
+.au-right .handles .h{color:#dcecff;font-size:9.5pt;}
+
+.cover-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.18);padding-top:12px;}
+.cover-foot .prov{font-size:8.5pt;color:#9fb6d6;line-height:1.45;font-style:italic;}
+
+/* ---------- TOC ---------- */
+.toc{width:210mm;margin:10mm auto;background:#fff;padding:20mm 18mm;
+  box-shadow:0 6px 26px rgba(20,40,80,.18);}
+.toc .kick{color:var(--cyan-d);text-transform:uppercase;letter-spacing:.26em;font-size:9.5pt;}
+.toc-h{font-size:22pt;color:var(--navy);border:0;margin:2px 0 0;padding:0;}
+.toc-h::before{display:none;}
+.toc-rule{height:3px;width:60mm;background:linear-gradient(90deg,var(--cyan),transparent);
+  margin:8px 0 18px;border-radius:2px;}
+ul.toc-list{list-style:none;margin:0;padding:0;}
+li.toc-ch{margin:0 0 10px;}
+li.toc-ch>a{display:flex;gap:12px;align-items:baseline;text-decoration:none;color:var(--navy);
+  font-weight:700;padding:7px 10px;border-radius:8px;background:var(--soft);}
+.toc-k{color:var(--cyan-d);font-size:9pt;white-space:nowrap;min-width:74px;
+  text-transform:uppercase;letter-spacing:.08em;}
+.toc-t{font-size:12pt;}
+ul.toc-sub{list-style:none;margin:5px 0 0;padding:0 0 0 88px;columns:2;column-gap:24px;}
+ul.toc-sub li{margin:2px 0;break-inside:avoid;}
+ul.toc-sub a{color:var(--grey);text-decoration:none;font-size:9.5pt;
+  font-family:'Segoe UI',system-ui,sans-serif;}
+
+/* ---------- chapters / body ---------- */
+.chapter{break-before:page;}
+.chapter.first{break-before:auto;}
+.ch-head{margin:0 0 14px;padding:14px 16px;border-radius:12px;color:#fff;position:relative;
+  overflow:hidden;break-after:avoid;
+  background:linear-gradient(120deg,var(--navy) 0%,var(--blue) 70%,#2a6bc4 100%);}
+.ch-head::after{content:"";position:absolute;right:-30px;top:-40px;width:180px;height:180px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V16L28 0l28 16v34L28 66zm0 34L0 84V50l28-16 28 16v34l-28 16z' fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='2'/%3E%3C/svg%3E");background-size:56px 100px;opacity:.5;transform:rotate(8deg);}
+.ch-kicker{position:relative;text-transform:uppercase;letter-spacing:.32em;font-size:10pt;color:#8fd8e4;}
+.ch-title{position:relative;margin:2px 0 0;font-size:22pt;font-weight:800;line-height:1.1;}
+.ch-rule{position:relative;display:flex;align-items:center;gap:10px;margin-top:8px;color:#8fd8e4;}
+.ch-node{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 4px rgba(18,179,199,.28);}
+.wave{width:60px;height:14px;}
+
+h2{color:var(--navy);font-size:14.5pt;margin:18px 0 6px;padding-bottom:5px;
+  border-bottom:2px solid var(--line);position:relative;break-after:avoid;}
+h2::before{content:"";position:absolute;left:0;bottom:-2px;width:42px;height:2px;background:var(--cyan);}
+h3{color:var(--blue);font-size:11.6pt;margin:13px 0 4px;break-after:avoid;}
+p{margin:4px 0 8px;text-align:justify;}
+strong{color:var(--navy);}
+p.note{color:var(--grey);font-style:italic;}
+p.formula{text-align:center;font-weight:700;font-size:13pt;color:var(--navy);background:var(--soft);
+  border:1px solid var(--line);border-radius:8px;padding:8px 10px;letter-spacing:.06em;font-family:'Segoe UI',sans-serif;}
+p.end{text-align:center;color:var(--grey);font-style:italic;margin-top:16px;
+  border-top:1px solid var(--line);padding-top:10px;}
+
+ul,ol{margin:4px 0 10px;padding-left:22px;}
+li{margin:3px 0;}
+ul{list-style:none;}
+ul>li{position:relative;padding-left:16px;}
+ul>li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;
+  background:var(--cyan);border-radius:1px;transform:rotate(45deg);}
+ul ul>li::before{background:var(--blue2);width:5px;height:5px;top:.66em;}
+ol{list-style:decimal;padding-left:26px;}
+ol>li{padding-left:4px;}
+ol>li::marker{color:var(--cyan-d);font-weight:700;font-family:'Segoe UI',sans-serif;}
+
+/* ---------- tables ---------- */
+.tbl-wrap{width:100%;overflow-x:auto;margin:8px 0 12px;}
+table{border-collapse:collapse;width:100%;font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:9.6pt;box-shadow:0 1px 0 var(--line);}
+thead th{background:linear-gradient(120deg,var(--navy),var(--blue));color:#fff;text-align:left;
+  padding:8px 10px;font-weight:700;}
+tbody td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+tbody tr:nth-child(even) td{background:var(--soft);}
+tbody tr:last-child td{border-bottom:0;}
+.tbl-wrap table,.tbl-wrap tr,.tbl-wrap td,.tbl-wrap th{break-inside:avoid;}
+
+/* ---------- repeating footer ---------- */
+.pagefoot{display:flex;justify-content:space-between;align-items:center;
+  width:210mm;margin:0 auto 12mm;background:#fff;border-top:2px solid var(--line);
+  padding:8px 18mm;box-shadow:0 6px 26px rgba(20,40,80,.18);}
+.pagefoot .tag{font-size:8.5pt;color:var(--grey);}
+.handles{display:flex;gap:16px;align-items:center;}
+.handles .h{display:inline-flex;align-items:center;gap:6px;font-size:9pt;font-weight:600;color:var(--blue);}
+.handles .ic{display:inline-flex;width:15px;height:15px;}
+.handles .ic svg{width:15px;height:15px;fill:currentColor;}
+
+@media screen and (max-width:820px){
+  .sheet,.doc,.toc,.pagefoot{width:100%;margin:0 auto;box-shadow:none;}
+  .doc,.toc{padding:20px 16px;}
+  .au-card{flex-direction:column;align-items:flex-start;}
+  .au-right .handles{flex-direction:row;align-items:center;}
+}
+
+/* ================= PRINT (A4) ================= */
+@page{size:A4;margin:14mm 13mm 13mm 13mm;}
+@media print{
+  body{background:#fff;}
+  .sheet,.doc,.toc{width:auto;margin:0;padding:0;box-shadow:none;}
+  .cover{min-height:calc(297mm - 27mm);padding:12mm 12mm 8mm;break-after:page;}
+  .toc{padding:2mm 2mm;break-after:page;}
+  .doc{padding:0;}
+  .chapter.first{break-before:auto;}
+  h2,h3,.ch-head{break-after:avoid;}
+  a{color:inherit;text-decoration:none;}
+  /* repeating footer: fixed elements repeat on every printed page; the opaque
+     cover (z-index:5) hides it on page 1 */
+  .pagefoot{position:fixed;left:0;right:0;bottom:0;width:auto;margin:0;z-index:1;
+    padding:2.5px 6mm 2.5px;border-top:1px solid var(--line);box-shadow:none;
+    background:#fff;}
+  .pagefoot .tag{font-size:8pt;}
+  .pagefoot .handles .h{font-size:8.5pt;}
+  .pagefoot .handles .ic,.pagefoot .handles .ic svg{width:13px;height:13px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SITE BACK-NAV (screen only) ===== -->
+<div class="site-backnav">
+  <a href="blog.html">← Blog</a>
+  <a href="index.html">Portfolio</a>
+</div>
+<style>
+  .site-backnav{position:fixed;top:14px;right:14px;z-index:9999;display:flex;gap:8px;
+    font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;}
+  .site-backnav a{background:rgba(16,44,82,.92);color:#eaf2ff;text-decoration:none;
+    font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;
+    border:1px solid rgba(143,211,223,.4);box-shadow:0 6px 18px rgba(0,0,0,.28);
+    backdrop-filter:blur(6px);transition:.2s ease;}
+  .site-backnav a:hover{background:#12b3c7;color:#04263a;}
+  @media print{.site-backnav{display:none!important;}}
+</style>
+
+<!-- ===== COVER ===== -->
+<section class="sheet cover">
+  <div class="cover-mid">
+    <p class="eyebrow">Study Material</p>
+    <h1 class="cover-title">MOBILE<br>COMPUTING</h1>
+    <div class="cover-part">PART&nbsp;—&nbsp;1</div>
+    <p class="cover-sub">Formal Academic Study Material</p>
+    <svg class="tower" viewBox="0 0 240 210" aria-hidden="true">
+  <g fill="none" stroke="#7fe3ef" stroke-width="2.4" stroke-linecap="round">
+    <path d="M104 30 A20 20 0 0 1 136 30" opacity=".9"/>
+    <path d="M96 34 A30 30 0 0 1 144 34" opacity=".6"/>
+    <path d="M88 38 A40 40 0 0 1 152 38" opacity=".38"/>
+  </g>
+  <circle cx="120" cy="26" r="3.4" fill="#7fe3ef"/>
+  <g stroke="#cfe6ff" stroke-width="2.2" fill="none" stroke-linejoin="round">
+    <line x1="120" y1="26" x2="120" y2="48"/>
+    <path d="M111 186 L117 48 M129 186 L123 48"/>
+    <path d="M112 168 H128 M113 150 H127 M114 132 H126 M115 114 H125 M116 96 H124 M117 78 H123"/>
+    <path d="M112 168 L127 150 M128 168 L113 150 M113 150 L126 132 M127 150 L114 132
+             M114 132 L125 114 M126 132 L115 114 M115 114 L124 96 M125 114 L116 96
+             M116 96 L123 78 M124 96 L117 78"/>
+    <path d="M104 190 L111 186 M136 190 L129 186"/>
+  </g>
+  <line x1="70" y1="190" x2="170" y2="190" stroke="#cfe6ff" stroke-width="2.4" stroke-linecap="round"/>
+  <g fill="none" stroke="#3f7fd6" stroke-width="1.7" opacity=".8">
+    <path d="M78 198 l7 -4 l7 4 l0 8 l-7 4 l-7 -4 z"/>
+    <path d="M108 198 l7 -4 l7 4 l0 8 l-7 4 l-7 -4 z"/>
+    <path d="M138 198 l7 -4 l7 4 l0 8 l-7 4 l-7 -4 z"/>
+  </g>
+</svg>
+    <div class="chips"><span class="chip">Introduction</span><span class="chip">Generations 1G – 4G</span><span class="chip">Cellular Concepts</span><span class="chip">FDMA · TDMA · CDMA</span><span class="chip">GSM</span><span class="chip">GSM vs CDMA</span><span class="chip">GPRS</span></div>
+  </div>
+
+  <div class="author">
+    <div class="au-card">
+      <div class="au-left">
+        <p class="au-tag">Prepared by</p>
+        <div class="au-name">MD. Rohan <span>(theuglyhaxor)</span></div>
+        <div class="au-line"><b>Bachelor in Computer Science and Engineering</b></div>
+        <div class="au-line">Bug Bounty Hunter</div>
+      </div>
+      <div class="au-right"><div class="handles on-dark"><span class="h"><i class="ic"><svg viewBox="0 0 24 24"><path d="M13 22v-8h2.8l.4-3H13V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V11H8.5v3H10v8h3z"/></svg></i>theuglyhaxor</span><span class="h"><i class="ic"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.1 8.1L23 22h-6.6l-5.2-6.8L5.3 22H2l7.6-8.7L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.8H5.5L17.7 20z"/></svg></i>theuglyhaxor</span><span class="h"><i class="ic"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.2-.4-4.7c-.2-.9-.9-1.5-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5c-.9.3-1.6.9-1.8 1.8C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.5 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5c.9-.3 1.6-.9 1.8-1.8C23 15.2 23 12 23 12zM9.8 15V9l5.2 3-5.2 3z"/></svg></i>theuglyhaxor</span></div></div>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <div class="prov">Compiled from the combined lecture slide deck
+      (Lecture&nbsp;1-8-1) and reorganized into continuous study notes —
+      without adding or removing any information.</div>
+  </div>
+</section>
+
+<!-- ===== CONTENTS ===== -->
+<section class="toc">
+  <div class="kick">Overview</div>
+  <h2 class="toc-h">Contents</h2>
+  <div class="toc-rule"></div>
+  <ul class="toc-list"><li class="toc-ch"><a href="#ch1"><span class="toc-k">Chapter 1</span><span class="toc-t">Introduction to Mobile Computing</span></a><ul class="toc-sub"><li><a href="#sec1">1.1  What Is Mobile Computing?</a></li><li><a href="#sec2">1.2  Comparison with Wired Networks</a></li><li><a href="#sec3">1.3  Why Go for Mobile?</a></li><li><a href="#sec4">1.4  Types of Wireless Devices</a></li><li><a href="#sec5">1.5  Challenges</a></li><li><a href="#sec6">1.6  Key Concepts and Terminology</a></li><li><a href="#sec7">1.7  Mobile Computing Functions</a></li><li><a href="#sec8">1.8  Issues by Category</a></li><li><a href="#sec9">1.9  Future of Mobile Computing</a></li><li><a href="#sec10">1.10  Still Open Areas</a></li></ul></li><li class="toc-ch"><a href="#ch2"><span class="toc-k">Chapter 2</span><span class="toc-t">Mobile Generations (1G, 2G, 3G &amp; 4G)</span></a><ul class="toc-sub"><li><a href="#sec11">2.1  Wireless Standards: History</a></li><li><a href="#sec12">2.2  First Generation (1G)</a></li><li><a href="#sec13">2.3  Second Generation (2G)</a></li><li><a href="#sec14">2.4  2.5G</a></li><li><a href="#sec15">2.5  Third Generation (3G)</a></li><li><a href="#sec16">2.6  Beyond 3G / Fourth Generation (4G)</a></li></ul></li><li class="toc-ch"><a href="#ch3"><span class="toc-k">Chapter 3</span><span class="toc-t">Cellular Concepts</span></a><ul class="toc-sub"><li><a href="#sec17">3.1  Cellular Telephone Service — History</a></li><li><a href="#sec18">3.2  Fundamental Concepts of the Cellular Phone</a></li><li><a href="#sec19">3.3  Frequency Allocation: Bands</a></li><li><a href="#sec20">3.4  Multiple Access</a></li><li><a href="#sec21">3.5  Handoff</a></li><li><a href="#sec22">3.6  Cell Structure and Frequency Reuse</a></li><li><a href="#sec23">3.7  Basics on Signals</a></li></ul></li><li class="toc-ch"><a href="#ch4"><span class="toc-k">Chapter 4</span><span class="toc-t">Multiple-Access Techniques: FDMA, TDMA &amp; CDMA</span></a><ul class="toc-sub"><li><a href="#sec24">4.1  Overview of the Access Methods</a></li><li><a href="#sec25">4.2  Everyday Analogy — Which Service Is Better for You?</a></li><li><a href="#sec26">4.3  Definitions</a></li><li><a href="#sec27">4.4  TDMA — Specifications, Advantages and Disadvantages</a></li><li><a href="#sec28">4.5  FDMA — Specifications, Advantages and Disadvantages</a></li><li><a href="#sec29">4.6  CDMA — Specifications, Operation, Advantages and Disadvantages</a></li></ul></li><li class="toc-ch"><a href="#ch5"><span class="toc-k">Chapter 5</span><span class="toc-t">GSM (Global System for Mobile Communication)</span></a><ul class="toc-sub"><li><a href="#sec30">5.1  GSM Through the Generations</a></li><li><a href="#sec31">5.2  GSM — Overview</a></li><li><a href="#sec32">5.3  General Architecture of GSM</a></li><li><a href="#sec33">5.4  Services Provided by GSM</a></li><li><a href="#sec34">5.5  Handover</a></li><li><a href="#sec35">5.6  GSM Radio Aspects</a></li><li><a href="#sec36">5.7  Classification of Channels</a></li><li><a href="#sec37">5.8  GSM System Architecture and Network Layout</a></li><li><a href="#sec38">5.9  Call Routing</a></li><li><a href="#sec39">5.10  Types of Handover (same as “handoff”)</a></li><li><a href="#sec40">5.11  Location Management</a></li></ul></li><li class="toc-ch"><a href="#ch6"><span class="toc-k">Chapter 6</span><span class="toc-t">GSM &amp; CDMA — A Comparison</span></a><ul class="toc-sub"><li><a href="#sec41">6.1  Core Characteristics</a></li><li><a href="#sec42">6.2  CDMA — Additional Characteristics</a></li><li><a href="#sec43">6.3  GSM — Additional Characteristics</a></li><li><a href="#sec44">6.4  Summary</a></li></ul></li><li class="toc-ch"><a href="#ch7"><span class="toc-k">Chapter 7</span><span class="toc-t">GPRS (General Packet Radio Service)</span></a><ul class="toc-sub"><li><a href="#sec45">7.1  GPRS Support Nodes (GSN)</a></li><li><a href="#sec46">7.2  What Is GPRS?</a></li><li><a href="#sec47">7.3  GPRS Charging &amp; QoS Compared to CSD</a></li><li><a href="#sec48">7.4  Serving GPRS Support Node (SGSN)</a></li><li><a href="#sec49">7.5  Gateway GPRS Support Node (GGSN)</a></li></ul></li></ul>
+</section>
+
+<!-- ===== BODY ===== -->
+<main class="doc">
+<section class="chapter first" id="ch1">
+<div class="ch-head"><div class="ch-kicker">Chapter 1</div><h1 class="ch-title">Introduction to Mobile Computing</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec1">1.1  What Is Mobile Computing?</h2>
+<ul><li><strong>What is computing?  </strong>The operation of computers (according to the Oxford Advanced Learner’s Dictionary).</li><li><strong>What is “mobile”?  </strong>That someone / something can move, or be moved, easily and quickly from place to place.</li><li><strong>What is mobile computing?  </strong>Users with portable computers still have network connections while they move.</li></ul>
+<h3>Alternative definitions</h3>
+<p>The concept can be stated in several equivalent ways:</p>
+<ul><li>A simple definition: Mobile Computing is using a computer (of one kind or another) while on the move.</li><li>Another definition: Mobile Computing is when a (work) process is moved from a normal fixed position to a more dynamic position.</li><li>A third definition: Mobile Computing is when a work process is carried out somewhere where it was not previously possible.</li></ul>
+<p>Extending these ideas:</p>
+<ul><li>Mobile Computing is an umbrella term used to describe technologies that enable people to access network services anyplace, anytime, and anywhere.</li><li>Mobile computing can be defined as a computing environment over physical mobility.</li></ul>
+<h2 id="sec2">1.2  Comparison with Wired Networks</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Wired Networks</th><th>Mobile Networks</th></tr></thead><tbody><tr><td>High bandwidth</td><td>Low bandwidth</td></tr><tr><td>Low bandwidth variability</td><td>High bandwidth variability</td></tr><tr><td>Can listen on wire</td><td>Hidden terminal problem</td></tr><tr><td>High power machines</td><td>Low power machines</td></tr><tr><td>High resource machines</td><td>Low resource machines</td></tr><tr><td>Need physical access (security)</td><td>Need proximity</td></tr><tr><td>Low delay</td><td>Higher delay</td></tr><tr><td>Connected operation</td><td>Disconnected operation</td></tr></tbody></table></div>
+<h2 id="sec3">1.3  Why Go for Mobile?</h2>
+<ul><li>Enable anywhere / anytime connectivity.</li><li>Bring computer communications to areas without pre-existing infrastructure.</li><li>Enable mobility.</li><li>Enable new applications.</li><li>An exciting new research area.</li></ul>
+<h2 id="sec4">1.4  Types of Wireless Devices</h2>
+<ul><li>Laptops</li><li>Palmtops</li><li>PDAs</li><li>Cell phones</li><li>Pagers</li><li>Sensors</li><li>… (and others)</li></ul>
+<h2 id="sec5">1.5  Challenges</h2>
+<ul><li>Disconnection.</li><li>Low bandwidth.</li><li>High bandwidth variability.</li><li>Low power and resources.</li><li>Security risks.</li><li>Wide variety of terminals and devices with different capabilities (device attributes).</li><li>Fitting more functionality into a single, smaller device.</li></ul>
+<h2 id="sec6">1.6  Key Concepts and Terminology</h2>
+<p>The user of a mobile computing environment will be able to access data, information or other logical objects from any device in any network while on the move. Two basic forms of mobility are distinguished:</p>
+<ul><li>User Mobility</li><li>Device Mobility</li></ul>
+<p>The following terms describe the different visions of a mobile computing environment:</p>
+<ul><li><strong>Anywhere, Anytime Information:  </strong>the generic definition of ubiquity, where the information is available anywhere, all the time.</li><li><strong>Virtual Home Environment (VHE):  </strong>an environment in a foreign network such that the mobile users can experience the same computing experience as they have in their home or corporate computing environment — for example, one would like to put one’s room heater on when one is about 15 minutes away from home.</li><li><strong>Nomadic Computing:  </strong>the computing environment is nomadic and moves along with the mobile user; this is true for both local and remote services.</li><li><strong>Pervasive Computing:  </strong>a computing environment which is pervasive in nature and can be made available in any environment.</li><li><strong>Ubiquitous Computing:  </strong>a disappearing (nobody will notice its presence) everyplace computing environment; the user will be able to use both local and remote services.</li><li><strong>Global Service Portability:  </strong>making a service portable and available in every environment — any service of any environment will be available globally.</li><li><strong>Wearable Computers:  </strong>computers that may be adorned by humans like a hat, watch, shoe or clothes (these are wearable accessories).</li></ul>
+<h2 id="sec7">1.7  Mobile Computing Functions</h2>
+<p>A computing environment can be defined as mobile if it supports one or more of the following characteristics:</p>
+<ul><li>User Mobility</li><li>Network Mobility</li><li>Device Mobility</li><li>Service Mobility</li><li>Bearer Mobility</li><li>Session Mobility</li><li>Host Mobility (client–server, IP)</li></ul>
+<h2 id="sec8">1.8  Issues by Category</h2>
+<p>The issues involved in mobile computing can be grouped into the following categories:</p>
+<ul><li><strong>Software Issues — </strong>applications; battery, hardware.</li><li><strong>Technical Issues — </strong>connection; understanding.</li><li><strong>Network Issues — </strong>attacks.</li><li><strong>User Interface Issues</strong></li><li><strong>Security Issues</strong></li></ul>
+<h2 id="sec9">1.9  Future of Mobile Computing</h2>
+<ul><li>Use of Artificial Intelligence.</li><li>Integrated circuitry → compact size.</li><li>Increases in computer processor speeds.</li><li>etc.</li></ul>
+<h2 id="sec10">1.10  Still Open Areas</h2>
+<ul><li>Interference.</li><li>Regulations and spectrum.</li><li>Low bandwidth.</li><li>High delays, large delay variations.</li><li>Lower security, simpler to attack.</li><li>Shared medium.</li><li>Ad-hoc networking.</li></ul>
+</section>
+<section class="chapter" id="ch2">
+<div class="ch-head"><div class="ch-kicker">Chapter 2</div><h1 class="ch-title">Mobile Generations (1G, 2G, 3G &amp; 4G)</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec11">2.1  Wireless Standards: History</h2>
+<ul><li>A new generation of cellular standards has appeared approximately every tenth year. 1G systems were introduced in 1981.</li><li>Each generation is characterized by:<ul><li>new frequency bands,</li><li>higher data rates, and</li><li>non-backwards-compatible transmission technology.</li></ul></li><li>3G is considered the successor to 1G and 2G.</li></ul>
+<h2 id="sec12">2.2  First Generation (1G)</h2>
+<ul><li>1G: the original analog cellular systems are considered the first generation of mobile telephony (1G).</li><li>In the early 1980s, 1G systems were deployed.</li><li>Example standard: AMPS.</li></ul>
+<h2 id="sec13">2.3  Second Generation (2G)</h2>
+<ul><li>After 1G, the second generation of mobile telephony (2G) came into being.</li><li>The difference between 1G and 2G is in the signaling techniques used:<ul><li>1G used analog signaling,</li><li>2G used digital signaling,</li><li>2G-based mobile telephony was intended primarily for voice transmission and data (low rate),</li><li>3G for high-speed data rate.</li></ul></li></ul>
+<h2 id="sec14">2.4  2.5G</h2>
+<ul><li>2.5G used some of the advanced techniques like packet-switching.</li><li>It can use some of the existing 2G infrastructure in GSM and CDMA networks.</li><li>GPRS is a 2.5G technology used by GSM operators.</li><li>Some protocols, such as EDGE (Enhanced Data rates for GSM Evolution) for GSM and CDMA2000 1x-RTT for CDMA, have a data rate above 144 kbps and are considered close to 3G.</li></ul>
+<h3>2.5G Cell Phone Systems</h3>
+<ul><li>Positioned between the original 2G digital phones and the newer 3G phones.</li><li>Bring data-transmission capability to 2G phones in addition to normal voice service.</li><li>Permit subscribers to exchange e-mails and access the Internet by cell phone.</li></ul>
+<h3>1. General Packet Radio Service (GPRS)</h3>
+<ul><li>Uses one or more of the eight TDMA time slots in a GSM phone system to transmit data rather than digitized voice.</li><li>Data rate is from 20 kbps up to 160 kbps.</li><li>Typical rate is about 40 kbps, which is more than enough for e-mail and short message service but poor for Internet access.</li><li>Involves an automatic rate-adjustment algorithm that adjusts the class and data rate to the robustness of the wireless channel.</li></ul>
+<h3>2. Enhanced Data Rate for GSM Evolution (EDGE)</h3>
+<ul><li>Based upon the GPRS system but uses 8-PSK modulation to achieve even higher data rates up to 384 kbps, thereby tripling the rate.</li><li>Theoretical maximum data rate is 473.6 kbps with all eight slots used.</li><li>If implemented, EDGE needs linear power amplifiers at the base station and in the handset.</li></ul>
+<h3>3. CDMA2000</h3>
+<ul><li>Uses 1.25 MHz wide channels.</li><li>Packet-based; permits a data rate of 144 kbps.</li><li>Uses three 1.25 MHz channels = 3.75 MHz.</li><li>Evolution-Data Optimized: a recent version has a higher rate approaching 3.1 Mbps downlink and an uplink rate up to 1.8 Mbps. These speeds qualify for 3G.</li></ul>
+<h2 id="sec15">2.5  Third Generation (3G)</h2>
+<h3>Evolving of 3G Standards: IMT-2000</h3>
+<ul><li>3G has been specified as International Mobile Telecommunications-2000 (IMT–2000) as per the definition of the International Telecommunication Unit (ITU).</li><li>IMT-2000 specifications embody standards for mobile phones and mobile telecommunications services as per the ITU.</li></ul>
+<h3>3G Goals</h3>
+<ul><li>Unifying pre-3G technologies:<ul><li>3G uses CDMA, while 1G used FDMA and 2G used TDMA / CDMA.</li></ul></li><li>Making global roaming feasible.</li><li>Higher security level.</li><li>Advanced Video:<ul><li>Streaming</li><li>IPTV</li><li>Mobile TV</li></ul></li></ul>
+<h3>What is 3G?</h3>
+<p>3G refers to the third generation of cellular wireless standards. Its aim is to:</p>
+<ul><li>provide a wide range of data rates for internet access to mobile as well as stationary users, and</li><li>efficiently support both voice and data applications.</li></ul>
+<h3>3G Data Rate</h3>
+<ul><li>3G data rate:<ul><li>a minimum data rate of 2 Mbit/s for stationary or walking users, and</li><li>384 kbit/s in a moving vehicle. (Note: 2G was limited to 128 and 144 kbps respectively.)</li></ul></li><li>ITU does not clearly specify minimum or average rates:<ul><li>so various rates are sold as 3G, intended to meet customers’ expectations of broadband data.</li></ul></li></ul>
+<h3>How to Use 3G?</h3>
+<ul><li>A 3G-compatible device.</li><li>A 3G service provider.</li></ul>
+<h3>First 3G International Launch</h3>
+<ul><li>The first pre-commercial 3G network was launched by NTT DoCoMo in Japan, branded FOMA, in May 2001 on a pre-release of W-CDMA technology.</li><li>The first commercial launch of 3G was also by NTT DoCoMo in Japan on 1 October 2001, although it was initially somewhat limited in scope.</li></ul>
+<h3>3G in India</h3>
+<ul><li>20 May 2010: concluded spectrum auction.<ul><li>Raised 50,968.37 Crore INR.</li><li>Operators: Bharti Airtel, Aircel, Idea Cellular, Reliance Communications, S Tel, Tata Teleservices, Vodafone Essar.</li></ul></li><li>Tata Docomo was the first one to launch.</li><li>Others to launch soon.</li></ul>
+<h2 id="sec16">2.6  Beyond 3G / Fourth Generation (4G)</h2>
+<ul><li>Beyond 3G is the fourth generation of wireless standards (4G), which is not yet well-defined.</li><li>4G will be a super-enhanced version of 3G, when all networks are expected to embrace Internet Protocol (IP) technology.</li><li>IMT-Advanced (under ITU) is currently under study to define the fourth generation (4G) of mobile communications.</li></ul>
+<h3>Introduction: 4G</h3>
+<p>A brief discussion on these terminologies follows:</p>
+<ul><li>Wireless Standard.</li><li>Next-generation futuristic wireless system.</li></ul>
+<h3>4G Basics</h3>
+<ul><li>4G infrastructure shall be all-IP-based (including IPv6 and MIPv6).</li><li>This shall develop into optimized packet-switched networks supporting high data speed.</li><li>Expected data rates for 4G are:<ul><li>100 Mbps for high-mobility devices, and</li><li>1 Gbps for slow-moving objects or stationary objects.</li></ul></li></ul>
+<h3>4G Expected Features (inferred from various research papers)</h3>
+<ul><li>4G shall co-exist and interwork with 2G and 3G systems as well as satellite, WLAN, and IEEE 802.16e (WMAN – WiMAX).</li><li>Achieve local / global roaming capabilities.</li><li>4G shall have clear advantages in terms of bandwidth, coverage, power consumption and spectrum usage.</li><li>4G shall be “Always Best Connected”, i.e. the user shall be connected through the best network.</li><li>A 4G terminal shall support multi-mode, multi-access and reconfiguration capabilities.</li><li>4G shall combine existing and emerging services such as voice, data, streamed multimedia, sensory, e-health, and social networking on mobile devices at best.</li><li>4G envisages that mobile services shall be available on the Mobile Cloud:<ul><li>with the mobile cloud, the various developers and service providers shall be able to make their services available to the end mobile user.</li></ul></li></ul>
+</section>
+<section class="chapter" id="ch3">
+<div class="ch-head"><div class="ch-kicker">Chapter 3</div><h1 class="ch-title">Cellular Concepts</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec17">3.1  Cellular Telephone Service — History</h2>
+<h3>1940s — MTS (Mobile Telephone Systems / Manual Telephone Systems)</h3>
+<ul><li>All calls were handled by an operator; use FM.</li><li>Use a single carrier frequency in the 35 MHz to 45 MHz range for both the mobile unit and base station.</li><li>Half-duplex operation.</li><li>120 kHz bandwidth per channel.</li><li>Only one conversation could take place at a time.</li><li>Could not be accessed directly through the PSTN with five-digit-long numbers.</li></ul>
+<h3>1964 — IMTS (Improved Mobile Telephone Systems)</h3>
+<ul><li>Use several carrier frequencies and could therefore handle several simultaneous mobile conversations at the same time.</li><li>High output power between 13 W and 30 W and a range of 25-mile radius.</li><li>Transmit power a channel bandwidth of 30 kHz, increasing the number of channels.</li></ul>
+<h3>Disadvantages of Early Mobile Telephone Systems</h3>
+<p>High cost, limited availability, and narrow frequency allocation.</p>
+<h3>1983 — AMPS (Advanced Mobile Phone System)</h3>
+<ul><li>The first U.S. cellular telephone system by AT&amp;T, with 666 30-kHz half-duplex mobile telephone channels.</li><li>Based on analog radio technologies and has been phased out.</li></ul>
+<h3>AMPS — Specifications</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Parameter</th><th>AMPS</th></tr></thead><tbody><tr><td>Frequency Band — Forward Link</td><td>869 – 894 MHz</td></tr><tr><td>Frequency Band — Reverse Link</td><td>824 – 849 MHz</td></tr><tr><td>Channel Spacing</td><td>30 kHz</td></tr><tr><td>Spacing between Transmission and Reception</td><td>45 MHz</td></tr><tr><td>Number of Channels</td><td>832 (previously 666)</td></tr><tr><td>Coverage Radius</td><td>2 – 20 km</td></tr><tr><td>Audio Signal — Type of Modulation</td><td>FM</td></tr><tr><td>Audio Signal — Frequency Deviation</td><td>+/- 12 kHz</td></tr><tr><td>Control Signal — Type of Modulation</td><td>FSK</td></tr><tr><td>Control Signal — Frequency Deviation</td><td>+/- 8 kHz</td></tr><tr><td>Data Transmission Rate</td><td>10 kbps</td></tr></tbody></table></div>
+<h2 id="sec18">3.2  Fundamental Concepts of the Cellular Phone</h2>
+<ul><li><strong>Coverage zone — </strong>a large geographic area.</li><li><strong>Cells — </strong>the small sections of the large geographic area. A cell is defined by its physical size and the size of its population.</li></ul>
+<p>Cell types by size:</p>
+<ul><li><strong>Macrocells — </strong>large cells that typically have a radius between 1 mile and 15 miles, with base-station transmit power between 1 W and 6 W.</li><li><strong>Microcells — </strong>the smallest cells, typically having a radius of 1500 feet or less, with base-station transmit power between 0.1 W and 1 W.</li><li><strong>Honeycomb — </strong>the pattern formed by the hexagonal-shaped cells.</li><li><strong>Picocells — </strong>very small cells used indoors.</li></ul>
+<h3>Base-Station Transmitter Locations</h3>
+<p>Different locations of base-station transmitters:</p>
+<ol><li>Center-excited cell.</li><li>Corner-excited cell.</li><li>Edge-excited cell.</li></ol>
+<h2 id="sec19">3.3  Frequency Allocation: Bands</h2>
+<ol><li>800 – 900 MHz — original frequency assignment; previously occupied by UHF TV channels 68 through 83.</li><li>824 and 849 MHz — reserved for uplink.</li><li>869 and 849 MHz — for downlink. Both (2) and (3) are divided into 832 channels with 30 kHz bandwidth.</li><li>30 kHz, 200 kHz, 1.25 MHz — the different bandwidths used in different ways by different companies in different locations.</li><li>700 to 800 MHz — abandoned UHF TV channels for digital high-definition TV in 2009.</li><li>1700 to 1750 MHz — from military.</li><li>1900 to 2300 MHz — available for 3G.</li></ol>
+<h2 id="sec20">3.4  Multiple Access</h2>
+<p>Multiple access refers to how the subscribers are allocated to the assigned frequency spectrum. Types:</p>
+<ol><li>Frequency reuse.</li><li>FDMA — the spectrum is divided into many smaller channels.</li><li>TDMA — multiple users use different time slots.</li><li>CDMA — with unique coding, up to 64 subscribers can share a 1.25 MHz channel.</li><li>SDMA — it uses highly directional antennas to pinpoint users and reject others on the same frequency.</li></ol>
+<h2 id="sec21">3.5  Handoff</h2>
+<p>A handoff transfers an ongoing call from one cell to another. Types of handoff:</p>
+<ul><li><strong>Hard Handoff — </strong>a connection that is momentarily broken during the cell-to-cell transfer. It is a break-before-make process.</li><li><strong>Soft Handoff — </strong>a flawless handoff, normally taking approximately 200 ms, which is imperceptible to voice telephone users, although the delay may be disruptive when transmitting data.</li></ul>
+<h2 id="sec22">3.6  Cell Structure and Frequency Reuse</h2>
+<ul><li><strong>Frequency reuse — </strong>the process in which the same set of frequencies (channels) can be allocated to more than one cell, provided the cells are separated by sufficient distance.</li><li><strong>Cluster — </strong>groups of cells.</li></ul>
+<h3>Frequency-Reuse Formulas</h3>
+<p>Number of channels available in a cluster, F:</p>
+<p class="formula">F = G N</p>
+<p>Total channel capacity in a given area, C:</p>
+<p class="formula">C = m F</p>
+<p>Where:</p>
+<ul><li>G = number of channels in a cell,</li><li>N = number of cells in a cluster = 3, 7, or 12,</li><li>m = number of clusters in a given area.</li></ul>
+<h3>Worked Example</h3>
+<p>Determine the number of channels per cluster and the total channel capacity for a cellular telephone area comprised of 10 clusters with seven cells in each cluster and 10 channels in each cell.</p>
+<ul><li>F = 10(7) channels per cluster.</li><li>C = 10(7)(10) total channels.</li></ul>
+<h3>Frequency Planning</h3>
+<p>3-cell clusters with 3-sector antennas.</p>
+<h2 id="sec23">3.7  Basics on Signals</h2>
+<p>This section groups the fundamentals of signal behaviour and modulation as presented in the deck.</p>
+<ul><li><strong>Signal propagation ranges. </strong></li><li><strong>Multipath propagation — </strong>a signal can take many different paths between sender and receiver due to reflection, scattering and diffraction.</li></ul>
+<p>Modulation — basic schemes:</p>
+<ul><li>Amplitude Modulation</li><li>Frequency Modulation</li><li>Phase Modulation</li></ul>
+<p>Further modulation topics covered:</p>
+<ul><li>Modulation and Demodulation</li><li>Digital Modulation</li></ul>
+<p>Spread-Spectrum Technology:</p>
+<ul><li>DSSS: Direct Sequence.</li><li>FSSS: Frequency Spread.</li></ul>
+</section>
+<section class="chapter" id="ch4">
+<div class="ch-head"><div class="ch-kicker">Chapter 4</div><h1 class="ch-title">Multiple-Access Techniques: FDMA, TDMA &amp; CDMA</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec24">4.1  Overview of the Access Methods</h2>
+<ul><li><strong>FDMA — Frequency Division Multiple Access. </strong>Associated with 1G cellular networks.</li><li><strong>TDMA — Time Division Multiple Access.</strong></li><li><strong>F/TDMA — Frequency and Time Division Multiple Access. </strong>Associated with 2G cellular networks (also used in Ham Bands).</li><li><strong>CDMA — Code Division Multiple Access. </strong>Associated with 3G cellular networks.</li></ul>
+<p>How CDMA works, in brief: CDMA uses the whole band for the whole time — everyone transmits on top of everyone else. With different codes, and if you know the right code, you can receive just the person transmitting with that code.</p>
+<h2 id="sec25">4.2  Everyday Analogy — Which Service Is Better for You?</h2>
+<ul><li><strong>FDMA — </strong>a large room divided up into small rooms. Each pair of people takes turns speaking.</li><li><strong>TDMA — </strong>a large room divided up into small rooms. Three pairs of people per room; however, each pair gets 20 seconds to speak.</li><li><strong>CDMA — </strong>no small rooms. Everyone is speaking in different languages. If voice volume is minimized, the number of people is maximized.</li></ul>
+<h2 id="sec26">4.3  Definitions</h2>
+<ul><li>TDMA — Time Division Multiple Access.</li><li>FDMA — Frequency Division Multiple Access.</li><li>CDMA — Code Division Multiple Access.</li></ul>
+<h2 id="sec27">4.4  TDMA — Specifications, Advantages and Disadvantages</h2>
+<h3>General Specification of TDMA</h3>
+<ul><li>Rx: 869–894 MHz;  Tx: 824–849 MHz.</li><li>832 channels spaced 30 kHz apart (3 users/channel).</li><li>DQPSK modulation scheme.</li><li>48.6 kbps bit rate.</li><li>Interim Standard (IS) – 54.</li><li>Digital AMPS (Advanced Mobile Phone System).</li><li>Uses Time Division Duplexing (TDD) usually.</li></ul>
+<h3>Advantages of TDMA</h3>
+<ul><li>Flexible bit rate.</li><li>No frequency guard band required.</li><li>No need for precise narrowband filters.</li><li>Easy for mobile or base stations to initiate and execute hand-off.</li><li>Extended battery life.</li><li>TDMA installations offer savings in base-station equipment, space and maintenance.</li><li>The most cost-effective technology for upgrading a current analog system to digital.</li></ul>
+<h3>Disadvantages of TDMA</h3>
+<ul><li>Requires network-wide timing synchronization.</li><li>Requires signal processing for matched filtering and correlation detection.</li><li>Demands high peak power on the uplink in transient mode.</li><li>Multipath distortion.</li></ul>
+<h2 id="sec28">4.5  FDMA — Specifications, Advantages and Disadvantages</h2>
+<h3>General Specification of FDMA</h3>
+<ul><li>Rx: 869–894 MHz;  Tx: 824–849 MHz.</li><li>832 channels spaced 30 kHz apart (3 users/channel).</li><li>DQPSK modulation scheme.</li><li>48.6 kbps bit rate.</li><li>Used in analog cellular phone systems (i.e. AMPS).</li><li>Uses Frequency Division Duplexing (FDD).</li><li>ISI (Intersymbol Interference) is low.</li></ul>
+<h3>Advantages of FDMA</h3>
+<ul><li>If a channel is not in use, it sits idle.</li><li>Channel bandwidth is relatively narrow (30 kHz).</li><li>Simple algorithmically, and from a hardware standpoint.</li><li>Fairly efficient when the number of stations is small and the traffic is uniformly constant.</li><li>Capacity increase can be obtained by reducing the information bit rate and using efficient digital code.</li><li>No need for network timing.</li><li>No restriction regarding the type of baseband or type of modulation.</li></ul>
+<h3>Disadvantages of FDMA</h3>
+<ul><li>The presence of guard bands.</li><li>Requires right RF filtering to minimize adjacent-channel interference.</li><li>Maximum bit rate per channel is fixed.</li><li>Small inhibiting flexibility in bit-rate capability.</li><li>Does not differ significantly from an analog system.</li></ul>
+<h2 id="sec29">4.6  CDMA — Specifications, Operation, Advantages and Disadvantages</h2>
+<h3>General Specification of CDMA</h3>
+<ul><li>Rx: 869–894 MHz;  Tx: 824–849 MHz.</li><li>20 channels spaced 1250 kHz apart (798 users/channel).</li><li>QPSK / (Offset) OQPSK modulation scheme.</li><li>1.2288 Mbps bit rate.</li><li>IS-95 standard.</li><li>Operates at both 800 and 1900 MHz frequency bands.</li></ul>
+<h3>CDMA Operation</h3>
+<ul><li>Spread-Spectrum Multiple-Access technologies.</li></ul>
+<h3>Advantages of CDMA</h3>
+<ul><li>Many users of CDMA use the same frequency; TDD or FDD may be used.</li><li>Multipath fading may be substantially reduced because of large signal bandwidth.</li><li>No absolute limit on the number of users.</li><li>Easy addition of more users.</li><li>Impossible for hackers to decipher the code sent.</li><li>Better signal quality.</li><li>No sense of handoff when changing cells.</li></ul>
+<h3>Disadvantages of CDMA</h3>
+<ul><li>As the number of users increases, the overall quality of service decreases.</li><li>Self-jamming.</li><li>Near-Far problem arises.</li></ul>
+</section>
+<section class="chapter" id="ch5">
+<div class="ch-head"><div class="ch-kicker">Chapter 5</div><h1 class="ch-title">GSM (Global System for Mobile Communication)</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec30">5.1  GSM Through the Generations</h2>
+<ul><li><strong>2nd Generation:  </strong>GSM – 9.6 Kbps (data rate).</li></ul>
+<p>2.5 Generation (Future of GSM):</p>
+<ul><li>HSCSD (High Speed Circuit Switched Data) — data rate: 76.8 Kbps (9.6 × 8 kbps).</li><li>GPRS (General Packet Radio Service) — data rate: 14.4 – 115.2 Kbps.</li><li>EDGE (Enhanced Data rate for GSM Evolution) — data rate: 547.2 Kbps (max).</li></ul>
+<p>3 Generation:</p>
+<ul><li>WCDMA (Wideband CDMA) — data rate: 0.348 – 2.0 Mbps.</li></ul>
+<h3>Evolution Chart</h3>
+<p>The evolution of mobile service across the generations, as charted in the deck:</p>
+<div class="tbl-wrap"><table><thead><tr><th>Generation</th><th>Service Type</th><th>Standards / System</th><th>Approx. Data Rate</th><th>Era</th></tr></thead><tbody><tr><td>1G</td><td>Voice (Analog)</td><td>AMPS</td><td>~24 kbps</td><td>1980</td></tr><tr><td>2G</td><td>Digital</td><td>IS-95, IS-136, GSM</td><td>~64 kbps</td><td>1990</td></tr><tr><td>3G</td><td>Wide Band</td><td>IMT-2000</td><td>~2 Mbps</td><td>2000</td></tr><tr><td>4G</td><td>Broad Band / Wireless Internet Mobile system, Multimedia</td><td>—</td><td>~20 Mbps</td><td>2010</td></tr></tbody></table></div>
+<h2 id="sec31">5.2  GSM — Overview</h2>
+<p>GSM is the Global System for Mobile Communication — the European TDMA digital cellular standard. This overview covers:</p>
+<ul><li>Architecture.</li><li>Components and sub-systems.</li><li>Types of services.</li><li>Call originating and receiving.</li></ul>
+<h2 id="sec32">5.3  General Architecture of GSM</h2>
+<p>GSM is organized into two major subsystems — the Base Station Subsystem (BSS) and the Network Subsystem (NSS) — which serve the Mobile Station (MS). The elements shown in the architecture are:</p>
+<ul><li><strong>Mobile Station (MS) — </strong>consists of two blocks: the Mobile Equipment (ME) and the Subscriber Identity Module (SIM). The MS connects to the base station over the Um interface.</li><li><strong>Base Station Subsystem (BSS) — </strong>the Base Transceiver Station (BTS) and the Base Station Controller (BSC).</li><li><strong>Network Subsystem (NSS) — </strong>the Mobile Switching Center (MSC), Home Location Register (HLR), Visitor Location Register (VLR), Authentication Center (AuC) and Equipment Identity Register (EIR), connecting onward to the PSTN / ISDN.</li></ul>
+<h3>Mobile Station (MS)</h3>
+<p>The Mobile Station has two blocks:</p>
+<ul><li>Mobile Equipment (ME).</li><li>Subscriber Identity Module (SIM).</li></ul>
+<p>Function of the Mobile Station:</p>
+<ol><li>Personal mobility.</li><li>IMEI (International Mobile Equipment Identity).</li><li>IMSI (International Mobile Subscriber Identity).</li></ol>
+<h3>Base Station Subsystem (BSS)</h3>
+<p>The BSS comprises:</p>
+<ul><li>Base Transceiver Station (BTS).</li><li>Base Station Controller (BSC).</li></ul>
+<p><strong>Base Station Controller (BSC):</strong></p>
+<ol><li>It manages radio resources for one or more BTS.</li><li>Allocation and deallocation of channels.</li><li>Transmitter power control.</li><li>Handoff control.</li></ol>
+<p><strong>Base Transceiver Station (BTS):</strong></p>
+<ol><li>It defines the cell.</li><li>It handles the radio-link protocol with the mobile station.</li></ol>
+<h3>Network Subsystem (NSS)</h3>
+<p>The Network Subsystem contains:</p>
+<ul><li><strong>MSC — </strong>Mobile Switching Center.</li><li><strong>HLR — </strong>Home Location Register.</li><li><strong>VLR — </strong>Visitor Location Register.</li><li><strong>AuC — </strong>Authentication Center.</li><li><strong>EIR — </strong>Equipment Identity Register.</li></ul>
+<p><strong>Mobile Switching Center (MSC) responsibilities:</strong></p>
+<ul><li>Call set-up / supervision / release.</li><li>Call routing.</li><li>Billing information collection.</li><li>Mobility management.</li><li>Paging, alerting, echo cancellation.</li><li>Connection to BSC, other MSC and other local exchange networks.</li><li>Access to HLR and VLR.</li></ul>
+<p><strong>Home Location Register (HLR):</strong></p>
+<ul><li>One HLR per GSM operator.</li><li>Contains a permanent database of all the subscribers in the network.</li><li>Contains MSRN (Mobile Station Routing Number).</li><li>It is referred to for every incoming call.</li></ul>
+<p><strong>Visitor Location Register (VLR):</strong></p>
+<ul><li>Temporary visitors’ database.</li><li>One VLR per MSC.</li></ul>
+<p><strong>Authentication Center (AuC):</strong></p>
+<ul><li>Provides security.</li><li>Authentication and encryption.</li></ul>
+<p><strong>Equipment Identity Register (EIR):</strong></p>
+<ul><li>Contains IMEI.</li></ul>
+<h2 id="sec33">5.4  Services Provided by GSM</h2>
+<p><strong>1. Teleservices:</strong></p>
+<ul><li>Basic teleservice.</li><li>Calling – voice communication.</li><li>Voice mailbox.</li><li>SMS.</li><li>Emergency calling.</li><li>Voice messaging.</li></ul>
+<p><strong>2. Bearer Services:</strong></p>
+<ul><li>Transmission of data.</li><li>Low-speed data transfer (up to 9.6 Kbps).</li><li>Synchronous / asynchronous.</li></ul>
+<p><strong>3. Supplementary Services:</strong></p>
+<ul><li>Call offering, call forwarding, call restriction, call waiting, call hold.</li><li>Multiparty teleconferencing, special schemes.</li></ul>
+<h2 id="sec34">5.5  Handover</h2>
+<p>In GSM, handover is of 4 types:</p>
+<ol><li>Intra-BTS.</li><li>Intra-BSC.</li><li>Inter-BSC.</li><li>Inter-MSC.</li></ol>
+<p>Expressed in terms of what is transferred:</p>
+<ul><li>Intra-BTS.</li><li>Inter-BTS / Intra-BSC.</li><li>Inter-BSC / Intra-MSC.</li><li>Inter-MSC.</li></ul>
+<h2 id="sec35">5.6  GSM Radio Aspects</h2>
+<ul><li>Uplink (mobile to base):<ul><li>890–915 MHz (Total 25 MHz).</li></ul></li><li>Downlink (base to mobile):<ul><li>935–960 MHz (Total 25 MHz).</li></ul></li><li>Total 45 MHz spacing for duplex operation.</li><li>GSM uses TDMA and FDMA.</li></ul>
+<h3>GSM Using FDMA</h3>
+<ul><li>Channel spacing (spacing between two carriers) = 200 kHz.</li><li>Total frequency range (uplink) = 25 MHz (890 MHz – 915 MHz).</li><li>Number of carriers = 25 MHz / 200 kHz = 124.</li></ul>
+<h3>GSM Using TDMA</h3>
+<ul><li>The TDMA frame is divided into 8 time slots.</li><li>Carrier spacing 200 kHz; duplex spacing 45 MHz.</li><li>Frame duration = 4.6 ms; time slot = 0.57 ms.</li></ul>
+<h2 id="sec36">5.7  Classification of Channels</h2>
+<p><strong>1. Traffic Channel (TCH):</strong></p>
+<ul><li>Speech:<ul><li>Full rate 22.8 kb/s.</li><li>Half rate 11.4 kb/s.</li></ul></li><li>Data:<ul><li>9.6 kb/s.</li><li>4.8 kb/s.</li><li>2.4 kb/s.</li></ul></li></ul>
+<p><strong>2. Control Channel (CCH):</strong></p>
+<ul><li>Broadcast (BCCH):<ul><li>Frequency correction (FCCH).</li><li>Synchronization (SCH).</li></ul></li><li>Common (CCH):<ul><li>Paging (PCH).</li><li>Access grant (AGCH).</li><li>Random access (RACH).</li></ul></li><li>Dedicated (DCCH):<ul><li>Fast Associative (FACCH).</li><li>Slow Associative (SACCH).</li><li>Stand-alone (SDCCH).</li></ul></li></ul>
+<h2 id="sec37">5.8  GSM System Architecture and Network Layout</h2>
+<p>The GSM network interconnects the mobile stations (MS) through the BTS, BSC and MSC toward the external networks (PSTN, ISDN, PDN). It also includes the OMC and the gateway MSC. The registers and support nodes shown in the layout are the GMSC, VLR, EIR, AuC and HLR, interconnected over the labelled interfaces (A; B, C; E).</p>
+<h3>Abbreviations</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Abbreviation</th><th>Meaning</th></tr></thead><tbody><tr><td>ISC</td><td>International Switching Center</td></tr><tr><td>OMC</td><td>Operations and Maintenance Center</td></tr><tr><td>GMSC</td><td>Gateway Switching Center</td></tr><tr><td>MSC</td><td>Mobile Switching Center</td></tr><tr><td>VLR</td><td>Visitor Location Register</td></tr><tr><td>HLR</td><td>Home Location Register</td></tr><tr><td>EIR</td><td>Equipment Identification Register</td></tr><tr><td>AUC</td><td>Authentication Center</td></tr><tr><td>BSC</td><td>Base Station Controller</td></tr><tr><td>BTS</td><td>Base Transceiver Station</td></tr><tr><td>MS</td><td>Mobile Subscriber</td></tr><tr><td>TMSI</td><td>Temporary Mobile Subscriber Identity</td></tr><tr><td>IMSI</td><td>International Mobile Subscriber Identity</td></tr><tr><td>MSRN</td><td>Mobile Station Roaming Number</td></tr></tbody></table></div>
+<h2 id="sec38">5.9  Call Routing</h2>
+<p>Call routing covers two cases: a call originating from the MS, and a call terminating at the MS.</p>
+<h3>Outgoing Call (Mobile Call Originating)</h3>
+<ol><li>MS sends the dialled number to the BSS.</li><li>BSS sends the dialled number to the MSC.</li><li>(Steps 3–4) MSC checks the VLR to see if the MS is allowed the requested service. If so, the MSC asks the BSS to allocate resources for the call.</li><li>(Step 5) MSC routes the call to the GMSC.</li><li>(Step 6) GMSC routes the call to the local exchange of the called user.</li><li>(Steps 7, 8, 9, 10) The answer-back (ring-back) tone is routed from the called user to the MS via GMSC, MSC and BSS.</li></ol>
+<h3>Incoming Call (Call Termination to MS)</h3>
+<ol><li>Calling a GSM subscriber.</li><li>Forwarding the call to the GMSC.</li><li>Signal setup to the HLR.</li><li>(Steps 4, 5) Request MSRN from the VLR.</li><li>(Step 6) Forward the responsible MSC to the GMSC.</li><li>(Step 7) Forward the call to the current MSC.</li><li>(Steps 8, 9) Get the current status of the MS.</li><li>(Steps 10, 11) Paging of the MS.</li><li>(Steps 12, 13) MS answers.</li><li>(Steps 14, 15) Security checks.</li><li>(Steps 16, 17) Set up the connection.</li></ol>
+<h2 id="sec39">5.10  Types of Handover (same as “handoff”)</h2>
+<p>There are four different types of handover in the GSM system. Handover involves transferring a call between:</p>
+<ul><li>Channels (time slots) in the same cell.</li><li>Cells (Base Transceiver Stations) under the control of the same Base Station Controller (BSC).</li><li>Cells under the control of different BSCs, but belonging to the same Mobile services Switching Center (MSC).</li><li>Cells under the control of different MSCs.</li></ul>
+<h2 id="sec40">5.11  Location Management</h2>
+<p>A set of procedures to:</p>
+<ul><li>track a mobile user, and</li><li>find the mobile user to deliver calls to it.</li></ul>
+<p>The current location of the MS is maintained by a 2-level hierarchical strategy with:</p>
+<ul><li>HLRs, and</li><li>VLRs.</li></ul>
+</section>
+<section class="chapter" id="ch6">
+<div class="ch-head"><div class="ch-kicker">Chapter 6</div><h1 class="ch-title">GSM &amp; CDMA — A Comparison</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec41">6.1  Core Characteristics</h2>
+<div class="tbl-wrap"><table><thead><tr><th>Characteristic</th><th>GSM</th><th>CDMA</th></tr></thead><tbody><tr><td>Technology basis</td><td>Time Division Multiple Access (TDMA) based</td><td>Code Division Multiple Access (CDMA) based</td></tr><tr><td>Bandwidth per carrier</td><td>200 kHz</td><td>1.25 MHz</td></tr><tr><td>Reuse</td><td>Deployed in reuse pattern 3/9, 4/12, 7/21</td><td>Reuse factor 1</td></tr><tr><td>Available operating frequency</td><td>900, 1800, 1900 MHz</td><td>450, 800, 1900 MHz</td></tr><tr><td>Card</td><td>Using SIM card</td><td>Using RUIM card</td></tr></tbody></table></div>
+<h2 id="sec42">6.2  CDMA — Additional Characteristics</h2>
+<ul><li>Inherently superior receive sensitivity (approx. −121 dB).</li><li>Trade-off between capacity, coverage and quality.</li><li>Soft / softer hand-off (make before break):<ul><li>precise power-control algorithms minimize interference.</li></ul></li><li>Multiple diversities:<ul><li>receive spatial diversity through two receive antennas,</li><li>path diversity through rake receivers,</li><li>frequency diversity through spread spectrum,</li><li>time diversity through interleaving.</li></ul></li></ul>
+<h2 id="sec43">6.3  GSM — Additional Characteristics</h2>
+<ul><li>Fixed coverage.</li><li>Receive sensitivity improvement (approx. −108 dB) relies on external solutions (masthead pre-amplifier, high-power amplifier).</li><li>Hard hand-off (break before make).</li></ul>
+<h2 id="sec44">6.4  Summary</h2>
+<p>CDMA, compared with GSM (TDMA) technology, provides:</p>
+<ul><li>better spectrum efficiency (more capacity),</li><li>better coverage (fewer sites required),</li><li>better voice quality,</li><li>better data capability,</li><li>better forward compatibility (the same spectrum can be reused).</li></ul>
+</section>
+<section class="chapter" id="ch7">
+<div class="ch-head"><div class="ch-kicker">Chapter 7</div><h1 class="ch-title">GPRS (General Packet Radio Service)</h1><div class="ch-rule"><span class="ch-node"></span><svg class="wave" viewBox="0 0 60 16" aria-hidden="true"><path d="M0 8 Q7 0 14 8 T28 8 T42 8 T56 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+<h2 id="sec45">7.1  GPRS Support Nodes (GSN)</h2>
+<ul><li>A GSN is a network node which supports the use of GPRS in the GSM core network.</li><li>All GSNs should have a Gn interface and support the GPRS tunnelling protocol.</li><li>There are two key variants of the GSN, namely:<ul><li>Gateway GPRS Support Node (GGSN), and</li><li>Serving GPRS Support Node (SGSN).</li></ul></li></ul>
+<h3>Advantages</h3>
+<ul><li>Speed.</li><li>Always-on connectivity.</li><li>New and better applications.</li><li>GSM operator costs — as an upgraded network, no major infrastructure changes.</li></ul>
+<h2 id="sec46">7.2  What Is GPRS?</h2>
+<ul><li>The General Packet Radio Service (GPRS) network is an “always on”, private network for data.</li><li>It uses the existing GSM network to transmit and receive TCP/IP-based data to and from GPRS mobile devices.</li><li>Private IP addresses are typically dynamically assigned within the network to mobile devices.</li><li>Firewalls typically reside at the APN to isolate the public and private networks. IP addresses allocated to mobile GPRS devices are therefore not addressable from outside the GPRS network (e.g. from the Internet) without specialized services or infrastructure.</li></ul>
+<p>Further points:</p>
+<ul><li>GPRS is a very widely deployed wireless data service, available now with most GSM networks.</li><li>GPRS customers enjoy advanced, feature-rich data services such as e-mail on the move, multimedia messages and location-based services.</li><li>GPRS is a packet-oriented mobile data service available to users of the 2G cellular communication systems Global System for Mobile Communications (GSM), as well as in the 3G systems.</li></ul>
+<h3>GPRS (continued)</h3>
+<ul><li>In 2G systems, GPRS provides data rates of 56–114 kbit/s.</li><li>2G cellular systems combined with GPRS are often described as 2.5G.</li><li>GPRS data transfer is typically charged per megabyte of traffic transferred, while data communication via traditional circuit switching is billed per minute of connection time.</li></ul>
+<h2 id="sec47">7.3  GPRS Charging &amp; QoS Compared to CSD</h2>
+<ul><li>GPRS data transfer is typically charged per megabyte of traffic transferred, while data communication via traditional circuit switching is billed per minute of connection time, independent of whether the user is actually using the capacity or is in an idle state.</li><li>GPRS is a best-effort packet-switched service.<ul><li>In circuit switching, a certain quality of service (QoS) is guaranteed during the connection for non-mobile users.</li></ul></li></ul>
+<h2 id="sec48">7.4  Serving GPRS Support Node (SGSN)</h2>
+<ul><li>A Serving GPRS Support Node (SGSN) is responsible for the delivery of data packets from and to the mobile stations within its geographical service area.</li><li>Its tasks include packet routing and transfer, mobility management (attach / detach and location management), and authentication and charging functions.</li><li>The location register of the SGSN stores location information (e.g., current cell, current VLR) and user profiles (e.g., IMSI, address(es) used in the packet data network) of all GPRS users registered with this SGSN.</li></ul>
+<h3>Common SGSN Functions</h3>
+<ul><li>Detunnel GTP packets from the GGSN (downlink).</li><li>Tunnel IP packets toward the GGSN (uplink).</li><li>Carry out mobility management as the standby-mode mobile moves from one Routing Area to another Routing Area.</li><li>Billing user data.</li></ul>
+<h2 id="sec49">7.5  Gateway GPRS Support Node (GGSN)</h2>
+<ul><li>The Gateway GPRS Support Node (GGSN) is a main component of the GPRS network. The GGSN is responsible for the interworking between the GPRS network and external packet-switched networks, like the Internet and X.25 networks.</li><li>From an external network’s point of view, the GGSN is a router to a sub-network, because the GGSN ‘hides’ the GPRS infrastructure from the external network.</li><li>When the GGSN receives data addressed to a specific user, it checks if the user is active. If it is, the GGSN forwards the data to the SGSN serving the mobile user; but if the mobile user is inactive, the data is discarded. On the other hand, mobile-originated packets are routed to the right network by the GGSN.</li><li>In short, the GGSN is the anchor point that enables the mobility of the user terminal in the GPRS / UMTS networks.</li></ul>
+<p class="end">End of Part–1.</p>
+</section>
+</main>
+
+<!-- repeating footer (fixed in print, static at end on screen) -->
+<div class="pagefoot">
+  <span class="tag">Mobile Computing · Part&nbsp;1 — Study Material</span>
+  <div class="handles "><span class="h"><i class="ic"><svg viewBox="0 0 24 24"><path d="M13 22v-8h2.8l.4-3H13V9.1c0-.9.3-1.5 1.6-1.5h1.7V5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V11H8.5v3H10v8h3z"/></svg></i>theuglyhaxor</span><span class="h"><i class="ic"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.1 8.1L23 22h-6.6l-5.2-6.8L5.3 22H2l7.6-8.7L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.8H5.5L17.7 20z"/></svg></i>theuglyhaxor</span><span class="h"><i class="ic"><svg viewBox="0 0 24 24"><path d="M23 12s0-3.2-.4-4.7c-.2-.9-.9-1.5-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5c-.9.3-1.6.9-1.8 1.8C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.9.9 1.5 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5c.9-.3 1.6-.9 1.8-1.8C23 15.2 23 12 23 12zM9.8 15V9l5.2 3-5.2 3z"/></svg></i>theuglyhaxor</span></div>
+</div>
+
+</body>
+</html>

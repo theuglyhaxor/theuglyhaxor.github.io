@@ -181,6 +181,37 @@
             font-size:0.97rem;
         }
 
+        /* ===== compact expertise bullets ===== */
+
+        .expertise-list{
+            list-style:none;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:12px 34px;
+        }
+
+        .expertise-list li{
+            position:relative;
+            padding-left:24px;
+            color:#cbd5e1;
+            font-size:1rem;
+            line-height:1.55;
+        }
+
+        .expertise-list li::before{
+            content:"▹";
+            position:absolute;
+            left:0;
+            top:0;
+            color:#60a5fa;
+            font-weight:700;
+        }
+
+        .expertise-list li b{
+            color:#f8fafc;
+            font-weight:600;
+        }
+
         /* ================= TIMELINE ================= */
 
         .timeline{
@@ -238,6 +269,322 @@
             box-shadow:0 12px 25px rgba(37,99,235,0.3);
         }
 
+        /* ================= NAVBAR ================= */
+
+        .navbar{
+            position:sticky;
+            top:14px;
+            z-index:50;
+            margin:0 auto 26px;
+            max-width:1150px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:14px;
+            padding:12px 22px;
+            background:rgba(15,23,42,0.82);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:18px;
+            backdrop-filter:blur(14px);
+            box-shadow:0 10px 30px rgba(0,0,0,0.35);
+        }
+
+        .nav-brand{
+            font-weight:800;
+            font-size:1.05rem;
+            color:#fff;
+            letter-spacing:-0.3px;
+            text-decoration:none;
+            white-space:nowrap;
+        }
+
+        .nav-brand span{color:#60a5fa;}
+
+        .nav-links{
+            display:flex;
+            flex-wrap:wrap;
+            gap:6px;
+        }
+
+        .nav-links a{
+            color:var(--muted);
+            text-decoration:none;
+            font-size:0.92rem;
+            font-weight:500;
+            padding:8px 14px;
+            border-radius:10px;
+            transition:0.25s ease;
+        }
+
+        .nav-links a:hover{
+            color:#fff;
+            background:rgba(37,99,235,0.18);
+        }
+
+        .nav-links a.nav-cta{
+            background:var(--primary);
+            color:#fff;
+            font-weight:600;
+        }
+
+        .nav-links a.nav-cta:hover{
+            background:var(--primary-hover);
+        }
+
+        /* ================= PROJECTS ================= */
+
+        .projects-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:22px;
+        }
+
+        .project-card{
+            display:flex;
+            flex-direction:column;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:20px;
+            padding:26px;
+            transition:0.35s ease;
+        }
+
+        .project-card:hover{
+            transform:translateY(-6px);
+            border-color:rgba(37,99,235,0.5);
+            box-shadow:0 14px 34px rgba(37,99,235,0.16);
+        }
+
+        .project-head{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:12px;
+            margin-bottom:14px;
+        }
+
+        .project-card h3{
+            color:#f8fafc;
+            font-size:1.2rem;
+        }
+
+        .project-card p{
+            color:#cbd5e1;
+            font-size:0.98rem;
+            flex:1;
+        }
+
+        .tag-row{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin:16px 0 18px;
+        }
+
+        .tag{
+            font-size:0.78rem;
+            font-weight:600;
+            color:#93c5fd;
+            background:rgba(37,99,235,0.14);
+            border:1px solid rgba(37,99,235,0.25);
+            padding:4px 11px;
+            border-radius:999px;
+        }
+
+        .tag.featured{
+            color:#fbbf24;
+            background:rgba(251,191,36,0.12);
+            border-color:rgba(251,191,36,0.3);
+        }
+
+        .project-links{
+            display:flex;
+            gap:14px;
+            margin-top:auto;
+        }
+
+        .project-links a{
+            color:#60a5fa;
+            text-decoration:none;
+            font-weight:600;
+            font-size:0.92rem;
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            transition:0.25s ease;
+        }
+
+        .project-links a:hover{color:#93c5fd;}
+
+        /* ================= BLOG PREVIEW ================= */
+
+        .blog-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:22px;
+        }
+
+        .blog-card{
+            display:flex;
+            flex-direction:column;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:20px;
+            padding:0;
+            overflow:hidden;
+            text-decoration:none;
+            transition:0.35s ease;
+        }
+
+        .blog-card:hover{
+            transform:translateY(-6px);
+            border-color:rgba(37,99,235,0.5);
+            box-shadow:0 14px 34px rgba(37,99,235,0.16);
+        }
+
+        .blog-card-top{
+            padding:22px 24px 0;
+        }
+
+        .blog-cat{
+            display:inline-block;
+            font-size:0.76rem;
+            font-weight:700;
+            letter-spacing:0.04em;
+            text-transform:uppercase;
+            color:#34d399;
+            background:rgba(52,211,153,0.12);
+            border:1px solid rgba(52,211,153,0.28);
+            padding:4px 11px;
+            border-radius:999px;
+            margin-bottom:14px;
+        }
+
+        .blog-card h3{
+            color:#f8fafc;
+            font-size:1.18rem;
+            line-height:1.4;
+            margin-bottom:10px;
+        }
+
+        .blog-card p{
+            color:#94a3b8;
+            font-size:0.95rem;
+            padding:0 24px;
+        }
+
+        .blog-card-foot{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:18px 24px 22px;
+            margin-top:auto;
+            color:#64748b;
+            font-size:0.85rem;
+        }
+
+        .blog-card-foot .read{
+            color:#60a5fa;
+            font-weight:600;
+        }
+
+        .see-all{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            margin-top:26px;
+            color:#60a5fa;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .see-all:hover{color:#93c5fd;}
+
+        /* ================= CERTIFICATES ================= */
+
+        .cert-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:22px;
+        }
+
+        .cert-card{
+            display:flex;
+            gap:20px;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.06);
+            border-radius:20px;
+            padding:26px;
+            transition:0.35s ease;
+        }
+
+        .cert-card:hover{
+            transform:translateY(-6px);
+            border-color:rgba(37,99,235,0.5);
+            box-shadow:0 14px 34px rgba(37,99,235,0.16);
+        }
+
+        .cert-icon{
+            flex:0 0 auto;
+            width:54px;
+            height:54px;
+            border-radius:14px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:rgba(37,99,235,0.15);
+            border:1px solid rgba(37,99,235,0.3);
+            color:#60a5fa;
+        }
+
+        .cert-icon svg{width:26px;height:26px;}
+
+        .cert-body{flex:1;min-width:0;}
+
+        .cert-body h3{
+            color:#f8fafc;
+            font-size:1.15rem;
+            margin-bottom:4px;
+        }
+
+        .cert-issuer{
+            color:#60a5fa;
+            font-weight:600;
+            font-size:0.95rem;
+            margin-bottom:6px;
+        }
+
+        .cert-date{
+            color:#94a3b8;
+            font-size:0.9rem;
+            margin-bottom:12px;
+        }
+
+        .cert-body p{
+            color:#cbd5e1;
+            font-size:0.96rem;
+            margin-bottom:16px;
+        }
+
+        .cert-link{
+            display:inline-flex;
+            align-items:center;
+            gap:7px;
+            color:#fff;
+            background:var(--primary);
+            text-decoration:none;
+            font-weight:600;
+            font-size:0.9rem;
+            padding:9px 18px;
+            border-radius:11px;
+            transition:0.25s ease;
+        }
+
+        .cert-link:hover{
+            background:var(--primary-hover);
+            transform:translateY(-2px);
+        }
+
         /* ================= FOOTER ================= */
 
         .footer{
@@ -274,6 +621,17 @@
                 width:100%;
                 text-align:center;
             }
+
+            .navbar{
+                flex-direction:column;
+                gap:10px;
+                top:8px;
+                padding:14px 18px;
+            }
+
+            .nav-links{
+                justify-content:center;
+            }
         }
 
     </style>
@@ -282,7 +640,21 @@
 
 <div class="container">
 
-    <div class="portfolio">
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+        <a href="#top" class="nav-brand">MD <span>Rohan</span></a>
+        <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Expertise</a>
+            <a href="#projects">Projects</a>
+            <a href="#certifications">Certs</a>
+            <a href="blog.html" class="nav-cta">Blog</a>
+        </div>
+    </nav>
+
+    <div class="portfolio" id="top">
 
         <!-- HERO SECTION -->
 
@@ -336,108 +708,9 @@
 
         <div class="content">
 
-            <!-- ABOUT -->
-
-            <section class="section">
-
-                <h2 class="section-title">About Me</h2>
-
-                <div class="card">
-
-                    <p class="description">
-                        I am a cybersecurity researcher and penetration tester with expertise in
-                        offensive security operations, bug bounty hunting, digital investigations,
-                        vulnerability assessment, and infrastructure security. I have experience
-                        performing network, web application, wireless, and red team security assessments.
-                        <br><br>
-                        In addition to security research, I am also a fluent programmer and experienced
-                        system administrator with hands-on expertise in Linux and Windows environments,
-                        network administration, server hardening, and automation.
-                    </p>
-
-                </div>
-
-            </section>
-
-            <!-- SKILLS -->
-
-            <section class="section">
-
-                <h2 class="section-title">Core Expertise</h2>
-
-                <div class="skills-grid">
-
-                    <div class="skill-card">
-                        <h3>Offensive Security</h3>
-                        <p>
-                            Penetration Testing, Red Teaming, Exploitation,
-                            Vulnerability Discovery, Security Research
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Application Security</h3>
-                        <p>
-                            Web Application Security, API Security Testing,
-                            Authentication Bypass, Logic Flaws
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Programming</h3>
-                        <p>
-                            Python, JavaScript, Bash, Automation Scripting,
-                            Secure Coding & Tool Development
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>System Administration</h3>
-                        <p>
-                            Linux Administration, Windows Administration,
-                            Server Hardening & Security Monitoring
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Network Security</h3>
-                        <p>
-                            Network Administration, Firewall Management,
-                            Traffic Analysis, VPN & Infrastructure Security
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Digital Investigation</h3>
-                        <p>
-                            OSINT, Fraud Investigation, Background Checks,
-                            Threat Intelligence & Online Investigation
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Reverse Engineering</h3>
-                        <p>
-                            Malware Analysis, Binary Analysis,
-                            Static & Dynamic Reverse Engineering
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Cloud & DevSecOps</h3>
-                        <p>
-                            Infrastructure Security, Security Automation,
-                            CI/CD Security & Secure Deployments
-                        </p>
-                    </div>
-
-                </div>
-
-            </section>
-
             <!-- EXPERIENCE -->
 
-            <section class="section">
+            <section class="section" id="experience">
 
                 <h2 class="section-title">Professional Experience</h2>
 
@@ -445,17 +718,18 @@
 
                     <div class="timeline-item">
 
-                        <h3>Penetration Tester — BYTIUM (Remote)</h3>
+                        <h3>Penetration Tester Intern — BYTIUM LLC (Remote)</h3>
 
                         <div class="date">
-                            September 2024 — Present
+                            September 2024 — February 2025
                         </div>
 
                         <p>
-                            Engage in a variety of penetration testing assessments including
-                            internal & external network testing, web application security testing,
-                            wireless assessments, red & purple team operations, physical security,
-                            and social engineering engagements.
+                            Completed a 6-month penetration testing internship, engaging in a
+                            variety of security assessments including internal & external network
+                            testing, web application security testing, wireless assessments,
+                            red & purple team operations, physical security, and social
+                            engineering engagements.
                         </p>
 
                     </div>
@@ -483,7 +757,7 @@
 
             <!-- EDUCATION -->
 
-            <section class="section">
+            <section class="section" id="education">
 
                 <h2 class="section-title">Education</h2>
 
@@ -506,6 +780,149 @@
                     </div>
 
                 </div>
+
+            </section>
+
+            <!-- SKILLS -->
+
+            <section class="section" id="skills">
+
+                <h2 class="section-title">Core Expertise</h2>
+
+                <ul class="expertise-list">
+                    <li><b>Offensive Security</b> — Penetration testing, red teaming, exploitation, vulnerability research</li>
+                    <li><b>Application Security</b> — Web &amp; API security testing, auth bypass, logic flaws</li>
+                    <li><b>Programming</b> — Python, JavaScript, Bash, automation &amp; tool development</li>
+                    <li><b>System Administration</b> — Linux &amp; Windows, server hardening, monitoring</li>
+                    <li><b>Network Security</b> — Network admin, firewalls, traffic analysis, VPN</li>
+                    <li><b>Digital Investigation</b> — OSINT, fraud investigation, threat intelligence</li>
+                    <li><b>Reverse Engineering</b> — Malware &amp; binary analysis, static &amp; dynamic RE</li>
+                    <li><b>Cloud &amp; DevSecOps</b> — Infrastructure security, CI/CD security, secure deployments</li>
+                </ul>
+
+            </section>
+
+            <!-- PROJECTS -->
+
+            <section class="section" id="projects">
+
+                <h2 class="section-title">Projects</h2>
+
+                <div class="projects-grid">
+
+                    <!-- SMART Quiz Generator -->
+                    <div class="project-card">
+                        <div class="project-head">
+                            <h3>SMART Quiz Generator</h3>
+                            <span class="tag featured">Featured</span>
+                        </div>
+                        <p>
+                            AI-powered quiz generator that automatically builds quizzes
+                            from a provided syllabus or PDF. Turns raw study material into
+                            ready-to-use practice questions.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">Python</span>
+                            <span class="tag">AI / NLP</span>
+                            <span class="tag">EdTech</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/theuglyhaxor/CSE4204-8D-T04-SMART-QUIZ-GENERATOR" target="_blank">↗ View on GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Finance -->
+                    <div class="project-card">
+                        <div class="project-head">
+                            <h3>Finance</h3>
+                            <span class="tag featured">Featured</span>
+                        </div>
+                        <p>
+                            A personal finance ledger to track income, expenses, and
+                            balances over time — a clean, self-hosted way to stay on top
+                            of day-to-day money management.
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">PHP</span>
+                            <span class="tag">Ledger</span>
+                            <span class="tag">FinTech</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/theuglyhaxor/Finance" target="_blank">↗ View on GitHub</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- CERTIFICATIONS -->
+
+            <section class="section" id="certifications">
+
+                <h2 class="section-title">Certifications</h2>
+
+                <div class="cert-grid">
+
+                    <div class="cert-card">
+                        <div class="cert-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="6"/>
+                                <path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/>
+                            </svg>
+                        </div>
+                        <div class="cert-body">
+                            <h3>Penetration Tester Internship — Completion Certificate</h3>
+                            <div class="cert-issuer">Bytium LLC · Dover, DE, USA</div>
+                            <div class="cert-date">17 September 2024 — 28 February 2025 · 6-month internship</div>
+                            <p>
+                                Awarded on completion of a six-month Penetration Tester
+                                internship, contributing to cybersecurity and penetration
+                                testing engagements. Signed by Jobyer Ahmed, Founder &amp; CEO.
+                            </p>
+                            <a class="cert-link" href="certificates/Bytium-Penetration-Tester-Internship-Certificate.pdf" target="_blank">
+                                View Certificate ↗
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- BLOG -->
+
+            <section class="section" id="blog">
+
+                <h2 class="section-title">From the Blog</h2>
+
+                <p class="description" style="margin-bottom:26px;">
+                    Study notes, security research, and long-form writing. New posts are
+                    added regularly.
+                </p>
+
+                <div class="blog-grid">
+
+                    <a class="blog-card" href="Mobile_Computing_Part-1_Study_Material.html">
+                        <div class="blog-card-top">
+                            <span class="blog-cat">Study Material</span>
+                            <h3>Mobile Computing — Part 1</h3>
+                        </div>
+                        <p>
+                            A formal academic study guide covering mobile generations
+                            (1G–4G), cellular concepts, FDMA/TDMA/CDMA, GSM, GPRS and more.
+                        </p>
+                        <div class="blog-card-foot">
+                            <span>Academic Notes</span>
+                            <span class="read">Read →</span>
+                        </div>
+                    </a>
+
+                </div>
+
+                <a href="blog.html" class="see-all">
+                    Browse all posts by category →
+                </a>
 
             </section>
 

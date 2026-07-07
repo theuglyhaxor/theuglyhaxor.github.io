@@ -178,6 +178,22 @@
 </head>
 <body>
 
+  <!-- ===== SITE BACK-NAV (screen only) ===== -->
+  <div class="site-backnav">
+    <a href="blog.html">← Blog</a>
+    <a href="index.html">Portfolio</a>
+  </div>
+  <style>
+    .site-backnav{position:fixed;top:14px;right:14px;z-index:9999;display:flex;gap:8px;
+      font-family:'Oswald','Arial Narrow',sans-serif;}
+    .site-backnav a{background:rgba(90,7,13,.94);color:#FCF5E3;text-decoration:none;
+      font-size:13px;font-weight:600;letter-spacing:.04em;padding:8px 14px;border-radius:999px;
+      border:1px solid var(--gold);box-shadow:0 6px 18px rgba(0,0,0,.4);
+      backdrop-filter:blur(6px);transition:.2s ease;}
+    .site-backnav a:hover{background:var(--gold);color:#3a120f;}
+    @media print{.site-backnav{display:none!important;}}
+  </style>
+
   <div class="sheet">
    <table class="layout">
     <thead><tr><td>
