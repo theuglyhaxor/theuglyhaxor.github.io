@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>MD Rohan | Offensive Security Researcher & Digital Investigator</title>
+    <title>MD Rohan — Write-ups &amp; Research</title>
+    <meta name="description" content="Write-ups, security research and long-form notes by MD Rohan — Bug Bounty Hunter &amp; OSINT Expert."/>
 
     <link rel="icon" type="image/png" href="image.png"/>
 
@@ -12,931 +13,468 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
+        *{margin:0;padding:0;box-sizing:border-box;}
 
         :root{
-            --bg:#0f172a;
-            --card:#111827;
-            --light:#f8fafc;
             --muted:#94a3b8;
-            --border:#1e293b;
             --primary:#2563eb;
             --primary-hover:#1d4ed8;
             --text:#e2e8f0;
         }
 
-        html{
-            scroll-behavior:smooth;
-        }
+        html{scroll-behavior:smooth;}
 
         body{
             font-family:'Inter',sans-serif;
             background:linear-gradient(to bottom right,#020617,#0f172a,#111827);
             color:var(--text);
             line-height:1.7;
-            padding:40px 20px;
+            padding:34px 20px 20px;
+            min-height:100vh;
         }
 
-        .container{
-            max-width:1150px;
-            margin:auto;
-        }
+        .container{max-width:1100px;margin:auto;}
 
-        .portfolio{
-            background:rgba(15,23,42,0.95);
-            border:1px solid rgba(255,255,255,0.06);
-            border-radius:28px;
-            overflow:hidden;
-            box-shadow:0 20px 60px rgba(0,0,0,0.45);
-            backdrop-filter:blur(10px);
-        }
+        /* ================= HEADER / MASTHEAD ================= */
 
-        /* ================= HEADER ================= */
-
-        .hero{
-            padding:70px 60px;
+        .masthead{
+            position:relative;
             background:
-                radial-gradient(circle at top right, rgba(37,99,235,0.35), transparent 30%),
+                radial-gradient(circle at top right, rgba(37,99,235,0.30), transparent 42%),
                 linear-gradient(135deg,#020617,#111827);
-            border-bottom:1px solid rgba(255,255,255,0.05);
-        }
-
-        .hero-content{
+            border:1px solid rgba(255,255,255,0.07);
+            border-radius:26px;
+            padding:32px 40px;
+            box-shadow:0 20px 60px rgba(0,0,0,0.45);
             display:flex;
             align-items:center;
-            gap:40px;
+            justify-content:space-between;
+            gap:26px;
             flex-wrap:wrap;
         }
 
-        .profile-img{
-            width:170px;
-            height:170px;
+        .mast-id{
+            display:flex;
+            align-items:center;
+            gap:20px;
+            min-width:250px;
+        }
+
+        .avatar{
+            width:74px;
+            height:74px;
             border-radius:50%;
             object-fit:cover;
-            border:5px solid rgba(255,255,255,0.12);
-            box-shadow:0 10px 30px rgba(0,0,0,0.45);
+            border:3px solid rgba(255,255,255,0.14);
+            box-shadow:0 8px 22px rgba(0,0,0,0.4);
+            flex:0 0 auto;
         }
 
-        .hero-text{
-            flex:1;
-            min-width:280px;
-        }
-
-        h1{
-            font-size:3.2rem;
-            font-weight:800;
-            margin-bottom:10px;
-            letter-spacing:-1px;
-        }
-
-        .subtitle{
-            font-size:1.2rem;
-            color:#93c5fd;
-            margin-bottom:22px;
-            font-weight:500;
-        }
-
-        .intro{
-            color:var(--muted);
-            font-size:1.05rem;
-            max-width:750px;
-        }
-
-        /* ================= CONTENT ================= */
-
-        .content{
-            padding:60px;
-        }
-
-        .section{
-            margin-bottom:55px;
-        }
-
-        .section-title{
+        .mast-name{
+            display:block;
             font-size:1.7rem;
-            margin-bottom:25px;
-            font-weight:700;
-            position:relative;
-            display:inline-block;
+            font-weight:800;
+            letter-spacing:-0.5px;
+            color:#fff;
+            text-decoration:none;
+            line-height:1.1;
         }
 
-        .section-title::after{
+        .mast-name span{color:#60a5fa;}
+
+        .mast-role{
+            margin-top:7px;
+            font-size:0.95rem;
+            font-weight:600;
+            color:#93c5fd;
+            letter-spacing:0.01em;
+        }
+
+        .mast-nav{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            align-items:center;
+            justify-content:flex-end;
+        }
+
+        .mast-nav a{
+            display:inline-flex;
+            align-items:center;
+            gap:7px;
+            color:var(--muted);
+            text-decoration:none;
+            font-size:0.9rem;
+            font-weight:600;
+            padding:9px 15px;
+            border-radius:11px;
+            border:1px solid rgba(255,255,255,0.08);
+            background:rgba(255,255,255,0.03);
+            transition:0.25s ease;
+        }
+
+        .mast-nav a:hover{
+            color:#fff;
+            border-color:rgba(37,99,235,0.5);
+            background:rgba(37,99,235,0.15);
+            transform:translateY(-2px);
+        }
+
+        .mast-nav a svg{width:16px;height:16px;flex:0 0 auto;}
+
+        .mast-nav a.cta{
+            background:var(--primary);
+            border-color:var(--primary);
+            color:#fff;
+        }
+
+        .mast-nav a.cta:hover{background:var(--primary-hover);}
+
+        /* ================= SECTION HEADING ================= */
+
+        .writeups-head{margin:46px 4px 20px;}
+
+        .writeups-head h2{
+            font-size:1.9rem;
+            font-weight:800;
+            letter-spacing:-0.6px;
+            color:#f8fafc;
+            display:inline-block;
+            position:relative;
+        }
+
+        .writeups-head h2::after{
             content:"";
             position:absolute;
             left:0;
-            bottom:-10px;
-            width:60%;
+            bottom:-9px;
+            width:56%;
             height:4px;
             border-radius:10px;
             background:var(--primary);
         }
 
-        .card{
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.06);
-            padding:30px;
-            border-radius:20px;
-        }
-
-        .description{
-            color:#cbd5e1;
-            font-size:1.05rem;
-        }
-
-        /* ================= SKILLS ================= */
-
-        .skills-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-            gap:20px;
-        }
-
-        .skill-card{
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.05);
-            border-radius:18px;
-            padding:25px;
-            transition:0.35s ease;
-        }
-
-        .skill-card:hover{
-            transform:translateY(-6px);
-            border-color:rgba(37,99,235,0.5);
-            box-shadow:0 10px 30px rgba(37,99,235,0.15);
-        }
-
-        .skill-card h3{
-            margin-bottom:14px;
-            color:#60a5fa;
-            font-size:1.1rem;
-        }
-
-        .skill-card p{
-            color:#cbd5e1;
-            font-size:0.97rem;
-        }
-
-        /* ===== compact expertise bullets ===== */
-
-        .expertise-list{
-            list-style:none;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-            gap:12px 34px;
-        }
-
-        .expertise-list li{
-            position:relative;
-            padding-left:24px;
-            color:#cbd5e1;
-            font-size:1rem;
-            line-height:1.55;
-        }
-
-        .expertise-list li::before{
-            content:"▹";
-            position:absolute;
-            left:0;
-            top:0;
-            color:#60a5fa;
-            font-weight:700;
-        }
-
-        .expertise-list li b{
-            color:#f8fafc;
-            font-weight:600;
-        }
-
-        /* ================= TIMELINE ================= */
-
-        .timeline{
-            display:flex;
-            flex-direction:column;
-            gap:25px;
-        }
-
-        .timeline-item{
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.05);
-            padding:28px;
-            border-radius:18px;
-        }
-
-        .timeline-item h3{
-            color:#f8fafc;
-            margin-bottom:8px;
-        }
-
-        .timeline-item .date{
-            color:#60a5fa;
-            font-size:0.95rem;
-            margin-bottom:14px;
-            font-weight:600;
-        }
-
-        .timeline-item p{
-            color:#cbd5e1;
-        }
-
-        /* ================= BUTTONS ================= */
-
-        .button-group{
-            display:flex;
-            flex-wrap:wrap;
-            gap:18px;
-            margin-top:25px;
-        }
-
-        .btn{
-            text-decoration:none;
-            background:var(--primary);
-            color:white;
-            padding:15px 28px;
-            border-radius:14px;
-            font-weight:600;
-            transition:0.35s ease;
-            border:1px solid transparent;
-        }
-
-        .btn:hover{
-            background:var(--primary-hover);
-            transform:translateY(-4px);
-            box-shadow:0 12px 25px rgba(37,99,235,0.3);
-        }
-
-        /* ================= NAVBAR ================= */
-
-        .navbar{
-            position:sticky;
-            top:14px;
-            z-index:50;
-            margin:0 auto 26px;
-            max-width:1150px;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:14px;
-            padding:12px 22px;
-            background:rgba(15,23,42,0.82);
-            border:1px solid rgba(255,255,255,0.08);
-            border-radius:18px;
-            backdrop-filter:blur(14px);
-            box-shadow:0 10px 30px rgba(0,0,0,0.35);
-        }
-
-        .nav-brand{
-            font-weight:800;
-            font-size:1.05rem;
-            color:#fff;
-            letter-spacing:-0.3px;
-            text-decoration:none;
-            white-space:nowrap;
-        }
-
-        .nav-brand span{color:#60a5fa;}
-
-        .nav-links{
-            display:flex;
-            flex-wrap:wrap;
-            gap:6px;
-        }
-
-        .nav-links a{
+        .writeups-head p{
+            margin-top:22px;
             color:var(--muted);
-            text-decoration:none;
-            font-size:0.92rem;
-            font-weight:500;
-            padding:8px 14px;
-            border-radius:10px;
-            transition:0.25s ease;
+            font-size:1.02rem;
+            max-width:700px;
         }
 
-        .nav-links a:hover{
-            color:#fff;
-            background:rgba(37,99,235,0.18);
-        }
+        /* ================= FILTERS ================= */
 
-        .nav-links a.nav-cta{
-            background:var(--primary);
-            color:#fff;
-            font-weight:600;
-        }
-
-        .nav-links a.nav-cta:hover{
-            background:var(--primary-hover);
-        }
-
-        /* ================= PROJECTS ================= */
-
-        .projects-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-            gap:22px;
-        }
-
-        .project-card{
-            display:flex;
-            flex-direction:column;
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.06);
-            border-radius:20px;
-            padding:26px;
-            transition:0.35s ease;
-        }
-
-        .project-card:hover{
-            transform:translateY(-6px);
-            border-color:rgba(37,99,235,0.5);
-            box-shadow:0 14px 34px rgba(37,99,235,0.16);
-        }
-
-        .project-head{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:12px;
-            margin-bottom:14px;
-        }
-
-        .project-card h3{
-            color:#f8fafc;
-            font-size:1.2rem;
-        }
-
-        .project-card p{
-            color:#cbd5e1;
-            font-size:0.98rem;
-            flex:1;
-        }
-
-        .tag-row{
+        .filter-bar{
             display:flex;
             flex-wrap:wrap;
-            gap:8px;
-            margin:16px 0 18px;
+            gap:10px;
+            margin:22px 4px 30px;
         }
 
-        .tag{
-            font-size:0.78rem;
+        .filter-btn{
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.08);
+            color:#cbd5e1;
+            font-family:inherit;
+            font-size:0.9rem;
             font-weight:600;
-            color:#93c5fd;
-            background:rgba(37,99,235,0.14);
-            border:1px solid rgba(37,99,235,0.25);
-            padding:4px 11px;
+            padding:9px 18px;
             border-radius:999px;
-        }
-
-        .tag.featured{
-            color:#fbbf24;
-            background:rgba(251,191,36,0.12);
-            border-color:rgba(251,191,36,0.3);
-        }
-
-        .project-links{
-            display:flex;
-            gap:14px;
-            margin-top:auto;
-        }
-
-        .project-links a{
-            color:#60a5fa;
-            text-decoration:none;
-            font-weight:600;
-            font-size:0.92rem;
-            display:inline-flex;
-            align-items:center;
-            gap:6px;
+            cursor:pointer;
             transition:0.25s ease;
         }
 
-        .project-links a:hover{color:#93c5fd;}
+        .filter-btn:hover{border-color:rgba(37,99,235,0.5);color:#fff;}
 
-        /* ================= BLOG PREVIEW ================= */
+        .filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
 
-        .blog-grid{
+        .filter-btn .count{opacity:0.7;font-weight:500;margin-left:6px;}
+
+        /* ================= POSTS ================= */
+
+        .posts-grid{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
             gap:22px;
         }
 
-        .blog-card{
+        .post-card{
             display:flex;
             flex-direction:column;
             background:rgba(255,255,255,0.03);
             border:1px solid rgba(255,255,255,0.06);
             border-radius:20px;
-            padding:0;
             overflow:hidden;
             text-decoration:none;
+            color:inherit;
             transition:0.35s ease;
         }
 
-        .blog-card:hover{
+        .post-card:hover{
             transform:translateY(-6px);
             border-color:rgba(37,99,235,0.5);
-            box-shadow:0 14px 34px rgba(37,99,235,0.16);
+            box-shadow:0 16px 38px rgba(37,99,235,0.16);
         }
 
-        .blog-card-top{
-            padding:22px 24px 0;
-        }
+        .post-body{padding:26px 26px 0;flex:1;}
 
-        .blog-cat{
+        .post-cat{
             display:inline-block;
-            font-size:0.76rem;
+            font-size:0.72rem;
             font-weight:700;
-            letter-spacing:0.04em;
+            letter-spacing:0.05em;
             text-transform:uppercase;
-            color:#34d399;
-            background:rgba(52,211,153,0.12);
-            border:1px solid rgba(52,211,153,0.28);
-            padding:4px 11px;
+            padding:4px 12px;
             border-radius:999px;
-            margin-bottom:14px;
+            margin-bottom:15px;
         }
 
-        .blog-card h3{
-            color:#f8fafc;
-            font-size:1.18rem;
+        .post-card h3{
+            font-size:1.24rem;
+            font-weight:700;
             line-height:1.4;
-            margin-bottom:10px;
+            margin-bottom:11px;
+            color:#f8fafc;
         }
 
-        .blog-card p{
-            color:#94a3b8;
-            font-size:0.95rem;
-            padding:0 24px;
-        }
+        .post-card .excerpt{color:#94a3b8;font-size:0.95rem;}
 
-        .blog-card-foot{
+        .post-foot{
             display:flex;
             align-items:center;
             justify-content:space-between;
-            padding:18px 24px 22px;
-            margin-top:auto;
+            padding:20px 26px 24px;
+            margin-top:18px;
             color:#64748b;
-            font-size:0.85rem;
+            font-size:0.84rem;
         }
 
-        .blog-card-foot .read{
-            color:#60a5fa;
-            font-weight:600;
+        .post-foot .read{color:#60a5fa;font-weight:600;}
+
+        .empty{
+            grid-column:1/-1;
+            text-align:center;
+            color:var(--muted);
+            padding:60px 20px;
+            font-size:1.05rem;
         }
 
-        .see-all{
-            display:inline-flex;
-            align-items:center;
-            gap:8px;
-            margin-top:26px;
-            color:#60a5fa;
-            text-decoration:none;
-            font-weight:600;
-        }
-
-        .see-all:hover{color:#93c5fd;}
-
-        /* ================= CERTIFICATES ================= */
-
-        .cert-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-            gap:22px;
-        }
-
-        .cert-card{
-            display:flex;
-            gap:20px;
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.06);
-            border-radius:20px;
-            padding:26px;
-            transition:0.35s ease;
-        }
-
-        .cert-card:hover{
-            transform:translateY(-6px);
-            border-color:rgba(37,99,235,0.5);
-            box-shadow:0 14px 34px rgba(37,99,235,0.16);
-        }
-
-        .cert-icon{
-            flex:0 0 auto;
-            width:54px;
-            height:54px;
-            border-radius:14px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background:rgba(37,99,235,0.15);
-            border:1px solid rgba(37,99,235,0.3);
-            color:#60a5fa;
-        }
-
-        .cert-icon svg{width:26px;height:26px;}
-
-        .cert-body{flex:1;min-width:0;}
-
-        .cert-body h3{
-            color:#f8fafc;
-            font-size:1.15rem;
-            margin-bottom:4px;
-        }
-
-        .cert-issuer{
-            color:#60a5fa;
-            font-weight:600;
-            font-size:0.95rem;
-            margin-bottom:6px;
-        }
-
-        .cert-date{
-            color:#94a3b8;
-            font-size:0.9rem;
-            margin-bottom:12px;
-        }
-
-        .cert-body p{
-            color:#cbd5e1;
-            font-size:0.96rem;
-            margin-bottom:16px;
-        }
-
-        .cert-link{
-            display:inline-flex;
-            align-items:center;
-            gap:7px;
-            color:#fff;
-            background:var(--primary);
-            text-decoration:none;
-            font-weight:600;
-            font-size:0.9rem;
-            padding:9px 18px;
-            border-radius:11px;
-            transition:0.25s ease;
-        }
-
-        .cert-link:hover{
-            background:var(--primary-hover);
-            transform:translateY(-2px);
-        }
+        /* category accent colours */
+        .cat-politics{color:#f87171;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.28);}
+        .cat-study{color:#34d399;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.28);}
+        .cat-security{color:#fbbf24;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.28);}
+        .cat-tech{color:#60a5fa;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.28);}
+        .cat-psychology{color:#f9a8d4;background:rgba(249,168,212,0.12);border:1px solid rgba(249,168,212,0.28);}
+        .cat-default{color:#a78bfa;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.28);}
 
         /* ================= FOOTER ================= */
 
         .footer{
             text-align:center;
-            padding:35px 20px;
+            padding:46px 20px 12px;
             color:#94a3b8;
-            border-top:1px solid rgba(255,255,255,0.05);
-            font-size:0.95rem;
+            font-size:0.92rem;
         }
+
+        .footer a{color:#60a5fa;text-decoration:none;}
+        .footer a:hover{color:#93c5fd;}
 
         /* ================= MOBILE ================= */
 
         @media(max-width:768px){
+            body{padding:20px 15px 15px;}
 
-            .hero,
-            .content{
-                padding:40px 25px;
-            }
-
-            h1{
-                font-size:2.3rem;
-            }
-
-            .subtitle{
-                font-size:1rem;
-            }
-
-            .profile-img{
-                width:140px;
-                height:140px;
-            }
-
-            .btn{
-                width:100%;
+            .masthead{
+                padding:26px 22px;
+                justify-content:center;
                 text-align:center;
             }
 
-            .navbar{
+            .mast-id{
                 flex-direction:column;
-                gap:10px;
-                top:8px;
-                padding:14px 18px;
+                text-align:center;
+                gap:14px;
+                min-width:0;
+                width:100%;
             }
 
-            .nav-links{
-                justify-content:center;
-            }
+            .mast-nav{justify-content:center;width:100%;}
+
+            .writeups-head{margin-top:36px;}
+            .writeups-head h2{font-size:1.6rem;}
+
+            .posts-grid{grid-template-columns:1fr;}
         }
-
     </style>
 </head>
 <body>
 
 <div class="container">
 
-    <!-- NAVBAR -->
+    <!-- ================= HEADER ================= -->
+    <header class="masthead">
 
-    <nav class="navbar">
-        <a href="#top" class="nav-brand">MD <span>Rohan</span></a>
-        <div class="nav-links">
-            <a href="#experience">Experience</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Expertise</a>
-            <a href="#projects">Projects</a>
-            <a href="#certifications">Certs</a>
-            <a href="blog.html" class="nav-cta">Blog</a>
-        </div>
-    </nav>
-
-    <div class="portfolio" id="top">
-
-        <!-- HERO SECTION -->
-
-        <section class="hero">
-
-            <div class="hero-content">
-
-                <img src="image.png" alt="MD Rohan" class="profile-img">
-
-                <div class="hero-text">
-
-                    <h1>MD Rohan</h1>
-
-                    <div class="subtitle">
-                        Offensive Security Researcher | Bug Bounty Hunter | Digital Investigator
-                    </div>
-
-                    <p class="intro">
-                        Cybersecurity professional with a strong background in offensive security,
-                        penetration testing, vulnerability research, network administration,
-                        Linux & Windows systems administration, reverse engineering, and online
-                        investigations. Passionate about securing modern infrastructure and helping
-                        organizations identify and eliminate security weaknesses before attackers exploit them.
-                    </p>
-
-                    <div class="button-group">
-                        <a href="https://github.com/theuglyhaxor/writeups" class="btn" target="_blank">
-                            GitHub Writeups
-                        </a>
-
-                        <a href="https://bugcrowd.com/h/theuglyhaxor" class="btn" target="_blank">
-                            Bugcrowd Profile
-                        </a>
-
-                        <a href="https://www.linkedin.com/in/theuglyhaxor/" class="btn" target="_blank">
-                            LinkedIn
-                        </a>
-
-                        <a href="https://www.youtube.com/@theuglyhaxor" class="btn" target="_blank">
-                            YouTube Channel
-                        </a>
-                    </div>
-
-                </div>
-
+        <div class="mast-id">
+            <img class="avatar" src="image.png" alt="MD Rohan">
+            <div>
+                <a href="index.html" class="mast-name">MD <span>Rohan</span></a>
+                <div class="mast-role">Bug Bounty Hunter · OSINT Expert</div>
             </div>
-
-        </section>
-
-        <!-- MAIN CONTENT -->
-
-        <div class="content">
-
-            <!-- EXPERIENCE -->
-
-            <section class="section" id="experience">
-
-                <h2 class="section-title">Professional Experience</h2>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-
-                        <h3>Penetration Tester Intern — BYTIUM LLC (Remote)</h3>
-
-                        <div class="date">
-                            September 2024 — February 2025
-                        </div>
-
-                        <p>
-                            Completed a 6-month penetration testing internship, engaging in a
-                            variety of security assessments including internal & external network
-                            testing, web application security testing, wireless assessments,
-                            red & purple team operations, physical security, and social
-                            engineering engagements.
-                        </p>
-
-                    </div>
-
-                    <div class="timeline-item">
-
-                        <h3>Bug Bounty Hunter — Bugcrowd (Freelance)</h3>
-
-                        <div class="date">
-                            February 2026 — Present
-                        </div>
-
-                        <p>
-                            Actively participating in bug bounty programs and vulnerability
-                            disclosure initiatives. Reported 18 security vulnerabilities within
-                            the first few months of active bug bounty hunting and earned
-                            recognition points through Bugcrowd programs.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- EDUCATION -->
-
-            <section class="section" id="education">
-
-                <h2 class="section-title">Education</h2>
-
-                <div class="timeline">
-
-                    <div class="timeline-item">
-
-                        <h3>
-                            Northern University of Business and Technology, Khulna
-                        </h3>
-
-                        <div class="date">
-                            BSc in Computer Science and Engineering
-                        </div>
-
-                        <p>
-                            GPA: 3.26 / 4.00
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- SKILLS -->
-
-            <section class="section" id="skills">
-
-                <h2 class="section-title">Core Expertise</h2>
-
-                <ul class="expertise-list">
-                    <li><b>Offensive Security</b> — Penetration testing, red teaming, exploitation, vulnerability research</li>
-                    <li><b>Application Security</b> — Web &amp; API security testing, auth bypass, logic flaws</li>
-                    <li><b>Programming</b> — Python, JavaScript, Bash, automation &amp; tool development</li>
-                    <li><b>System Administration</b> — Linux &amp; Windows, server hardening, monitoring</li>
-                    <li><b>Network Security</b> — Network admin, firewalls, traffic analysis, VPN</li>
-                    <li><b>Digital Investigation</b> — OSINT, fraud investigation, threat intelligence</li>
-                    <li><b>Reverse Engineering</b> — Malware &amp; binary analysis, static &amp; dynamic RE</li>
-                    <li><b>Cloud &amp; DevSecOps</b> — Infrastructure security, CI/CD security, secure deployments</li>
-                </ul>
-
-            </section>
-
-            <!-- PROJECTS -->
-
-            <section class="section" id="projects">
-
-                <h2 class="section-title">Projects</h2>
-
-                <div class="projects-grid">
-
-                    <!-- SMART Quiz Generator -->
-                    <div class="project-card">
-                        <div class="project-head">
-                            <h3>SMART Quiz Generator</h3>
-                            <span class="tag featured">Featured</span>
-                        </div>
-                        <p>
-                            AI-powered quiz generator that automatically builds quizzes
-                            from a provided syllabus or PDF. Turns raw study material into
-                            ready-to-use practice questions.
-                        </p>
-                        <div class="tag-row">
-                            <span class="tag">Python</span>
-                            <span class="tag">AI / NLP</span>
-                            <span class="tag">EdTech</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/theuglyhaxor/CSE4204-8D-T04-SMART-QUIZ-GENERATOR" target="_blank">↗ View on GitHub</a>
-                        </div>
-                    </div>
-
-                    <!-- Finance -->
-                    <div class="project-card">
-                        <div class="project-head">
-                            <h3>Finance</h3>
-                            <span class="tag featured">Featured</span>
-                        </div>
-                        <p>
-                            A personal finance ledger to track income, expenses, and
-                            balances over time — a clean, self-hosted way to stay on top
-                            of day-to-day money management.
-                        </p>
-                        <div class="tag-row">
-                            <span class="tag">PHP</span>
-                            <span class="tag">Ledger</span>
-                            <span class="tag">FinTech</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/theuglyhaxor/Finance" target="_blank">↗ View on GitHub</a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- CERTIFICATIONS -->
-
-            <section class="section" id="certifications">
-
-                <h2 class="section-title">Certifications</h2>
-
-                <div class="cert-grid">
-
-                    <div class="cert-card">
-                        <div class="cert-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="8" r="6"/>
-                                <path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/>
-                            </svg>
-                        </div>
-                        <div class="cert-body">
-                            <h3>Penetration Tester Internship — Completion Certificate</h3>
-                            <div class="cert-issuer">Bytium LLC · Dover, DE, USA</div>
-                            <div class="cert-date">17 September 2024 — 28 February 2025 · 6-month internship</div>
-                            <p>
-                                Awarded on completion of a six-month Penetration Tester
-                                internship, contributing to cybersecurity and penetration
-                                testing engagements. Signed by Jobyer Ahmed, Founder &amp; CEO.
-                            </p>
-                            <a class="cert-link" href="certificates/Bytium-Penetration-Tester-Internship-Certificate.pdf" target="_blank">
-                                View Certificate ↗
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- BLOG -->
-
-            <section class="section" id="blog">
-
-                <h2 class="section-title">From the Blog</h2>
-
-                <p class="description" style="margin-bottom:26px;">
-                    Study notes, security research, and long-form writing. New posts are
-                    added regularly.
-                </p>
-
-                <div class="blog-grid">
-
-                    <a class="blog-card" href="Mobile_Computing_Part-1_Study_Material.html">
-                        <div class="blog-card-top">
-                            <span class="blog-cat">Study Material</span>
-                            <h3>Mobile Computing — Part 1</h3>
-                        </div>
-                        <p>
-                            A formal academic study guide covering mobile generations
-                            (1G–4G), cellular concepts, FDMA/TDMA/CDMA, GSM, GPRS and more.
-                        </p>
-                        <div class="blog-card-foot">
-                            <span>Academic Notes</span>
-                            <span class="read">Read →</span>
-                        </div>
-                    </a>
-
-                </div>
-
-                <a href="blog.html" class="see-all">
-                    Browse all posts by category →
-                </a>
-
-            </section>
-
         </div>
 
-        <!-- FOOTER -->
+        <nav class="mast-nav">
+            <a href="portfolio.html" class="cta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Portfolio
+            </a>
+            <a href="https://www.linkedin.com/in/theuglyhaxor/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8h4.52V24H.24V8zM8.34 8h4.33v2.18h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.52v-6.35c0-1.51-.03-3.46-2.11-3.46-2.11 0-2.43 1.65-2.43 3.35V24H8.34V8z"/></svg>
+                LinkedIn
+            </a>
+            <a href="https://github.com/theuglyhaxor" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.13-.3-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.23 0 4.63-2.81 5.65-5.49 5.95.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+                GitHub
+            </a>
+            <a href="https://bugcrowd.com/h/theuglyhaxor" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z"/></svg>
+                Bugcrowd
+            </a>
+            <a href="https://www.youtube.com/@theuglyhaxor" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+                YouTube
+            </a>
+        </nav>
 
-        <div class="footer">
-            © 2026 MD Rohan — Offensive Security Researcher & Digital Investigator
-        </div>
+    </header>
 
+    <!-- ================= WRITE-UPS ================= -->
+    <div class="writeups-head">
+        <h2>Write-ups &amp; Research</h2>
+        <p>
+            Bug bounty findings, offensive-security research, OSINT investigations
+            and long-form study notes. Use the filters below to jump to a topic.
+        </p>
+    </div>
+
+    <!-- CATEGORY FILTERS (auto-generated) -->
+    <div class="filter-bar" id="filterBar"></div>
+
+    <!-- POSTS (auto-generated) -->
+    <div class="posts-grid" id="postsGrid"></div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="footer">
+        © 2026 MD Rohan · Bug Bounty Hunter &amp; OSINT Expert —
+        <a href="portfolio.html">Portfolio</a> ·
+        <a href="https://github.com/theuglyhaxor" target="_blank" rel="noopener">GitHub</a>
     </div>
 
 </div>
+
+<script>
+/* =============================================================
+   WRITE-UPS / BLOG POSTS
+   -------------------------------------------------------------
+   To add a new post, copy one block below and edit it, placing
+   it above the "ADD NEW POSTS ABOVE THIS LINE" comment.
+   Categories become filter chips automatically — reuse an
+   existing category name or invent a new one.
+
+   "catClass" sets the badge colour:
+     cat-security | cat-study | cat-politics |
+     cat-tech | cat-psychology | cat-default
+   ============================================================= */
+const posts = [
+    {
+        title: "Mental Health: ADHD, বাইপোলার ডিসঅর্ডার আর মাঝখানে দাঁড়িয়ে থাকা একজন মানুষ",
+        category: "Psychology",
+        catClass: "cat-psychology",
+        excerpt: "আমার গল্প, ADHD ও বাইপোলার ডিসঅর্ডার আসলে কী, আমার প্রেসক্রিপশনের ওষুধ, ADHD-র ওষুধের তুলনা ও দাম — আর RSD নিয়ে একটা জরুরি কথা।",
+        meta: "08 July 2026 · বাংলা",
+        url: "Mental_Health_ADHD_BI_POLAR.html"
+    },
+    {
+        title: "ছোটদের রাজনীতি ও ছোটদের অর্থনীতি",
+        category: "Politics & Economics",
+        catClass: "cat-politics",
+        excerpt: "Revolutionary study notes (বিপ্লবী পাঠ-নোট) on Prof. Nihar Kumar Sarkar's book — unpacking exploitation, surplus value, political awareness, and economics in plain Bangla.",
+        meta: "06 July 2026 · বাংলা",
+        url: "LPB-Chotoder_Rajniti_Chotoder_orthoniti.html"
+    },
+    {
+        title: "Mobile Computing — Part 1",
+        category: "Study Material",
+        catClass: "cat-study",
+        excerpt: "A formal academic study guide covering mobile generations (1G–4G), cellular concepts, FDMA/TDMA/CDMA, GSM, GSM vs CDMA, and GPRS.",
+        meta: "Academic Notes · English",
+        url: "Mobile_Computing_Part-1_Study_Material.html"
+    }
+
+    /* ---- ADD NEW POSTS ABOVE THIS LINE ----
+    ,{
+        title: "Your Post Title",
+        category: "Security",
+        catClass: "cat-security",
+        excerpt: "One or two sentences describing the post.",
+        meta: "Date · Tag",
+        url: "your-new-post.html"
+    }
+    */
+];
+
+/* ---------- render logic (no need to edit below) ---------- */
+const grid = document.getElementById('postsGrid');
+const filterBar = document.getElementById('filterBar');
+let activeCat = 'All';
+
+function buildFilters(){
+    const counts = {};
+    posts.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
+    const cats = ['All', ...Object.keys(counts)];
+
+    filterBar.innerHTML = '';
+    cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (cat === activeCat ? ' active' : '');
+        const total = cat === 'All' ? posts.length : counts[cat];
+        btn.innerHTML = cat + '<span class="count">' + total + '</span>';
+        btn.onclick = () => { activeCat = cat; buildFilters(); render(); };
+        filterBar.appendChild(btn);
+    });
+}
+
+function render(){
+    const list = activeCat === 'All'
+        ? posts
+        : posts.filter(p => p.category === activeCat);
+
+    grid.innerHTML = '';
+
+    if(list.length === 0){
+        grid.innerHTML = '<div class="empty">No posts in this category yet — check back soon.</div>';
+        return;
+    }
+
+    list.forEach(p => {
+        const a = document.createElement('a');
+        a.className = 'post-card';
+        a.href = p.url;
+        a.innerHTML =
+            '<div class="post-body">' +
+                '<span class="post-cat ' + (p.catClass || 'cat-default') + '">' + p.category + '</span>' +
+                '<h3>' + p.title + '</h3>' +
+                '<p class="excerpt">' + p.excerpt + '</p>' +
+            '</div>' +
+            '<div class="post-foot">' +
+                '<span>' + (p.meta || '') + '</span>' +
+                '<span class="read">Read →</span>' +
+            '</div>';
+        grid.appendChild(a);
+    });
+}
+
+buildFilters();
+render();
+</script>
 
 </body>
 </html>
