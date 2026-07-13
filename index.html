@@ -1,480 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>MD Rohan — Write-ups &amp; Research</title>
-    <meta name="description" content="Write-ups, security research and long-form notes by MD Rohan — Bug Bounty Hunter &amp; OSINT Expert."/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD. Rohan — theuglyhaxor · Bug Bounty Hunter & Security Researcher</title>
+<meta name="description" content="MD. Rohan (theuglyhaxor) — Offensive Security Researcher, Bug Bounty Hunter and Digital Investigator. Bugcrowd hunter, ex-BYTIUM penetration tester.">
+<style>
+  :root{
+    --bg:#070b14; --bg2:#0b1120; --panel:#0e1626; --panel2:#111c30;
+    --line:#1c2b45; --ink:#e9eef7; --ink2:#adbace; --muted:#7488a6;
+    --cy:#22d3ee; --cy2:#38bdf8; --grn:#34d399; --gold:#e2b66e;
+    --cy-soft:rgba(34,211,238,.12); --cy-line:rgba(34,211,238,.35);
+    --mono:"Cascadia Code",ui-monospace,Consolas,"SF Mono",monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --radius:16px; --max:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+  section{padding:96px 0;position:relative}
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:14px}
+  h2.title{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+  .lead{color:var(--ink2);max-width:64ch}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:14px;font-weight:600;padding:12px 22px;border-radius:999px;border:1px solid var(--cy-line);color:var(--cy);background:var(--cy-soft);transition:.2s;cursor:pointer}
+  .btn:hover{background:var(--cy);color:#04121a;transform:translateY(-2px)}
+  .btn.ghost{color:var(--ink2);border-color:var(--line);background:transparent}
+  .btn.ghost:hover{color:var(--ink);border-color:var(--cy);background:transparent;transform:translateY(-2px)}
 
-    <link rel="icon" type="image/png" href="image.png"/>
+  /* ---------- background decor ---------- */
+  .grid-bg{position:fixed;inset:0;z-index:-2;background:
+     radial-gradient(900px 600px at 85% -5%,rgba(34,211,238,.10),transparent 60%),
+     radial-gradient(700px 500px at 5% 100%,rgba(56,189,248,.07),transparent 60%),
+     linear-gradient(180deg,var(--bg),var(--bg2))}
+  .grid-bg::before{content:"";position:absolute;inset:0;opacity:.4;
+     background-image:linear-gradient(rgba(120,150,200,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,150,200,.05) 1px,transparent 1px);
+     background-size:44px 44px;mask:radial-gradient(1200px 700px at 60% 0%,#000,transparent 80%)}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  /* ---------- nav ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(7,11,20,.72);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.02em;font-size:17px;display:flex;align-items:center;gap:9px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--grn);box-shadow:0 0 12px var(--grn)}
+  .brand b{color:var(--cy)}
+  .navlinks{display:flex;gap:28px;align-items:center}
+  .navlinks a{font-size:14px;color:var(--ink2);transition:.2s;position:relative}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--cy);transition:.25s}
+  .navlinks a:hover::after{width:100%}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:8px 10px;cursor:pointer;font-size:18px}
 
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
+  /* ---------- hero ---------- */
+  .hero{padding-top:70px}
+  .hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:48px;align-items:center}
+  .term{font-family:var(--mono);font-size:14px;color:var(--muted);margin-bottom:20px}
+  .term .prompt{color:var(--grn)} .term .typed{color:var(--cy)}
+  .term .cursor{display:inline-block;width:9px;height:17px;background:var(--cy);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero h1{font-size:clamp(44px,7vw,84px);line-height:.98;font-weight:800;letter-spacing:-.03em}
+  .hero h1 .alias{background:linear-gradient(90deg,var(--cy),var(--cy2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .role{margin-top:16px;font-size:clamp(18px,2.4vw,23px);color:var(--ink);font-weight:600}
+  .hero .role span{color:var(--cy)}
+  .hero .sub{margin-top:16px;color:var(--ink2);max-width:52ch}
+  .hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .socials{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  .socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;color:var(--ink2);transition:.2s;font-family:var(--mono);font-size:12px;font-weight:700}
+  .socials a:hover{color:var(--cy);border-color:var(--cy);transform:translateY(-3px)}
+  .portrait{position:relative;justify-self:center}
+  .portrait img{width:min(360px,72vw);border-radius:50%}
+  .portrait::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 90deg,var(--cy),transparent 40%,var(--cy2),transparent 80%,var(--cy));filter:blur(22px);opacity:.35;z-index:-1;animation:spin 14s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .badge-float{position:absolute;font-family:var(--mono);font-size:12px;font-weight:700;padding:8px 13px;border-radius:999px;background:var(--panel);border:1px solid var(--cy-line);color:var(--cy);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .badge-float.b1{top:8%;left:-6%} .badge-float.b2{bottom:12%;right:-8%;color:var(--grn);border-color:rgba(52,211,153,.4)}
 
-        :root{
-            --muted:#94a3b8;
-            --primary:#2563eb;
-            --primary-hover:#1d4ed8;
-            --text:#e2e8f0;
-        }
+  /* ---------- stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 0;margin-top:20px}
+  .stat .n{font-size:clamp(30px,4vw,44px);font-weight:800;font-family:var(--mono);color:var(--cy);letter-spacing:-.02em}
+  .stat .l{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
 
-        html{scroll-behavior:smooth;}
+  /* ---------- cards / sections ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+  .chip{font-family:var(--mono);font-size:13px;color:var(--ink2);padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02)}
+  .chip:hover{border-color:var(--cy);color:var(--cy)}
 
-        body{
-            font-family:'Inter',sans-serif;
-            background:linear-gradient(to bottom right,#020617,#0f172a,#111827);
-            color:var(--text);
-            line-height:1.7;
-            padding:34px 20px 20px;
-            min-height:100vh;
-        }
+  .timeline{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+  .job{display:grid;grid-template-columns:auto 1fr;gap:22px}
+  .job .rail{display:flex;flex-direction:column;align-items:center}
+  .job .node{width:16px;height:16px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 5px var(--cy-soft);margin-top:6px}
+  .job .line{flex:1;width:2px;background:var(--line);margin-top:6px}
+  .job:last-child .line{display:none}
+  .job .body{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .job .when{font-family:var(--mono);font-size:12.5px;color:var(--cy);letter-spacing:.04em}
+  .job h3{font-size:20px;margin:6px 0 2px}
+  .job .org{color:var(--ink2);font-weight:600;margin-bottom:10px}
+  .job ul{margin:10px 0 0;padding-left:18px;color:var(--ink2)}
+  .job ul li{margin:5px 0}
 
-        .container{max-width:1100px;margin:auto;}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:10px}
+  .skillcat h4{font-family:var(--mono);color:var(--cy);font-size:14px;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .skillcat h4::before{content:"▹";color:var(--cy)}
 
-        /* ================= HEADER / MASTHEAD ================= */
+  .edu{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .edu .card .yr{font-family:var(--mono);color:var(--muted);font-size:13px}
+  .edu .card h3{font-size:18px;margin:6px 0 4px}
 
-        .masthead{
-            position:relative;
-            background:
-                radial-gradient(circle at top right, rgba(37,99,235,0.30), transparent 42%),
-                linear-gradient(135deg,#020617,#111827);
-            border:1px solid rgba(255,255,255,0.07);
-            border-radius:26px;
-            padding:32px 40px;
-            box-shadow:0 20px 60px rgba(0,0,0,0.45);
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:26px;
-            flex-wrap:wrap;
-        }
+  /* ---------- detective ---------- */
+  .noir{background:radial-gradient(700px 300px at 20% 0%,rgba(226,182,110,.06),transparent 70%),var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:40px;text-align:center}
+  .noir .lens{font-size:40px}
+  .noir h3{font-size:clamp(22px,3vw,30px);font-weight:800;margin:10px 0}
+  .noir .trio{font-family:var(--mono);color:var(--gold);letter-spacing:.08em;margin-top:12px}
+  .noir p{color:var(--ink2);max-width:60ch;margin:12px auto 0}
 
-        .mast-id{
-            display:flex;
-            align-items:center;
-            gap:20px;
-            min-width:250px;
-        }
+  /* ---------- contact ---------- */
+  .contact{text-align:center}
+  .contact .big{font-size:clamp(26px,4vw,40px);font-weight:800;margin:8px 0 18px}
+  .contact .big a{color:var(--cy)}
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-family:var(--mono);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
-        .avatar{
-            width:74px;
-            height:74px;
-            border-radius:50%;
-            object-fit:cover;
-            border:3px solid rgba(255,255,255,0.14);
-            box-shadow:0 8px 22px rgba(0,0,0,0.4);
-            flex:0 0 auto;
-        }
+  .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
 
-        .mast-name{
-            display:block;
-            font-size:1.7rem;
-            font-weight:800;
-            letter-spacing:-0.5px;
-            color:#fff;
-            text-decoration:none;
-            line-height:1.1;
-        }
-
-        .mast-name span{color:#60a5fa;}
-
-        .mast-role{
-            margin-top:7px;
-            font-size:0.95rem;
-            font-weight:600;
-            color:#93c5fd;
-            letter-spacing:0.01em;
-        }
-
-        .mast-nav{
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-            align-items:center;
-            justify-content:flex-end;
-        }
-
-        .mast-nav a{
-            display:inline-flex;
-            align-items:center;
-            gap:7px;
-            color:var(--muted);
-            text-decoration:none;
-            font-size:0.9rem;
-            font-weight:600;
-            padding:9px 15px;
-            border-radius:11px;
-            border:1px solid rgba(255,255,255,0.08);
-            background:rgba(255,255,255,0.03);
-            transition:0.25s ease;
-        }
-
-        .mast-nav a:hover{
-            color:#fff;
-            border-color:rgba(37,99,235,0.5);
-            background:rgba(37,99,235,0.15);
-            transform:translateY(-2px);
-        }
-
-        .mast-nav a svg{width:16px;height:16px;flex:0 0 auto;}
-
-        .mast-nav a.cta{
-            background:var(--primary);
-            border-color:var(--primary);
-            color:#fff;
-        }
-
-        .mast-nav a.cta:hover{background:var(--primary-hover);}
-
-        /* ================= SECTION HEADING ================= */
-
-        .writeups-head{margin:46px 4px 20px;}
-
-        .writeups-head h2{
-            font-size:1.9rem;
-            font-weight:800;
-            letter-spacing:-0.6px;
-            color:#f8fafc;
-            display:inline-block;
-            position:relative;
-        }
-
-        .writeups-head h2::after{
-            content:"";
-            position:absolute;
-            left:0;
-            bottom:-9px;
-            width:56%;
-            height:4px;
-            border-radius:10px;
-            background:var(--primary);
-        }
-
-        .writeups-head p{
-            margin-top:22px;
-            color:var(--muted);
-            font-size:1.02rem;
-            max-width:700px;
-        }
-
-        /* ================= FILTERS ================= */
-
-        .filter-bar{
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-            margin:22px 4px 30px;
-        }
-
-        .filter-btn{
-            background:rgba(255,255,255,0.04);
-            border:1px solid rgba(255,255,255,0.08);
-            color:#cbd5e1;
-            font-family:inherit;
-            font-size:0.9rem;
-            font-weight:600;
-            padding:9px 18px;
-            border-radius:999px;
-            cursor:pointer;
-            transition:0.25s ease;
-        }
-
-        .filter-btn:hover{border-color:rgba(37,99,235,0.5);color:#fff;}
-
-        .filter-btn.active{background:var(--primary);border-color:var(--primary);color:#fff;}
-
-        .filter-btn .count{opacity:0.7;font-weight:500;margin-left:6px;}
-
-        /* ================= POSTS ================= */
-
-        .posts-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-            gap:22px;
-        }
-
-        .post-card{
-            display:flex;
-            flex-direction:column;
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.06);
-            border-radius:20px;
-            overflow:hidden;
-            text-decoration:none;
-            color:inherit;
-            transition:0.35s ease;
-        }
-
-        .post-card:hover{
-            transform:translateY(-6px);
-            border-color:rgba(37,99,235,0.5);
-            box-shadow:0 16px 38px rgba(37,99,235,0.16);
-        }
-
-        .post-body{padding:26px 26px 0;flex:1;}
-
-        .post-cat{
-            display:inline-block;
-            font-size:0.72rem;
-            font-weight:700;
-            letter-spacing:0.05em;
-            text-transform:uppercase;
-            padding:4px 12px;
-            border-radius:999px;
-            margin-bottom:15px;
-        }
-
-        .post-card h3{
-            font-size:1.24rem;
-            font-weight:700;
-            line-height:1.4;
-            margin-bottom:11px;
-            color:#f8fafc;
-        }
-
-        .post-card .excerpt{color:#94a3b8;font-size:0.95rem;}
-
-        .post-foot{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:20px 26px 24px;
-            margin-top:18px;
-            color:#64748b;
-            font-size:0.84rem;
-        }
-
-        .post-foot .read{color:#60a5fa;font-weight:600;}
-
-        .empty{
-            grid-column:1/-1;
-            text-align:center;
-            color:var(--muted);
-            padding:60px 20px;
-            font-size:1.05rem;
-        }
-
-        /* category accent colours */
-        .cat-politics{color:#f87171;background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.28);}
-        .cat-study{color:#34d399;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.28);}
-        .cat-security{color:#fbbf24;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.28);}
-        .cat-tech{color:#60a5fa;background:rgba(96,165,250,0.12);border:1px solid rgba(96,165,250,0.28);}
-        .cat-psychology{color:#f9a8d4;background:rgba(249,168,212,0.12);border:1px solid rgba(249,168,212,0.28);}
-        .cat-default{color:#a78bfa;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.28);}
-
-        /* ================= FOOTER ================= */
-
-        .footer{
-            text-align:center;
-            padding:46px 20px 12px;
-            color:#94a3b8;
-            font-size:0.92rem;
-        }
-
-        .footer a{color:#60a5fa;text-decoration:none;}
-        .footer a:hover{color:#93c5fd;}
-
-        /* ================= MOBILE ================= */
-
-        @media(max-width:768px){
-            body{padding:20px 15px 15px;}
-
-            .masthead{
-                padding:26px 22px;
-                justify-content:center;
-                text-align:center;
-            }
-
-            .mast-id{
-                flex-direction:column;
-                text-align:center;
-                gap:14px;
-                min-width:0;
-                width:100%;
-            }
-
-            .mast-nav{justify-content:center;width:100%;}
-
-            .writeups-head{margin-top:36px;}
-            .writeups-head h2{font-size:1.6rem;}
-
-            .posts-grid{grid-template-columns:1fr;}
-        }
-    </style>
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;text-align:center}
+    .portrait{order:-1} .hero .cta,.socials,.term{justify-content:center;display:flex}
+    .about-grid,.edu{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .navlinks{position:fixed;inset:64px 0 auto 0;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--line);padding:20px;gap:18px;transform:translateY(-120%);transition:.3s}
+    .navlinks.open{transform:none}
+    .menu-btn{display:block}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
+<div class="grid-bg"></div>
 
-<div class="container">
+<header>
+  <nav class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span>the<b>ugly</b>haxor</a>
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="mailto:mdrohansheikh1000@gmail.com">Hire me</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
+  </nav>
+</header>
 
-    <!-- ================= HEADER ================= -->
-    <header class="masthead">
-
-        <div class="mast-id">
-            <img class="avatar" src="image.png" alt="MD Rohan">
-            <div>
-                <a href="index.html" class="mast-name">MD <span>Rohan</span></a>
-                <div class="mast-role">Bug Bounty Hunter · OSINT Expert</div>
-            </div>
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="term"><span class="prompt">rohan@web:~$</span> whoami &nbsp;→&nbsp; <span class="typed" id="typed"></span><span class="cursor"></span></div>
+        <h1>MD. Rohan<br><span class="alias">theuglyhaxor</span></h1>
+        <div class="role">Bug Bounty Hunter · Web App Security · <span>Digital Investigator</span></div>
+        <p class="sub">I hunt for the security glitches others miss — mostly in web apps — and turn them into clear, high-impact reports. Offensive security is my profession and my passion.</p>
+        <div class="cta">
+          <a class="btn" href="#contact">Get in touch →</a>
+          <a class="btn ghost" href="cv.html" target="_blank">View CV</a>
         </div>
-
-        <nav class="mast-nav">
-            <a href="portfolio.html" class="cta">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                Portfolio
-            </a>
-            <a href="https://www.linkedin.com/in/theuglyhaxor/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8h4.52V24H.24V8zM8.34 8h4.33v2.18h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9V24h-4.52v-6.35c0-1.51-.03-3.46-2.11-3.46-2.11 0-2.43 1.65-2.43 3.35V24H8.34V8z"/></svg>
-                LinkedIn
-            </a>
-            <a href="https://github.com/theuglyhaxor" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.13-.3-.54-1.53.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.23 0 4.63-2.81 5.65-5.49 5.95.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5z"/></svg>
-                GitHub
-            </a>
-            <a href="https://bugcrowd.com/h/theuglyhaxor" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z"/></svg>
-                Bugcrowd
-            </a>
-            <a href="https://www.youtube.com/@theuglyhaxor" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
-                YouTube
-            </a>
-        </nav>
-
-    </header>
-
-    <!-- ================= WRITE-UPS ================= -->
-    <div class="writeups-head">
-        <h2>Write-ups &amp; Research</h2>
-        <p>
-            Bug bounty findings, offensive-security research, OSINT investigations
-            and long-form study notes. Use the filters below to jump to a topic.
-        </p>
+        <div class="socials">
+          <a href="https://linkedin.com/in/theuglyhaxor" target="_blank" title="LinkedIn">in</a>
+          <a href="https://github.com/theuglyhaxor" target="_blank" title="GitHub">GH</a>
+          <a href="https://x.com/theuglyhaxor" target="_blank" title="X">X</a>
+          <a href="https://youtube.com/@theuglyhaxor" target="_blank" title="YouTube">YT</a>
+          <a href="mailto:mdrohansheikh1000@gmail.com" title="Email">@</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <img src="avatar.png" alt="MD. Rohan — theuglyhaxor">
+        <span class="badge-float b1 mono">CVSS 9.8</span>
+        <span class="badge-float b2 mono">Bugcrowd ✓</span>
+      </div>
     </div>
 
-    <!-- CATEGORY FILTERS (auto-generated) -->
-    <div class="filter-bar" id="filterBar"></div>
-
-    <!-- POSTS (auto-generated) -->
-    <div class="posts-grid" id="postsGrid"></div>
-
-    <!-- ================= FOOTER ================= -->
-    <div class="footer">
-        © 2026 MD Rohan · Bug Bounty Hunter &amp; OSINT Expert —
-        <a href="portfolio.html">Portfolio</a> ·
-        <a href="https://github.com/theuglyhaxor" target="_blank" rel="noopener">GitHub</a>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat reveal"><div class="n" data-count="2000" data-prefix="$" data-suffix="+">$0</div><div class="l">Bounties Earned</div></div>
+        <div class="stat reveal"><div class="n" data-count="50">0</div><div class="l">Bugcrowd Points</div></div>
+        <div class="stat reveal"><div class="n" data-count="6" data-suffix=" mo">0</div><div class="l">Pentest Internship</div></div>
+        <div class="stat reveal"><div class="n">RCE</div><div class="l">Critical Bugs Found</div></div>
+      </div>
     </div>
+  </section>
 
-</div>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <div class="eyebrow">// about</div>
+        <h2 class="title">Offensive security, end to end.</h2>
+        <p class="lead">I'm a cybersecurity professional focused on <b>offensive security, penetration testing and vulnerability research</b>. My background spans web application security, network &amp; systems administration (Linux &amp; Windows), reverse engineering, and online investigations.</p>
+        <p class="lead" style="margin-top:14px">I'm passionate about securing modern infrastructure — helping organizations find and eliminate weaknesses <b>before attackers exploit them</b>. Currently hunting on Bugcrowd and always learning.</p>
+      </div>
+      <div class="card reveal">
+        <div class="mono" style="color:var(--cy);font-size:13px;letter-spacing:.1em">FOCUS AREAS</div>
+        <div class="chips">
+          <span class="chip">Web AppSec</span><span class="chip">IDOR</span><span class="chip">SSRF</span>
+          <span class="chip">XSS</span><span class="chip">RCE</span><span class="chip">API Security</span>
+          <span class="chip">Recon</span><span class="chip">Auth Bypass</span><span class="chip">OSINT</span>
+        </div>
+        <div class="mono" style="color:var(--cy);font-size:13px;letter-spacing:.1em;margin-top:22px">DETAILS</div>
+        <div class="chips">
+          <span class="chip">📍 Khulna, Bangladesh</span>
+          <span class="chip">🗣 English — Bilingual</span>
+          <span class="chip">🎓 CSE @ NUBTK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="eyebrow reveal">// experience</div>
+      <h2 class="title reveal">Where I've hunted</h2>
+      <div class="timeline">
+        <div class="job reveal">
+          <div class="rail"><div class="node"></div><div class="line"></div></div>
+          <div class="body">
+            <div class="when">JAN 2026 — PRESENT · Part-time · Remote</div>
+            <h3>Bug Bounty Hunter</h3>
+            <div class="org">Bugcrowd</div>
+            <p>Hunting security glitches in real-world applications — mostly web. I enjoy the chase, and I report what I find clearly and responsibly.</p>
+            <ul>
+              <li><b>$2,000</b> earned in bounties · <b>50</b> researcher points (solo)</li>
+              <li>Specialising in web application vulnerabilities &amp; access-control flaws</li>
+              <li>Skills: Penetration Testing, Report Writing, Recon</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job reveal">
+          <div class="rail"><div class="node"></div><div class="line"></div></div>
+          <div class="body">
+            <div class="when">SEP 2024 — FEB 2025 · Internship · Remote</div>
+            <h3>Penetration Tester</h3>
+            <div class="org">BYTIUM LLC · Dover, DE</div>
+            <p>A 6-month penetration testing internship where I contributed to real cybersecurity engagements with dedication and professionalism.</p>
+            <ul>
+              <li>Found <b>RCEs and other critical bugs</b> in web applications</li>
+              <li>Assisted in <b>remediating</b> vulnerabilities</li>
+              <li>Wrote <b>high-quality reports</b></li>
+              <li>Built client-communication, teamwork &amp; professional soft skills</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="eyebrow reveal">// arsenal</div>
+      <h2 class="title reveal">Skills &amp; toolkit</h2>
+      <div class="skills-grid">
+        <div class="skillcat card reveal">
+          <h4>Offensive Security</h4>
+          <div class="chips"><span class="chip">Bug Bounty</span><span class="chip">Web Pentesting</span><span class="chip">Vulnerability Research</span><span class="chip">Exploit Dev</span><span class="chip">Reverse Engineering</span></div>
+        </div>
+        <div class="skillcat card reveal">
+          <h4>Web Vuln Classes</h4>
+          <div class="chips"><span class="chip">IDOR / BAC</span><span class="chip">SSRF</span><span class="chip">XSS</span><span class="chip">RCE</span><span class="chip">Auth Bypass</span><span class="chip">Business Logic</span></div>
+        </div>
+        <div class="skillcat card reveal">
+          <h4>Infra &amp; Systems</h4>
+          <div class="chips"><span class="chip">Network Security</span><span class="chip">Network Admin</span><span class="chip">Linux Admin</span><span class="chip">Windows Admin</span></div>
+        </div>
+        <div class="skillcat card reveal">
+          <h4>Recon &amp; OSINT</h4>
+          <div class="chips"><span class="chip">Subdomain Enum</span><span class="chip">Asset Discovery</span><span class="chip">Online Investigation</span><span class="chip">Programming</span></div>
+        </div>
+        <div class="skillcat card reveal">
+          <h4>Reporting</h4>
+          <div class="chips"><span class="chip">High-quality Reports</span><span class="chip">CVSS Scoring</span><span class="chip">Clear PoCs</span><span class="chip">Client Comms</span></div>
+        </div>
+        <div class="skillcat card reveal">
+          <h4>Certifications</h4>
+          <div class="chips"><span class="chip">Penetration Tester Internship — BYTIUM</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETECTIVE -->
+  <section id="ethos">
+    <div class="wrap">
+      <div class="noir reveal">
+        <div class="lens">🔍</div>
+        <div class="eyebrow" style="color:var(--gold)">// the digital satyanweshi</div>
+        <h3>Every bug leaves a trace — and I read every one.</h3>
+        <p>I approach security the way a detective works a case: patient recon, sharp observation, and following the smallest clue to its conclusion. Off the clock, I read the masters who taught me that method.</p>
+        <div class="trio">IN THE LINE OF  ·  BYOMKESH  ·  FELUDA  ·  SHERLOCK HOLMES</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="eyebrow reveal">// education</div>
+      <h2 class="title reveal">Learning path</h2>
+      <div class="edu">
+        <div class="card reveal">
+          <div class="yr">2022 — Present</div>
+          <h3>B.Sc. in Computer Science &amp; Engineering</h3>
+          <div class="mono" style="color:var(--ink2);font-size:14px">Northern University of Business &amp; Technology, Khulna</div>
+        </div>
+        <div class="card reveal">
+          <div class="yr">2018 — 2020</div>
+          <h3>Higher Secondary — Science</h3>
+          <div class="mono" style="color:var(--ink2);font-size:14px">Khulna Public College</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap contact">
+      <div class="eyebrow reveal">// contact</div>
+      <h2 class="title reveal">Let's secure something.</h2>
+      <p class="lead reveal" style="margin:0 auto">Open to bug bounty collaborations, penetration testing work and security research. The fastest way to reach me:</p>
+      <div class="big reveal"><a href="mailto:mdrohansheikh1000@gmail.com">mdrohansheikh1000@gmail.com</a></div>
+      <div class="cta reveal" style="justify-content:center;display:flex;gap:14px;flex-wrap:wrap">
+        <a class="btn" href="https://linkedin.com/in/theuglyhaxor" target="_blank">LinkedIn →</a>
+        <a class="btn ghost" href="https://github.com/theuglyhaxor" target="_blank">GitHub →</a>
+        <a class="btn ghost" href="cv.html" target="_blank">Download CV →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div>© <span id="yr"></span> MD. Rohan — theuglyhaxor</div>
+  <div>Built with curiosity · Khulna, BD</div>
+</footer>
 
 <script>
-/* =============================================================
-   WRITE-UPS / BLOG POSTS
-   -------------------------------------------------------------
-   To add a new post, copy one block below and edit it, placing
-   it above the "ADD NEW POSTS ABOVE THIS LINE" comment.
-   Categories become filter chips automatically — reuse an
-   existing category name or invent a new one.
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  // mobile menu
+  const mb=document.getElementById('menuBtn'), nl=document.getElementById('navlinks');
+  mb.addEventListener('click',()=>nl.classList.toggle('open'));
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
 
-   "catClass" sets the badge colour:
-     cat-security | cat-study | cat-politics |
-     cat-tech | cat-psychology | cat-default
-   ============================================================= */
-const posts = [
-    {
-        title: "Mental Health: ADHD, বাইপোলার ডিসঅর্ডার আর মাঝখানে দাঁড়িয়ে থাকা একজন মানুষ",
-        category: "Psychology",
-        catClass: "cat-psychology",
-        excerpt: "আমার গল্প, ADHD ও বাইপোলার ডিসঅর্ডার আসলে কী, আমার প্রেসক্রিপশনের ওষুধ, ADHD-র ওষুধের তুলনা ও দাম — আর RSD নিয়ে একটা জরুরি কথা।",
-        meta: "08 July 2026 · বাংলা",
-        url: "Mental_Health_ADHD_BI_POLAR.html"
-    },
-    {
-        title: "ছোটদের রাজনীতি ও ছোটদের অর্থনীতি",
-        category: "Politics & Economics",
-        catClass: "cat-politics",
-        excerpt: "Revolutionary study notes (বিপ্লবী পাঠ-নোট) on Prof. Nihar Kumar Sarkar's book — unpacking exploitation, surplus value, political awareness, and economics in plain Bangla.",
-        meta: "06 July 2026 · বাংলা",
-        url: "LPB-Chotoder_Rajniti_Chotoder_orthoniti.html"
-    },
-    {
-        title: "Mobile Computing — Part 1",
-        category: "Study Material",
-        catClass: "cat-study",
-        excerpt: "A formal academic study guide covering mobile generations (1G–4G), cellular concepts, FDMA/TDMA/CDMA, GSM, GSM vs CDMA, and GPRS.",
-        meta: "Academic Notes · English",
-        url: "Mobile_Computing_Part-1_Study_Material.html"
-    }
+  // typed roles
+  const roles=["bug_bounty_hunter","web_pentester","digital_investigator","security_researcher"];
+  const el=document.getElementById('typed'); let ri=0,ci=0,del=false;
+  (function type(){
+    const w=roles[ri];
+    el.textContent = del ? w.slice(0,ci--) : w.slice(0,ci++);
+    if(!del && ci===w.length+1){del=true;setTimeout(type,1300);return;}
+    if(del && ci===0){del=false;ri=(ri+1)%roles.length;}
+    setTimeout(type, del?45:80);
+  })();
 
-    /* ---- ADD NEW POSTS ABOVE THIS LINE ----
-    ,{
-        title: "Your Post Title",
-        category: "Security",
-        catClass: "cat-security",
-        excerpt: "One or two sentences describing the post.",
-        meta: "Date · Tag",
-        url: "your-new-post.html"
-    }
-    */
-];
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
 
-/* ---------- render logic (no need to edit below) ---------- */
-const grid = document.getElementById('postsGrid');
-const filterBar = document.getElementById('filterBar');
-let activeCat = 'All';
-
-function buildFilters(){
-    const counts = {};
-    posts.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
-    const cats = ['All', ...Object.keys(counts)];
-
-    filterBar.innerHTML = '';
-    cats.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn' + (cat === activeCat ? ' active' : '');
-        const total = cat === 'All' ? posts.length : counts[cat];
-        btn.innerHTML = cat + '<span class="count">' + total + '</span>';
-        btn.onclick = () => { activeCat = cat; buildFilters(); render(); };
-        filterBar.appendChild(btn);
-    });
-}
-
-function render(){
-    const list = activeCat === 'All'
-        ? posts
-        : posts.filter(p => p.category === activeCat);
-
-    grid.innerHTML = '';
-
-    if(list.length === 0){
-        grid.innerHTML = '<div class="empty">No posts in this category yet — check back soon.</div>';
-        return;
-    }
-
-    list.forEach(p => {
-        const a = document.createElement('a');
-        a.className = 'post-card';
-        a.href = p.url;
-        a.innerHTML =
-            '<div class="post-body">' +
-                '<span class="post-cat ' + (p.catClass || 'cat-default') + '">' + p.category + '</span>' +
-                '<h3>' + p.title + '</h3>' +
-                '<p class="excerpt">' + p.excerpt + '</p>' +
-            '</div>' +
-            '<div class="post-foot">' +
-                '<span>' + (p.meta || '') + '</span>' +
-                '<span class="read">Read →</span>' +
-            '</div>';
-        grid.appendChild(a);
-    });
-}
-
-buildFilters();
-render();
+  // count-up stats
+  const cIO=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(!e.isIntersecting) return; const n=e.target; cIO.unobserve(n);
+    const target=+n.dataset.count; if(!target) return;
+    const pre=n.dataset.prefix||'', suf=n.dataset.suffix||''; let cur=0;
+    const step=Math.max(1,Math.ceil(target/60));
+    const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(t);} n.textContent=pre+cur.toLocaleString()+suf;},22);
+  }),{threshold:.5});
+  document.querySelectorAll('.stat .n[data-count]').forEach(x=>cIO.observe(x));
 </script>
-
 </body>
 </html>
