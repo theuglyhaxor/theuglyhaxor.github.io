@@ -6,80 +6,61 @@
 <title>MD. Rohan — CV</title>
 <style>
   :root{
-    --side:#102534; --side2:#0c1d2a; --accent:#0e93ab; --accent2:#12b3c9;
-    --ink:#1e293b; --ink2:#475569; --muted:#64748b; --line:#e2e8f0;
-    --sideink:#e8eef4; --sideink2:#a9bccb;
-    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --ink:#111111; --ink2:#222222; --muted:#444444; --line:#000000;
+    --sans:Arial,"Helvetica Neue",Helvetica,"Segoe UI",system-ui,sans-serif;
     --mono:"Consolas",ui-monospace,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#4b5563;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{background:#5b6472;font-family:var(--sans);color:var(--ink);
+       -webkit-font-smoothing:antialiased;line-height:1.4;font-size:11pt}
 
-  /* screen control bar */
+  /* screen-only control bar (hidden in print / not parsed by ATS) */
   .bar{position:sticky;top:0;z-index:10;background:#0b1120;color:#e8eef7;display:flex;
-       align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;font-family:var(--mono);font-size:13px}
+       align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;
+       font-family:var(--mono);font-size:13px}
   .bar b{color:#22d3ee}
   .bar button{font-family:var(--mono);font-size:13px;font-weight:700;border:0;border-radius:8px;
        background:#22d3ee;color:#04121a;padding:9px 18px;cursor:pointer;transition:.2s}
   .bar button:hover{background:#67e8f9}
 
-  .page{width:210mm;min-height:297mm;margin:22px auto;background:#fff;display:grid;
-        grid-template-columns:70mm 1fr;box-shadow:0 20px 60px rgba(0,0,0,.4);overflow:hidden}
+  /* single-column A4 page — ATS-parseable */
+  .page{width:210mm;min-height:297mm;margin:22px auto;background:#fff;
+        padding:18mm 18mm 16mm;box-shadow:0 20px 60px rgba(0,0,0,.4)}
 
-  /* ---------- sidebar ---------- */
-  .side{background:linear-gradient(180deg,var(--side),var(--side2));color:var(--sideink);padding:26px 22px}
-  .photo{width:120px;height:120px;margin:0 auto 16px;display:block}
-  .side .name{text-align:center;font-size:24px;font-weight:800;letter-spacing:.01em}
-  .side .alias{text-align:center;font-family:var(--mono);color:var(--accent2);font-size:13px;margin-top:2px}
-  .side .tagline{text-align:center;color:var(--sideink2);font-size:12px;margin-top:8px;line-height:1.5}
-  .side h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);
-           margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.12)}
-  .side .row{display:flex;gap:9px;font-size:12.5px;color:var(--sideink);margin:8px 0;line-height:1.4;align-items:flex-start;word-break:break-word}
-  .side .row .ic{color:var(--accent2);flex:none;width:16px;text-align:center}
-  .side .row a{color:var(--sideink);text-decoration:none}
-  .taglist{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-  .taglist span{font-size:11.5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
-                border-radius:20px;padding:4px 10px;color:var(--sideink)}
-  .side .skillline{font-size:12.5px;margin:7px 0;color:var(--sideink)}
-  .side .skillline b{color:var(--accent2);font-weight:600}
+  /* header */
+  header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:16px}
+  h1{font-size:24pt;font-weight:700;letter-spacing:.01em;line-height:1.1}
+  .title{font-size:12pt;font-weight:700;color:var(--ink2);margin-top:4px}
+  .contact{font-size:10pt;color:var(--muted);margin-top:8px;line-height:1.7}
+  .contact a{color:var(--muted);text-decoration:none}
 
-  /* ---------- main ---------- */
-  .main{padding:30px 30px 26px}
-  .head .hname{font-size:34px;font-weight:800;letter-spacing:-.01em;line-height:1.05}
-  .head .htitle{color:var(--accent);font-weight:700;font-size:15px;margin-top:4px}
-  .head .hloc{color:var(--muted);font-size:12.5px;margin-top:2px}
-  h3.sec{font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
-          margin:22px 0 12px;display:flex;align-items:center;gap:10px}
-  h3.sec::after{content:"";flex:1;height:2px;background:var(--line)}
-  h3.sec::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--accent)}
-  .summary{color:var(--ink2);font-size:13px;line-height:1.6}
+  /* sections */
+  h2{font-size:12pt;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+     color:var(--ink);border-bottom:1px solid var(--line);
+     padding-bottom:3px;margin:16px 0 8px}
+  p{font-size:10.5pt;color:var(--ink2);line-height:1.5}
 
-  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 4px}
-  .kpi{border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-align:center}
-  .kpi .n{font-size:22px;font-weight:800;color:var(--accent);font-family:var(--mono)}
-  .kpi .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+  .skill-line{font-size:10.5pt;color:var(--ink2);margin:4px 0;line-height:1.5}
+  .skill-line b{color:var(--ink)}
 
-  .job{margin-bottom:16px;break-inside:avoid}
-  .job .jt{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-  .job .role{font-size:15px;font-weight:700}
-  .job .when{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
-  .job .org{color:var(--accent);font-weight:600;font-size:13px;margin:1px 0 6px}
-  .job ul{margin:0;padding-left:18px;color:var(--ink2);font-size:12.5px;line-height:1.55}
-  .job ul li{margin:3px 0}
-  .edu-item{margin-bottom:12px}
-  .edu-item .d{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-  .edu-item .t{font-weight:700;font-size:14px;margin-top:1px}
-  .edu-item .s{color:var(--ink2);font-size:12.5px}
+  .entry{margin-bottom:12px}
+  .entry .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .entry .role{font-size:11.5pt;font-weight:700;color:var(--ink)}
+  .entry .when{font-size:10pt;color:var(--muted);white-space:nowrap}
+  .entry .org{font-size:10.5pt;font-weight:700;color:var(--ink2);margin:1px 0 5px}
+  .entry ul{margin:0;padding-left:18px;color:var(--ink2);font-size:10.5pt;line-height:1.5}
+  .entry ul li{margin:3px 0}
 
   @media(max-width:800px){
-    .page{width:100%;grid-template-columns:1fr}
+    .page{width:100%;padding:8mm 6mm}
   }
   @media print{
-    @page{size:A4;margin:0}
-    body{background:#fff}
+    @page{size:A4;margin:14mm}
+    body{background:#fff;font-size:10.5pt}
     .bar{display:none}
-    .page{margin:0;box-shadow:none;width:210mm}
-    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .page{margin:0;box-shadow:none;width:auto;min-height:0;padding:0}
+    .entry,header{break-inside:avoid}
+    a{color:var(--muted)}
   }
 </style>
 </head>
@@ -90,95 +71,97 @@
   </div>
 
   <div class="page">
-    <!-- SIDEBAR -->
-    <aside class="side">
-      <img class="photo" src="avatar.png" alt="MD. Rohan">
-      <div class="name">MD. Rohan</div>
-      <div class="alias">@theuglyhaxor</div>
-      <div class="tagline">Offensive Security Researcher · Bug Bounty Hunter · Digital Investigator</div>
+    <header>
+      <h1>MD. Rohan</h1>
+      <div class="title">Offensive Security Researcher | Bug Bounty Hunter | Penetration Tester</div>
+      <div class="contact">
+        Daulatpur, Khulna, Bangladesh<br>
+        Email: <a href="mailto:mdrohansheikh1000@gmail.com">mdrohansheikh1000@gmail.com</a><br>
+        LinkedIn: <a href="https://linkedin.com/in/theuglyhaxor">linkedin.com/in/theuglyhaxor</a>
+        &nbsp;|&nbsp; GitHub: <a href="https://github.com/theuglyhaxor">github.com/theuglyhaxor</a>
+        &nbsp;|&nbsp; Website: <a href="https://theuglyhaxor.github.io">theuglyhaxor.github.io</a>
+      </div>
+    </header>
 
-      <h2>Contact</h2>
-      <div class="row"><span class="ic">◉</span><span>Daulatpur, Khulna, Bangladesh</span></div>
-      <div class="row"><span class="ic">✉</span><a href="mailto:mdrohansheikh1000@gmail.com">mdrohansheikh1000@gmail.com</a></div>
-      <div class="row"><span class="ic">in</span><a href="https://linkedin.com/in/theuglyhaxor">linkedin.com/in/theuglyhaxor</a></div>
-      <div class="row"><span class="ic">⌥</span><a href="https://github.com/theuglyhaxor">github.com/theuglyhaxor</a></div>
-      <div class="row"><span class="ic">◈</span><a href="https://theuglyhaxor.github.io">theuglyhaxor.github.io</a></div>
+    <section>
+      <h2>Professional Summary</h2>
+      <p>Cybersecurity professional with a strong background in offensive security, penetration testing and vulnerability research, plus network administration, Linux and Windows systems administration, reverse engineering and online investigations. Identify and eliminate security weaknesses across web applications, Android applications, APIs and networks, and translate them into clear, high-impact reports that help organizations fix issues before attackers exploit them. Earned $2,000+ in bug bounties and 50 Bugcrowd researcher points solo, with critical findings including remote code execution (RCE).</p>
+    </section>
 
-      <h2>Core Skills</h2>
-      <div class="skillline"><b>Offensive:</b> Web, Android, API &amp; Network Pentesting, Bug Bounty, Vulnerability Research, Reverse Engineering</div>
-      <div class="skillline"><b>Web &amp; API:</b> IDOR, SSRF, XSS, RCE, Auth Bypass, Business Logic, GraphQL</div>
-      <div class="skillline"><b>Mobile:</b> Android APK analysis, Frida, insecure storage, exported components</div>
-      <div class="skillline"><b>Infra:</b> Network Security, Network Admin, Linux &amp; Windows Admin</div>
-      <div class="skillline"><b>Recon:</b> Subdomain Enum, OSINT, Online Investigation</div>
-      <div class="skillline"><b>Also:</b> Report Writing, CVSS, Programming</div>
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skill-line"><b>Offensive Security:</b> Web, Android, API and Network Penetration Testing, Bug Bounty, Vulnerability Research, Reverse Engineering</div>
+      <div class="skill-line"><b>Web and API:</b> IDOR, SSRF, XSS, RCE, Authentication Bypass, Business Logic Flaws, GraphQL</div>
+      <div class="skill-line"><b>Mobile:</b> Android APK Analysis, Frida, Insecure Data Storage, Exported Components</div>
+      <div class="skill-line"><b>Infrastructure:</b> Network Security, Network Administration, Linux and Windows Administration</div>
+      <div class="skill-line"><b>Recon and Investigation:</b> Subdomain Enumeration, OSINT, Online Investigation</div>
+      <div class="skill-line"><b>Reporting:</b> Vulnerability Report Writing, CVSS Scoring, Programming</div>
+      <div class="skill-line"><b>Tools:</b> Burp Suite, Nuclei, httpx, subfinder, ffuf, Nmap, Wireshark, Frida, jadx, Postman, Linux</div>
+    </section>
 
-      <h2>Tools</h2>
-      <div class="taglist">
-        <span>Burp Suite</span><span>Nuclei</span><span>httpx</span><span>subfinder</span>
-        <span>ffuf</span><span>Nmap</span><span>Wireshark</span><span>Frida</span>
-        <span>jadx</span><span>Postman</span><span>Linux</span>
+    <section>
+      <h2>Professional Experience</h2>
+
+      <div class="entry">
+        <div class="top">
+          <span class="role">Bug Bounty Hunter</span>
+          <span class="when">Jan 2026 – Present</span>
+        </div>
+        <div class="org">Bugcrowd — Part-time, Remote</div>
+        <ul>
+          <li>Hunt vulnerabilities across web applications, Android applications, APIs and networks on real-world targets and report them responsibly.</li>
+          <li>Earned $2,000+ in bounties and 50 researcher points (solo) to date.</li>
+          <li>Focus areas: access-control flaws, injection, SSRF, authentication bypass and business-logic bugs.</li>
+        </ul>
       </div>
 
-      <h2>Languages</h2>
-      <div class="skillline">English — Native / Bilingual</div>
+      <div class="entry">
+        <div class="top">
+          <span class="role">Penetration Tester (Internship)</span>
+          <span class="when">Sep 2024 – Feb 2025</span>
+        </div>
+        <div class="org">BYTIUM LLC — Dover, DE, Remote</div>
+        <ul>
+          <li>Performed internal and external network, web and API testing; found RCEs and other critical bugs during live engagements.</li>
+          <li>Assisted in remediating discovered vulnerabilities alongside the team.</li>
+          <li>Authored high-quality vulnerability reports with clear reproduction steps.</li>
+          <li>Developed professional soft skills, including client communication and teamwork.</li>
+        </ul>
+      </div>
+    </section>
 
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="top">
+          <span class="role">B.Sc. in Computer Science and Engineering</span>
+          <span class="when">2022 – Present</span>
+        </div>
+        <div class="org">Northern University of Business and Technology, Khulna</div>
+      </div>
+      <div class="entry">
+        <div class="top">
+          <span class="role">Higher Secondary Certificate (Science)</span>
+          <span class="when">2018 – 2020</span>
+        </div>
+        <div class="org">Khulna Public College</div>
+      </div>
+    </section>
+
+    <section>
       <h2>Certifications</h2>
-      <div class="skillline">Penetration Tester Internship Certification — BYTIUM LLC</div>
-    </aside>
+      <p>Penetration Tester Internship Certification — BYTIUM LLC</p>
+    </section>
 
-    <!-- MAIN -->
-    <main class="main">
-      <div class="head">
-        <div class="hname">MD. Rohan</div>
-        <div class="htitle">Independent Ethical Hacker · Offensive Security Researcher</div>
-        <div class="hloc">Bug Bounty Hunter — Bugcrowd · Ex-Penetration Tester — BYTIUM</div>
-      </div>
+    <section>
+      <h2>Languages</h2>
+      <p>English — Native / Bilingual</p>
+    </section>
 
-      <h3 class="sec">Summary</h3>
-      <p class="summary">Cybersecurity professional with a strong background in offensive security, penetration testing and vulnerability research, plus network administration, Linux &amp; Windows systems administration, reverse engineering and online investigations. I find and eliminate security weaknesses across <b>web apps, Android apps, APIs and networks</b> — and turn them into clear, high-impact reports, helping organizations fix issues before attackers exploit them.</p>
-
-      <div class="kpis">
-        <div class="kpi"><div class="n">$2,000+</div><div class="l">Bounties Earned</div></div>
-        <div class="kpi"><div class="n">50</div><div class="l">Bugcrowd Points</div></div>
-        <div class="kpi"><div class="n">RCE</div><div class="l">Critical Bugs Found</div></div>
-      </div>
-
-      <h3 class="sec">Experience</h3>
-      <div class="job">
-        <div class="jt"><span class="role">Bug Bounty Hunter</span><span class="when">Jan 2026 — Present</span></div>
-        <div class="org">Bugcrowd · Part-time · Remote</div>
-        <ul>
-          <li>Hunt vulnerabilities across <b>web apps, Android apps, APIs and networks</b> on real-world targets and report them responsibly.</li>
-          <li>Earned <b>$2,000+</b> in bounties and <b>50</b> researcher points (solo) to date.</li>
-          <li>Focus: access-control flaws, injection, SSRF, authentication bypass and business-logic bugs.</li>
-        </ul>
-      </div>
-      <div class="job">
-        <div class="jt"><span class="role">Penetration Tester (Internship)</span><span class="when">Sep 2024 — Feb 2025</span></div>
-        <div class="org">BYTIUM LLC · Dover, DE · Remote</div>
-        <ul>
-          <li>Performed internal &amp; external <b>network</b>, <b>web</b> and <b>API</b> testing — found <b>RCEs and other critical bugs</b> during live engagements.</li>
-          <li>Assisted in <b>remediating</b> discovered vulnerabilities alongside the team.</li>
-          <li>Authored <b>high-quality vulnerability reports</b> with clear reproduction steps.</li>
-          <li>Developed professional soft skills: client communication and teamwork.</li>
-        </ul>
-      </div>
-
-      <h3 class="sec">Education</h3>
-      <div class="edu-item">
-        <div class="d">2022 — Present</div>
-        <div class="t">B.Sc. in Computer Science &amp; Engineering</div>
-        <div class="s">Northern University of Business &amp; Technology, Khulna</div>
-      </div>
-      <div class="edu-item">
-        <div class="d">2018 — 2020</div>
-        <div class="t">Higher Secondary Certificate — Science</div>
-        <div class="s">Khulna Public College</div>
-      </div>
-
-      <h3 class="sec">Interests</h3>
-      <p class="summary">Detective fiction — Byomkesh, Feluda and Sherlock Holmes — which shaped how I investigate: patient recon, sharp observation, and following every clue to its conclusion.</p>
-    </main>
+    <section>
+      <h2>Interests</h2>
+      <p>Detective fiction — Byomkesh, Feluda and Sherlock Holmes — which shaped how I investigate: patient recon, sharp observation, and following every clue to its conclusion.</p>
+    </section>
   </div>
 </body>
 </html>
