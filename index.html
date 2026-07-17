@@ -3,154 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MD. Rohan — theuglyhaxor · Bug Bounty Hunter & Security Researcher</title>
-<meta name="description" content="MD. Rohan (theuglyhaxor) — Offensive Security Researcher, Bug Bounty Hunter and Digital Investigator. Bugcrowd hunter, ex-BYTIUM penetration tester.">
+<title>MD. Rohan — Offensive Security Researcher & Bug Bounty Hunter</title>
+<meta name="description" content="MD. Rohan (theuglyhaxor) — Offensive Security Researcher, Bug Bounty Hunter and Penetration Tester. Bugcrowd hunter, ex-BYTIUM penetration tester.">
+<link rel="icon" type="image/png" href="avatar.png"/>
 <style>
   :root{
-    --bg:#070b14; --bg2:#0b1120; --panel:#0e1626; --panel2:#111c30;
-    --line:#1c2b45; --ink:#e9eef7; --ink2:#adbace; --muted:#7488a6;
-    --cy:#22d3ee; --cy2:#38bdf8; --grn:#34d399; --gold:#e2b66e;
-    --cy-soft:rgba(34,211,238,.12); --cy-line:rgba(34,211,238,.35);
-    --mono:"Cascadia Code",ui-monospace,Consolas,"SF Mono",monospace;
-    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
-    --radius:16px; --max:1120px;
+    --ink:#111111; --ink2:#333333; --muted:#666666;
+    --line:#dcdcdc; --rule:#111111; --accent:#1f3a5f; --bg:#ffffff; --soft:#f6f7f8;
+    --sans:Arial,"Helvetica Neue",Helvetica,"Segoe UI",system-ui,sans-serif;
+    --max:900px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);
+       line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
   img{max-width:100%;display:block}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-  .mono{font-family:var(--mono)}
-  section{padding:96px 0;position:relative}
-  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--cy);margin-bottom:14px}
-  h2.title{font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
-  .lead{color:var(--ink2);max-width:64ch}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:14px;font-weight:600;padding:12px 22px;border-radius:999px;border:1px solid var(--cy-line);color:var(--cy);background:var(--cy-soft);transition:.2s;cursor:pointer}
-  .btn:hover{background:var(--cy);color:#04121a;transform:translateY(-2px)}
-  .btn.ghost{color:var(--ink2);border-color:var(--line);background:transparent}
-  .btn.ghost:hover{color:var(--ink);border-color:var(--cy);background:transparent;transform:translateY(-2px)}
+  section{padding:44px 0;border-top:1px solid var(--line)}
 
-  /* ---------- background decor ---------- */
-  .grid-bg{position:fixed;inset:0;z-index:-2;background:
-     radial-gradient(900px 600px at 85% -5%,rgba(34,211,238,.10),transparent 60%),
-     radial-gradient(700px 500px at 5% 100%,rgba(56,189,248,.07),transparent 60%),
-     linear-gradient(180deg,var(--bg),var(--bg2))}
-  .grid-bg::before{content:"";position:absolute;inset:0;opacity:.4;
-     background-image:linear-gradient(rgba(120,150,200,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,150,200,.05) 1px,transparent 1px);
-     background-size:44px 44px;mask:radial-gradient(1200px 700px at 60% 0%,#000,transparent 80%)}
+  /* section headings — match the CV */
+  .label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+         font-weight:700;margin-bottom:6px}
+  h2.title{font-size:22px;font-weight:700;letter-spacing:.01em;color:var(--ink);margin-bottom:14px}
+  .lead{color:var(--ink2);max-width:70ch}
+  .lead + .lead{margin-top:12px}
 
-  /* ---------- nav ---------- */
-  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(7,11,20,.72);border-bottom:1px solid var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.02em;font-size:17px;display:flex;align-items:center;gap:9px}
-  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--grn);box-shadow:0 0 12px var(--grn)}
-  .brand b{color:var(--cy)}
-  .navlinks{display:flex;gap:28px;align-items:center}
-  .navlinks a{font-size:14px;color:var(--ink2);transition:.2s;position:relative}
-  .navlinks a:hover{color:var(--ink)}
-  .navlinks a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--cy);transition:.25s}
-  .navlinks a:hover::after{width:100%}
-  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:8px 10px;cursor:pointer;font-size:18px}
+  /* buttons — simple outlined */
+  .btn{display:inline-block;font-size:14px;font-weight:700;padding:10px 18px;border-radius:4px;
+       border:1px solid var(--ink);color:var(--ink);background:#fff;transition:.15s;cursor:pointer}
+  .btn:hover{background:var(--ink);color:#fff;text-decoration:none}
+  .btn.solid{background:var(--ink);color:#fff}
+  .btn.solid:hover{background:#000}
 
-  /* ---------- hero ---------- */
-  .hero{padding-top:70px}
-  .hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:48px;align-items:center}
-  .term{font-family:var(--mono);font-size:14px;color:var(--muted);margin-bottom:20px}
-  .term .prompt{color:var(--grn)} .term .typed{color:var(--cy)}
-  .term .cursor{display:inline-block;width:9px;height:17px;background:var(--cy);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(2) infinite}
-  @keyframes blink{50%{opacity:0}}
-  .hero h1{font-size:clamp(44px,7vw,84px);line-height:.98;font-weight:800;letter-spacing:-.03em}
-  .hero h1 .alias{background:linear-gradient(90deg,var(--cy),var(--cy2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero .role{margin-top:16px;font-size:clamp(18px,2.4vw,23px);color:var(--ink);font-weight:600}
-  .hero .role span{color:var(--cy)}
-  .hero .sub{margin-top:16px;color:var(--ink2);max-width:52ch}
-  .hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
-  .socials{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
-  .socials a{width:44px;height:44px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;color:var(--ink2);transition:.2s;font-family:var(--mono);font-size:12px;font-weight:700}
-  .socials a:hover{color:var(--cy);border-color:var(--cy);transform:translateY(-3px)}
-  .portrait{position:relative;justify-self:center}
-  .portrait img{width:min(360px,72vw);border-radius:50%}
-  .portrait::before{content:"";position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from 90deg,var(--cy),transparent 40%,var(--cy2),transparent 80%,var(--cy));filter:blur(22px);opacity:.35;z-index:-1;animation:spin 14s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .badge-float{position:absolute;font-family:var(--mono);font-size:12px;font-weight:700;padding:8px 13px;border-radius:999px;background:var(--panel);border:1px solid var(--cy-line);color:var(--cy);box-shadow:0 10px 30px rgba(0,0,0,.4)}
-  .badge-float.b1{top:8%;left:-6%} .badge-float.b2{bottom:12%;right:-8%;color:var(--grn);border-color:rgba(52,211,153,.4)}
+  /* nav */
+  header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{font-weight:700;font-size:17px;letter-spacing:.01em;color:var(--ink)}
+  .brand:hover{text-decoration:none}
+  .navlinks{display:flex;gap:26px;align-items:center}
+  .navlinks a{font-size:14px;color:var(--ink2)}
+  .navlinks a:hover{color:var(--ink);text-decoration:none}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:4px;
+            color:var(--ink);padding:6px 10px;cursor:pointer;font-size:18px}
 
-  /* ---------- stats ---------- */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 0;margin-top:20px}
-  .stat .n{font-size:clamp(30px,4vw,44px);font-weight:800;font-family:var(--mono);color:var(--cy);letter-spacing:-.02em}
-  .stat .l{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+  /* hero */
+  .hero{padding:52px 0 44px;border-top:0}
+  .hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+  .hero h1{font-size:38px;font-weight:700;letter-spacing:.01em;line-height:1.1}
+  .hero .role{margin-top:8px;font-size:16px;font-weight:700;color:var(--ink2)}
+  .hero .sub{margin-top:14px;color:var(--ink2);max-width:58ch}
+  .hero .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+  .hero .links{margin-top:16px;font-size:14px;color:var(--muted)}
+  .hero .links a{color:var(--accent)}
+  .portrait img{width:150px;height:150px;border-radius:50%;border:1px solid var(--line);object-fit:cover}
 
-  /* ---------- cards / sections ---------- */
-  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
-  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
-  .chip{font-family:var(--mono);font-size:13px;color:var(--ink2);padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02)}
-  .chip:hover{border-color:var(--cy);color:var(--cy)}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .stat{padding:18px 14px;text-align:center;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat .n{font-size:24px;font-weight:700;color:var(--ink)}
+  .stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
 
-  .timeline{display:flex;flex-direction:column;gap:22px;margin-top:8px}
-  .job{display:grid;grid-template-columns:auto 1fr;gap:22px}
-  .job .rail{display:flex;flex-direction:column;align-items:center}
-  .job .node{width:16px;height:16px;border-radius:50%;background:var(--cy);box-shadow:0 0 0 5px var(--cy-soft);margin-top:6px}
-  .job .line{flex:1;width:2px;background:var(--line);margin-top:6px}
-  .job:last-child .line{display:none}
-  .job .body{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
-  .job .when{font-family:var(--mono);font-size:12.5px;color:var(--cy);letter-spacing:.04em}
-  .job h3{font-size:20px;margin:6px 0 2px}
-  .job .org{color:var(--ink2);font-weight:600;margin-bottom:10px}
-  .job ul{margin:10px 0 0;padding-left:18px;color:var(--ink2)}
-  .job ul li{margin:5px 0}
+  /* generic content blocks */
+  .entry{margin-bottom:20px}
+  .entry:last-child{margin-bottom:0}
+  .entry .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .entry .role{font-size:16px;font-weight:700;color:var(--ink)}
+  .entry .when{font-size:13px;color:var(--muted);white-space:nowrap}
+  .entry .org{font-size:14px;font-weight:700;color:var(--ink2);margin:2px 0 6px}
+  .entry p{color:var(--ink2);font-size:14px}
+  .entry ul{margin:8px 0 0;padding-left:20px;color:var(--ink2);font-size:14px}
+  .entry ul li{margin:4px 0}
 
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:10px}
-  .skillcat h4{font-family:var(--mono);color:var(--cy);font-size:14px;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-  .skillcat h4::before{content:"▹";color:var(--cy)}
+  .skill-row{margin:10px 0}
+  .skill-row .h{font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+  .skill-row .v{color:var(--ink2);font-size:14px}
 
-  .edu{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .edu .card .yr{font-family:var(--mono);color:var(--muted);font-size:13px}
-  .edu .card h3{font-size:18px;margin:6px 0 4px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
-  /* ---------- detective ---------- */
-  .noir{background:radial-gradient(700px 300px at 20% 0%,rgba(226,182,110,.06),transparent 70%),var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:40px;text-align:center}
-  .noir .lens{font-size:40px}
-  .noir h3{font-size:clamp(22px,3vw,30px);font-weight:800;margin:10px 0}
-  .noir .trio{font-family:var(--mono);color:var(--gold);letter-spacing:.08em;margin-top:12px}
-  .noir p{color:var(--ink2);max-width:60ch;margin:12px auto 0}
+  .card{border:1px solid var(--line);border-radius:6px;padding:20px}
+  .card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+  .card p{color:var(--ink2);font-size:14px}
+  .card .meta{font-size:13px;color:var(--muted);margin:2px 0 8px}
 
-  /* ---------- contact ---------- */
-  .contact{text-align:center}
-  .contact .big{font-size:clamp(26px,4vw,40px);font-weight:800;margin:8px 0 18px}
-  .contact .big a{color:var(--cy)}
-  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-family:var(--mono);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .note{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--ink2)}
+  .note h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .note .cite{font-size:13px;color:var(--muted);margin-top:8px;letter-spacing:.04em}
 
-  .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.8,.2,1)}
-  .reveal.in{opacity:1;transform:none}
+  footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:13px;
+         display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
-  @media(max-width:860px){
-    .hero-grid{grid-template-columns:1fr;text-align:center}
-    .portrait{order:-1} .hero .cta,.socials,.term{justify-content:center;display:flex}
-    .about-grid,.edu{grid-template-columns:1fr}
-    .stats{grid-template-columns:repeat(2,1fr)}
-    .navlinks{position:fixed;inset:64px 0 auto 0;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--line);padding:20px;gap:18px;transform:translateY(-120%);transition:.3s}
+  @media(max-width:760px){
+    .hero-grid{grid-template-columns:1fr}
+    .portrait{order:-1}
+    .two,.stats{grid-template-columns:1fr}
+    .stat{border-right:0;border-bottom:1px solid var(--line)}
+    .stat:last-child{border-bottom:0}
+    .navlinks{position:fixed;inset:60px 0 auto 0;flex-direction:column;background:#fff;
+              border-bottom:1px solid var(--line);padding:18px;gap:16px;transform:translateY(-130%);transition:.25s}
     .navlinks.open{transform:none}
     .menu-btn{display:block}
   }
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
 
 <header>
   <nav class="wrap">
-    <a class="brand" href="#top"><span class="dot"></span>the<b>ugly</b>haxor</a>
+    <a class="brand" href="#top">MD. Rohan</a>
     <div class="navlinks" id="navlinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="writeups.html">Write-ups</a>
+      <a href="cv.html" target="_blank">CV</a>
       <a href="#contact">Contact</a>
-      <a class="btn" href="mailto:mdrohansheikh1000@gmail.com">Hire me</a>
     </div>
     <button class="menu-btn" id="menuBtn" aria-label="Menu">≡</button>
   </nav>
@@ -161,102 +131,80 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="term"><span class="prompt">rohan@offsec:~$</span> whoami &nbsp;→&nbsp; <span class="typed" id="typed"></span><span class="cursor"></span></div>
-        <h1>MD. Rohan<br><span class="alias">theuglyhaxor</span></h1>
-        <div class="role">Bug Bounty Hunter · Web · Android · API · Network · <span>Digital Investigator</span></div>
-        <p class="sub">I hunt security bugs across web apps, Android apps, APIs and networks — then turn them into clear, high-impact reports. Offensive security is my profession and my passion.</p>
+        <h1>MD. Rohan</h1>
+        <div class="role">Offensive Security Researcher · Bug Bounty Hunter · Penetration Tester</div>
+        <p class="sub">I find and eliminate security weaknesses across web applications, Android applications, APIs and networks, then turn them into clear, high-impact reports that help organizations fix issues before attackers exploit them.</p>
         <div class="cta">
-          <a class="btn" href="#contact">Get in touch →</a>
-          <a class="btn ghost" href="writeups.html">Read write-ups</a>
-          <a class="btn ghost" href="cv.html" target="_blank">View CV</a>
+          <a class="btn solid" href="#contact">Get in touch</a>
+          <a class="btn" href="cv.html" target="_blank">View CV</a>
+          <a class="btn" href="writeups.html">Write-ups</a>
         </div>
-        <div class="socials">
-          <a href="https://linkedin.com/in/theuglyhaxor" target="_blank" title="LinkedIn">in</a>
-          <a href="https://github.com/theuglyhaxor" target="_blank" title="GitHub">GH</a>
-          <a href="https://x.com/theuglyhaxor" target="_blank" title="X">X</a>
-          <a href="https://youtube.com/@theuglyhaxor" target="_blank" title="YouTube">YT</a>
-          <a href="mailto:mdrohansheikh1000@gmail.com" title="Email">@</a>
+        <div class="links">
+          <a href="https://linkedin.com/in/theuglyhaxor" target="_blank">LinkedIn</a> ·
+          <a href="https://github.com/theuglyhaxor" target="_blank">GitHub</a> ·
+          <a href="mailto:mdrohansheikh1000@gmail.com">Email</a> ·
+          <span>Khulna, Bangladesh</span>
         </div>
       </div>
       <div class="portrait">
-        <img src="avatar.png" alt="MD. Rohan — theuglyhaxor">
-        <span class="badge-float b1 mono">CVSS 9.8</span>
-        <span class="badge-float b2 mono">Bugcrowd ✓</span>
+        <img src="avatar.png" alt="MD. Rohan">
       </div>
     </div>
+  </section>
 
+  <!-- STATS -->
+  <section>
     <div class="wrap">
       <div class="stats">
-        <div class="stat reveal"><div class="n" data-count="2000" data-prefix="$" data-suffix="+">$0</div><div class="l">Bounties Earned</div></div>
-        <div class="stat reveal"><div class="n" data-count="50">0</div><div class="l">Bugcrowd Points</div></div>
-        <div class="stat reveal"><div class="n" data-count="6" data-suffix=" mo">0</div><div class="l">Pentest Internship</div></div>
-        <div class="stat reveal"><div class="n">RCE</div><div class="l">Critical Bugs Found</div></div>
+        <div class="stat"><div class="n">$2,000+</div><div class="l">Bounties Earned</div></div>
+        <div class="stat"><div class="n">50</div><div class="l">Bugcrowd Points</div></div>
+        <div class="stat"><div class="n">6 mo</div><div class="l">Pentest Internship</div></div>
+        <div class="stat"><div class="n">RCE</div><div class="l">Critical Bugs Found</div></div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="wrap about-grid">
-      <div class="reveal">
-        <div class="eyebrow">// about</div>
-        <h2 class="title">Offensive security, end to end.</h2>
-        <p class="lead">I'm a cybersecurity professional focused on <b>offensive security, penetration testing and vulnerability research</b>. I hunt and pentest across <b>web apps, Android apps, APIs and networks</b> — backed by systems administration (Linux &amp; Windows), reverse engineering, and online investigations.</p>
-        <p class="lead" style="margin-top:14px">I'm passionate about securing modern infrastructure — helping organizations find and eliminate weaknesses <b>before attackers exploit them</b>. Currently hunting on Bugcrowd and always learning.</p>
-      </div>
-      <div class="card reveal">
-        <div class="mono" style="color:var(--cy);font-size:13px;letter-spacing:.1em">FOCUS AREAS</div>
-        <div class="chips">
-          <span class="chip">Web AppSec</span><span class="chip">Android AppSec</span><span class="chip">API Security</span>
-          <span class="chip">Network Pentest</span><span class="chip">IDOR</span><span class="chip">SSRF</span>
-          <span class="chip">XSS</span><span class="chip">RCE</span><span class="chip">Auth Bypass</span>
-          <span class="chip">Recon</span><span class="chip">OSINT</span>
-        </div>
-        <div class="mono" style="color:var(--cy);font-size:13px;letter-spacing:.1em;margin-top:22px">DETAILS</div>
-        <div class="chips">
-          <span class="chip">📍 Khulna, Bangladesh</span>
-          <span class="chip">🗣 English — Bilingual</span>
-          <span class="chip">🎓 CSE @ NUBTK</span>
-        </div>
-      </div>
+    <div class="wrap">
+      <div class="label">About</div>
+      <h2 class="title">Offensive security, end to end.</h2>
+      <p class="lead">Cybersecurity professional focused on offensive security, penetration testing and vulnerability research. I hunt and pentest across web applications, Android applications, APIs and networks, backed by systems administration (Linux and Windows), reverse engineering and online investigations.</p>
+      <p class="lead">I help organizations find and eliminate weaknesses before attackers exploit them. Currently hunting on Bugcrowd and always learning.</p>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="wrap">
-      <div class="eyebrow reveal">// experience</div>
-      <h2 class="title reveal">Where I've hunted</h2>
-      <div class="timeline">
-        <div class="job reveal">
-          <div class="rail"><div class="node"></div><div class="line"></div></div>
-          <div class="body">
-            <div class="when">JAN 2026 — PRESENT · Part-time · Remote</div>
-            <h3>Bug Bounty Hunter</h3>
-            <div class="org">Bugcrowd</div>
-            <p>Hunting security glitches across web apps, Android apps, APIs and networks in real-world programs. I enjoy the chase, and I report what I find clearly and responsibly.</p>
-            <ul>
-              <li><b>$2,000+</b> earned in bounties · <b>50</b> researcher points (solo)</li>
-              <li>Hunt across <b>web, Android, API and network</b> targets — access-control, injection &amp; logic flaws</li>
-              <li>Skills: Penetration Testing, Report Writing, Recon</li>
-            </ul>
-          </div>
+      <div class="label">Experience</div>
+      <h2 class="title">Professional Experience</h2>
+
+      <div class="entry">
+        <div class="top">
+          <span class="role">Bug Bounty Hunter</span>
+          <span class="when">Jan 2026 – Present</span>
         </div>
-        <div class="job reveal">
-          <div class="rail"><div class="node"></div><div class="line"></div></div>
-          <div class="body">
-            <div class="when">SEP 2024 — FEB 2025 · Internship · Remote</div>
-            <h3>Penetration Tester</h3>
-            <div class="org">BYTIUM LLC · Dover, DE</div>
-            <p>A 6-month penetration testing internship contributing to real cybersecurity engagements — internal &amp; external network, web application and API assessments, plus wireless and red/purple-team work.</p>
-            <ul>
-              <li>Internal &amp; external <b>network</b>, <b>web</b> &amp; <b>API</b> testing — found <b>RCEs and other critical bugs</b></li>
-              <li>Assisted in <b>remediating</b> vulnerabilities</li>
-              <li>Wrote <b>high-quality reports</b></li>
-              <li>Built client-communication, teamwork &amp; professional soft skills</li>
-            </ul>
-          </div>
+        <div class="org">Bugcrowd — Part-time, Remote</div>
+        <ul>
+          <li>Hunt vulnerabilities across web applications, Android applications, APIs and networks on real-world programs and report them clearly and responsibly.</li>
+          <li>Earned $2,000+ in bounties and 50 researcher points (solo) to date.</li>
+          <li>Focus areas: access-control flaws, injection, SSRF, authentication bypass and business-logic bugs.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="top">
+          <span class="role">Penetration Tester (Internship)</span>
+          <span class="when">Sep 2024 – Feb 2025</span>
         </div>
+        <div class="org">BYTIUM LLC — Dover, DE, Remote</div>
+        <ul>
+          <li>Performed internal and external network, web and API testing; found RCEs and other critical bugs during live engagements.</li>
+          <li>Assisted in remediating discovered vulnerabilities alongside the team.</li>
+          <li>Authored high-quality vulnerability reports with clear reproduction steps.</li>
+          <li>Developed professional soft skills, including client communication and teamwork.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -264,54 +212,35 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="wrap">
-      <div class="eyebrow reveal">// arsenal</div>
-      <h2 class="title reveal">Skills &amp; toolkit</h2>
-      <div class="skills-grid">
-        <div class="skillcat card reveal">
-          <h4>Offensive Security</h4>
-          <div class="chips"><span class="chip">Bug Bounty</span><span class="chip">Web Pentesting</span><span class="chip">Android Pentesting</span><span class="chip">API Pentesting</span><span class="chip">Network Pentesting</span><span class="chip">Vulnerability Research</span><span class="chip">Exploit Dev</span><span class="chip">Reverse Engineering</span></div>
-        </div>
-        <div class="skillcat card reveal">
-          <h4>Web &amp; API Vulns</h4>
-          <div class="chips"><span class="chip">IDOR / BAC</span><span class="chip">SSRF</span><span class="chip">XSS</span><span class="chip">RCE</span><span class="chip">Auth Bypass</span><span class="chip">Business Logic</span><span class="chip">GraphQL</span><span class="chip">Mass Assignment</span></div>
-        </div>
-        <div class="skillcat card reveal">
-          <h4>Android / Mobile</h4>
-          <div class="chips"><span class="chip">APK Analysis</span><span class="chip">Static &amp; Dynamic</span><span class="chip">Frida</span><span class="chip">Hardcoded Secrets</span><span class="chip">Insecure Storage</span><span class="chip">Exported Components</span></div>
-        </div>
-        <div class="skillcat card reveal">
-          <h4>Network &amp; Infra</h4>
-          <div class="chips"><span class="chip">Network Security</span><span class="chip">Nmap</span><span class="chip">Traffic Analysis</span><span class="chip">Network Admin</span><span class="chip">Linux Admin</span><span class="chip">Windows Admin</span></div>
-        </div>
-        <div class="skillcat card reveal">
-          <h4>Recon &amp; OSINT</h4>
-          <div class="chips"><span class="chip">Subdomain Enum</span><span class="chip">Asset Discovery</span><span class="chip">Online Investigation</span><span class="chip">Programming</span></div>
-        </div>
-        <div class="skillcat card reveal">
-          <h4>Reporting</h4>
-          <div class="chips"><span class="chip">High-quality Reports</span><span class="chip">CVSS Scoring</span><span class="chip">Clear PoCs</span><span class="chip">Client Comms</span></div>
-        </div>
-      </div>
+      <div class="label">Skills</div>
+      <h2 class="title">Technical Skills</h2>
+      <div class="skill-row"><div class="h">Offensive Security</div><div class="v">Bug Bounty, Web Pentesting, Android Pentesting, API Pentesting, Network Pentesting, Vulnerability Research, Exploit Development, Reverse Engineering</div></div>
+      <div class="skill-row"><div class="h">Web &amp; API Vulnerabilities</div><div class="v">IDOR / Broken Access Control, SSRF, XSS, RCE, Authentication Bypass, Business Logic Flaws, GraphQL, Mass Assignment</div></div>
+      <div class="skill-row"><div class="h">Android / Mobile</div><div class="v">APK Analysis, Static &amp; Dynamic Analysis, Frida, Hardcoded Secrets, Insecure Storage, Exported Components</div></div>
+      <div class="skill-row"><div class="h">Network &amp; Infrastructure</div><div class="v">Network Security, Nmap, Traffic Analysis, Network Administration, Linux Administration, Windows Administration</div></div>
+      <div class="skill-row"><div class="h">Recon &amp; OSINT</div><div class="v">Subdomain Enumeration, Asset Discovery, Online Investigation, Programming</div></div>
+      <div class="skill-row"><div class="h">Reporting</div><div class="v">High-quality Reports, CVSS Scoring, Clear PoCs, Client Communication</div></div>
+      <div class="skill-row"><div class="h">Tools</div><div class="v">Burp Suite, Nuclei, httpx, subfinder, ffuf, Nmap, Wireshark, Frida, jadx, Postman, Linux</div></div>
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section id="projects">
     <div class="wrap">
-      <div class="eyebrow reveal">// projects</div>
-      <h2 class="title reveal">Things I've built</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:10px">
-        <div class="card reveal">
-          <div class="mono" style="color:var(--cy);font-size:15px;font-weight:700">SMART Quiz Generator <span style="color:var(--gold);font-size:12px;font-weight:600">★ Featured</span></div>
-          <p class="lead" style="font-size:14px;margin-top:8px">AI-powered quiz generator that builds quizzes automatically from a syllabus or PDF — turning raw study material into ready-to-use practice questions.</p>
-          <div class="chips" style="margin-top:12px"><span class="chip">Python</span><span class="chip">AI / NLP</span><span class="chip">EdTech</span></div>
-          <div style="margin-top:16px"><a class="btn ghost" href="https://github.com/theuglyhaxor/CSE4204-8D-T04-SMART-QUIZ-GENERATOR" target="_blank">View on GitHub →</a></div>
+      <div class="label">Projects</div>
+      <h2 class="title">Selected Projects</h2>
+      <div class="two">
+        <div class="card">
+          <h3>SMART Quiz Generator</h3>
+          <div class="meta">Python · AI / NLP · EdTech</div>
+          <p>AI-powered quiz generator that builds quizzes automatically from a syllabus or PDF — turning raw study material into ready-to-use practice questions.</p>
+          <p style="margin-top:10px"><a href="https://github.com/theuglyhaxor/CSE4204-8D-T04-SMART-QUIZ-GENERATOR" target="_blank">View on GitHub →</a></p>
         </div>
-        <div class="card reveal">
-          <div class="mono" style="color:var(--cy);font-size:15px;font-weight:700">Finance <span style="color:var(--gold);font-size:12px;font-weight:600">★ Featured</span></div>
-          <p class="lead" style="font-size:14px;margin-top:8px">A personal finance ledger to track income, expenses and balances over time — a clean, self-hosted way to stay on top of day-to-day money management.</p>
-          <div class="chips" style="margin-top:12px"><span class="chip">PHP</span><span class="chip">Ledger</span><span class="chip">FinTech</span></div>
-          <div style="margin-top:16px"><a class="btn ghost" href="https://github.com/theuglyhaxor/Finance" target="_blank">View on GitHub →</a></div>
+        <div class="card">
+          <h3>Finance</h3>
+          <div class="meta">PHP · Ledger · FinTech</div>
+          <p>A personal finance ledger to track income, expenses and balances over time — a clean, self-hosted way to stay on top of day-to-day money management.</p>
+          <p style="margin-top:10px"><a href="https://github.com/theuglyhaxor/Finance" target="_blank">View on GitHub →</a></p>
         </div>
       </div>
     </div>
@@ -320,46 +249,16 @@
   <!-- CERTIFICATIONS -->
   <section id="certifications">
     <div class="wrap">
-      <div class="eyebrow reveal">// certifications</div>
-      <h2 class="title reveal">Certifications</h2>
-      <div class="card reveal" style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
-        <div style="font-size:30px">🏅</div>
-        <div style="flex:1;min-width:240px">
-          <h3 style="font-size:18px">Penetration Tester Internship — Completion Certificate</h3>
-          <div class="mono" style="color:var(--cy);font-size:13px;margin:4px 0">BYTIUM LLC · Dover, DE, USA</div>
-          <div style="color:var(--muted);font-size:13px">17 Sep 2024 — 28 Feb 2025 · 6-month internship</div>
-          <p class="lead" style="font-size:14px;margin-top:10px">Awarded on completion of a six-month Penetration Tester internship contributing to real cybersecurity and penetration-testing engagements. Signed by Jobyer Ahmed, Founder &amp; CEO.</p>
-          <div style="margin-top:14px"><a class="btn ghost" href="certificates/Bytium-Penetration-Tester-Internship-Certificate.pdf" target="_blank">View certificate ↗</a></div>
+      <div class="label">Certifications</div>
+      <h2 class="title">Certifications</h2>
+      <div class="entry">
+        <div class="top">
+          <span class="role">Penetration Tester Internship — Completion Certificate</span>
+          <span class="when">Sep 2024 – Feb 2025</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WRITE-UPS CTA -->
-  <section id="writeups-cta">
-    <div class="wrap">
-      <div class="noir reveal">
-        <div class="lens">📝</div>
-        <div class="eyebrow" style="color:var(--cy)">// write-ups</div>
-        <h3>Read my research &amp; write-ups.</h3>
-        <p>Security research, bug-bounty field notes, study material and long-form writing — all in one place.</p>
-        <div class="cta" style="justify-content:center;display:flex;gap:14px;flex-wrap:wrap;margin-top:22px">
-          <a class="btn" href="writeups.html">See all write-ups →</a>
-          <a class="btn ghost" href="https://github.com/theuglyhaxor" target="_blank">GitHub write-ups</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DETECTIVE -->
-  <section id="ethos">
-    <div class="wrap">
-      <div class="noir reveal">
-        <div class="lens">🔍</div>
-        <div class="eyebrow" style="color:var(--gold)">// the digital satyanweshi</div>
-        <h3>Every bug leaves a trace — and I read every one.</h3>
-        <p>I approach security the way a detective works a case: patient recon, sharp observation, and following the smallest clue to its conclusion. Off the clock, I read the masters who taught me that method.</p>
-        <div class="trio">IN THE LINE OF  ·  BYOMKESH  ·  FELUDA  ·  SHERLOCK HOLMES</div>
+        <div class="org">BYTIUM LLC — Dover, DE, USA</div>
+        <p>Awarded on completion of a six-month Penetration Tester internship contributing to real cybersecurity and penetration-testing engagements. Signed by Jobyer Ahmed, Founder &amp; CEO.</p>
+        <p style="margin-top:8px"><a href="certificates/Bytium-Penetration-Tester-Internship-Certificate.pdf" target="_blank">View certificate →</a></p>
       </div>
     </div>
   </section>
@@ -367,34 +266,61 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="wrap">
-      <div class="eyebrow reveal">// education</div>
-      <h2 class="title reveal">Learning path</h2>
-      <div class="edu">
-        <div class="card reveal">
-          <div class="yr">2022 — Present</div>
-          <h3>B.Sc. in Computer Science &amp; Engineering</h3>
-          <div class="mono" style="color:var(--ink2);font-size:14px">Northern University of Business &amp; Technology, Khulna</div>
+      <div class="label">Education</div>
+      <h2 class="title">Education</h2>
+      <div class="entry">
+        <div class="top">
+          <span class="role">B.Sc. in Computer Science &amp; Engineering</span>
+          <span class="when">2022 – Present</span>
         </div>
-        <div class="card reveal">
-          <div class="yr">2018 — 2020</div>
-          <h3>Higher Secondary — Science</h3>
-          <div class="mono" style="color:var(--ink2);font-size:14px">Khulna Public College</div>
+        <div class="org">Northern University of Business &amp; Technology, Khulna</div>
+      </div>
+      <div class="entry">
+        <div class="top">
+          <span class="role">Higher Secondary Certificate — Science</span>
+          <span class="when">2018 – 2020</span>
         </div>
+        <div class="org">Khulna Public College</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITE-UPS -->
+  <section id="writeups">
+    <div class="wrap">
+      <div class="label">Write-ups</div>
+      <h2 class="title">Research &amp; Write-ups</h2>
+      <p class="lead">Security research, bug-bounty field notes, study material and long-form writing — all in one place. Detailed vulnerability write-ups and PoCs are published on GitHub.</p>
+      <div class="cta" style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn solid" href="writeups.html">See all write-ups</a>
+        <a class="btn" href="https://github.com/theuglyhaxor" target="_blank">GitHub write-ups</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <div class="wrap">
+      <div class="label">Interests</div>
+      <div class="note">
+        <h3>Every bug leaves a trace — and I read every one.</h3>
+        <p>I approach security the way a detective works a case: patient recon, sharp observation, and following the smallest clue to its conclusion. Off the clock, I read the masters who taught me that method.</p>
+        <div class="cite">In the line of — Byomkesh · Feluda · Sherlock Holmes</div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="wrap contact">
-      <div class="eyebrow reveal">// contact</div>
-      <h2 class="title reveal">Let's secure something.</h2>
-      <p class="lead reveal" style="margin:0 auto">Open to bug bounty collaborations, penetration testing work and security research. The fastest way to reach me:</p>
-      <div class="big reveal"><a href="mailto:mdrohansheikh1000@gmail.com">mdrohansheikh1000@gmail.com</a></div>
-      <div class="cta reveal" style="justify-content:center;display:flex;gap:14px;flex-wrap:wrap">
-        <a class="btn" href="https://linkedin.com/in/theuglyhaxor" target="_blank">LinkedIn →</a>
-        <a class="btn ghost" href="https://github.com/theuglyhaxor" target="_blank">GitHub →</a>
-        <a class="btn ghost" href="cv.html" target="_blank">Download CV →</a>
+    <div class="wrap">
+      <div class="label">Contact</div>
+      <h2 class="title">Let's secure something.</h2>
+      <p class="lead">Open to bug bounty collaborations, penetration testing work and security research. The fastest way to reach me:</p>
+      <p style="margin-top:10px;font-size:17px;font-weight:700"><a href="mailto:mdrohansheikh1000@gmail.com">mdrohansheikh1000@gmail.com</a></p>
+      <div class="cta" style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="https://linkedin.com/in/theuglyhaxor" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://github.com/theuglyhaxor" target="_blank">GitHub</a>
+        <a class="btn" href="cv.html" target="_blank">Download CV</a>
       </div>
     </div>
   </section>
@@ -402,41 +328,14 @@
 
 <footer class="wrap">
   <div>© <span id="yr"></span> MD. Rohan — theuglyhaxor</div>
-  <div>Built with curiosity · Khulna, BD</div>
+  <div>Khulna, Bangladesh</div>
 </footer>
 
 <script>
-  // year
   document.getElementById('yr').textContent = new Date().getFullYear();
-  // mobile menu
   const mb=document.getElementById('menuBtn'), nl=document.getElementById('navlinks');
   mb.addEventListener('click',()=>nl.classList.toggle('open'));
   nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
-
-  // typed roles
-  const roles=["bug_bounty_hunter","web_pentester","android_pentester","api_hacker","network_pentester","digital_investigator"];
-  const el=document.getElementById('typed'); let ri=0,ci=0,del=false;
-  (function type(){
-    const w=roles[ri];
-    el.textContent = del ? w.slice(0,ci--) : w.slice(0,ci++);
-    if(!del && ci===w.length+1){del=true;setTimeout(type,1300);return;}
-    if(del && ci===0){del=false;ri=(ri+1)%roles.length;}
-    setTimeout(type, del?45:80);
-  })();
-
-  // reveal on scroll
-  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14});
-  document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
-
-  // count-up stats
-  const cIO=new IntersectionObserver((es)=>es.forEach(e=>{
-    if(!e.isIntersecting) return; const n=e.target; cIO.unobserve(n);
-    const target=+n.dataset.count; if(!target) return;
-    const pre=n.dataset.prefix||'', suf=n.dataset.suffix||''; let cur=0;
-    const step=Math.max(1,Math.ceil(target/60));
-    const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target;clearInterval(t);} n.textContent=pre+cur.toLocaleString()+suf;},22);
-  }),{threshold:.5});
-  document.querySelectorAll('.stat .n[data-count]').forEach(x=>cIO.observe(x));
 </script>
 </body>
 </html>
