@@ -1,3 +1,6 @@
+<img width="940" height="788" alt="Omnipotence Paradox" src="https://github.com/user-attachments/assets/cbd68722-97b5-4622-8995-719b9c8e11d2" />
+
+
 # Omnipotence Paradox
 
 | মোঃ রোহান, নর্দান ইউনিভার্সিটি অব বিজনেস এন্ড টেকনোলজি এর কম্পিউটার বিঙ্গান ও প্রকৌশল বিভাগের ফাইনাল সেমিস্টার এর ছাত্র। |
